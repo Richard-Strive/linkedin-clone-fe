@@ -7,6 +7,7 @@ import Dashboard from "../profile_subcomponents/Dashboard";
 import Activity from '../profile_subcomponents/Activity'
 import EducationBlock from '../profile_subcomponents/EducationBlock'
 import Interests from "../profile_subcomponents/Interests";
+import Skills from "../profile_subcomponents/Skills";
 class Profile extends React.Component {
 	state = { user: {} };
 
@@ -41,6 +42,7 @@ class Profile extends React.Component {
 				<Activity/>
 				<EducationBlock/>
 				<Interests/>
+				<Skills/>
 			</div>
 		);
 	}
