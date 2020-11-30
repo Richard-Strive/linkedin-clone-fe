@@ -14,7 +14,8 @@
         "placeholder":"Ex: Microsoft",
         "title":"Employment type",
         "as":"select",
-        "options":[
+        "options":
+        [
             "Full-time",
             "Part-time",
             "Self-employed",

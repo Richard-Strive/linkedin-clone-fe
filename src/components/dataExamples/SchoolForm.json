@@ -37,6 +37,6 @@
         "id":"description",
         "placeholder":"",
         "title":"Description",
-        "type": "text-area"             
+        "as": "textarea"             
     }
 ]

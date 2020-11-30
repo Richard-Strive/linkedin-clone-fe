@@ -22,7 +22,7 @@ export default class AboutBlock extends PureComponent {
     }
     
     render() {
-        let show = this.state.showModal? '-100%' : ''
+        let show = this.state.showModal? '-150vh' : ''
         return (
             <div id='about'>
                 <Modal.Dialog style={{marginTop: `${show}`}}>
