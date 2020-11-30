@@ -5,10 +5,11 @@ import TopHeader from "../profile_subcomponents/TopHeader";
 import AboutBlock from "../profile_subcomponents/AboutBlock";
 import Dashboard from "../profile_subcomponents/Dashboard";
 
-import Activity from "../profile_subcomponents/Activity";
-import EducationBlock from "../profile_subcomponents/EducationBlock";
 import Interests from "../profile_subcomponents/Interests";
 import Skills from "../profile_subcomponents/Skills";
+
+import Activity from "../profile_subcomponents/Activity";
+import EducationBlock from "../profile_subcomponents/EducationBlock";
 
 import SeeJobs from "../sideComponents/SeeJobs";
 import EditAdd from "../sideComponents/EditAdd";
@@ -50,6 +51,8 @@ class Profile extends React.Component {
 					<Dashboard />
 					<Activity />
 					<EducationBlock />
+					<Interests />
+					<Skills />
 				</div>
 				<div className='side-components mt-3'>
 					<EditAdd />
