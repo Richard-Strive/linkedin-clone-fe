@@ -41,8 +41,8 @@ class Profile extends React.Component {
 				<Dashboard />
 				<Activity/>
 				<EducationBlock/>
-				<Interests/>
 				<Skills/>
+				<Interests/>
 			</div>
 		);
 	}
