@@ -11,6 +11,8 @@
 }
 .header-img {
 	width: 100%;
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
 }
 .profile-img {
 	width: 18%;
@@ -73,4 +75,22 @@
 .contact:hover {
 	text-decoration: underline;
 	cursor: pointer;
+}
+
+.modal-content {
+	margin-top: -100%;
+	margin-left: -50%;
+}
+
+.modal-body {
+	max-height: calc(100vh - 210px);
+	overflow-y: auto !important;
+}
+
+.form-disabled-info {
+	color: rgb(163, 162, 162);
+}
+
+.profile-edit-form label {
+	color: gray !important;
 }
