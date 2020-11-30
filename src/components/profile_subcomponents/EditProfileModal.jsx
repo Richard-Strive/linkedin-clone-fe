@@ -15,6 +15,7 @@ class EditProfileModal extends Component {
 			<>
 				<Modal
 					{...this.props}
+					className='edit-profile-modal'
 					size='lg'
 					aria-labelledby='contained-modal-title-vcenter'
 					centered>
