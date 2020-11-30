@@ -44,6 +44,7 @@ class Profile extends React.Component {
 	}
 	render() {
 		return (
+<<<<<<< HEAD
 			<div className='profile-container d-flex flex-row'>
 				<div>
 					<TopHeader user={this.state.user} />
@@ -61,6 +62,16 @@ class Profile extends React.Component {
 					<PeopleYouMayKnow />
 					<InLearning />
 				</div>
+=======
+			<div className='profile-container'>
+				<TopHeader user={this.state.user} />
+				<AboutBlock />
+				<Dashboard />
+				<Activity/>
+				<EducationBlock/>
+				<Skills/>
+				<Interests/>
+>>>>>>> reniejr
 			</div>
 		);
 	}
