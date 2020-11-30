@@ -15,6 +15,7 @@ class TopHeader extends React.Component {
 					onHide={() => this.setState({ showModal: false })}
 					show={this.state.showModal}
 				/>
+
 				<div className='top-header-card'>
 					<Row>
 						<Col md={12} className='images-container'>

@@ -77,20 +77,20 @@
 	cursor: pointer;
 }
 
-.modal-content {
+.edit-profile-modal .modal-content {
 	margin-top: -100%;
 	margin-left: -50%;
 }
 
-.modal-body {
+.edit-profile-modal .modal-body {
 	max-height: calc(100vh - 210px);
 	overflow-y: auto !important;
 }
 
-.form-disabled-info {
+.edit-profile-modal .form-disabled-info {
 	color: rgb(163, 162, 162);
 }
 
-.profile-edit-form label {
+.edit-profile-modal .profile-edit-form label {
 	color: gray !important;
 }
