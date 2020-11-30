@@ -1,0 +1,23 @@
+.App {
+  width: 100%;
+  text-align: center;
+}
+.nav-icons {
+  font-size: 25px;
+  color: rgb(80, 80, 80);
+}
+.nav-icons:hover {
+  color: black;
+}
+.nav-icon-text {
+  margin-top: 2px;
+  font-size: 13px !important;
+}
+.nav-icon-text:hover {
+  text-decoration: underline;
+}
+.footerbutton {
+  background-color: white !important;
+  border-radius: 0;
+  color: black;
+}
