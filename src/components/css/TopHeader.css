@@ -78,7 +78,7 @@
 }
 
 .edit-profile-modal .modal-content {
-	margin-top: -100%;
+	margin-bottom: 120%;
 	margin-left: -50%;
 }
 
@@ -86,11 +86,13 @@
 	max-height: calc(100vh - 210px);
 	overflow-y: auto !important;
 }
-
-.edit-profile-modal .form-disabled-info {
+.edit-profile-modal .modal-dialog {
+	background-color: transparent !important;
+}
+.form-disabled-info {
 	color: rgb(163, 162, 162);
 }
 
-.edit-profile-modal .profile-edit-form label {
+.profile-edit-form label {
 	color: gray !important;
 }
