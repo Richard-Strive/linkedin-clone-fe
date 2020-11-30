@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react'
 import '../css/EducationBlock.scss'
 import ModalForEduBlock from './ModalForEduBlock'
 import {Row} from 'react-bootstrap'
+import ExperienceForm from '../dataExamples/ExperienceForm.json'
 
 export default class EducationBlock extends PureComponent {
     state={
@@ -22,11 +23,18 @@ export default class EducationBlock extends PureComponent {
             organization:'',
             time:''
         },
-        showModal:true
+        showModal:true,
+        form:[],
+        titleModal:''
     }
 
     showModal(){
         this.setState({showModal: !this.state.showModal})
+    }
+
+    experienceForm(){
+        this.setState({form: ExperienceForm, titleModal: 'Add Experience'})
+        this.showModal()
     }
 
     render() {
@@ -37,6 +45,8 @@ export default class EducationBlock extends PureComponent {
                 <ModalForEduBlock 
                 style={show} 
                 showModal={this.showModal.bind(this)}
+                typeForm={this.state.form}
+                titleModal={this.state.titleModal}
                 />
 
                 {/* Experience */}
@@ -45,7 +55,7 @@ export default class EducationBlock extends PureComponent {
                     
                     <header>
                         <span>Experience</span>
-                        <i className="fas fa-plus" onClick={this.showModal.bind(this)}></i>
+                        <i className="fas fa-plus" onClick={this.experienceForm.bind(this)}></i>
                     </header>
                 </Row>
 

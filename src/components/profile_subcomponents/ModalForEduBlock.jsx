@@ -1,20 +1,37 @@
 import React, { PureComponent } from 'react'
 import '../css/ModalForEduBlock.scss'
-import {Modal, Button} from 'react-bootstrap'
+import {Modal, Button, Form} from 'react-bootstrap'
 
 
 export default class ModalForEduBlock extends PureComponent {
     render() {
-        let {style, showModal}=this.props
+        let {style, showModal, typeForm, titleModal}=this.props
         return (
             <>
                 <Modal.Dialog style={{marginTop:`${style}`}}>
                     <Modal.Header closeButton onClick={showModal}>
-                        <Modal.Title>Modal title</Modal.Title>
+                        <Modal.Title>{titleModal}</Modal.Title>
                     </Modal.Header>
 
                     <Modal.Body>
-                        <p>Modal body text goes here.</p>
+                        {typeForm.map((input, index)=>{
+                            return(
+                                <Form.Group key={index}>
+                                    <Form.Label htmlFor={input.htmlFor}>{input.title}</Form.Label>
+                                    <Form.Control
+                                        required
+                                        type={input.type}
+                                        name={input.name}
+                                        id={input.id}
+                                        placeholder={input.placeholder}
+                                        as={input.as}
+                                        rows={input.rows}
+                                    />
+                                    {input.options}
+                                </Form.Group>
+                            )
+                        })}
+                        
                     </Modal.Body>
 
                     <Modal.Footer>
