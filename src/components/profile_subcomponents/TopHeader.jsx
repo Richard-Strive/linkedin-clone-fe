@@ -1,7 +1,7 @@
 import React from "react";
 import { Col, Container, Row, Dropdown, DropdownButton } from "react-bootstrap";
 import "../css/TopHeader.css";
-
+import striveLogo from "../images/strive-logo.jpeg";
 class TopHeader extends React.Component {
 	state = {};
 
@@ -21,6 +21,9 @@ class TopHeader extends React.Component {
 							src={user.image}
 							alt='profile-pic'
 						/>
+						<div className='edit-profile-icon float-right mr-4 mt-4'>
+							<i className=' fas fa-pencil-alt fa-lg '></i>
+						</div>
 					</Col>
 
 					{/* <Col md={12}></Col> */}
@@ -33,8 +36,16 @@ class TopHeader extends React.Component {
 						</h3>
 					</Col>
 
-					<Col md={6}>
-						<h5>Strive</h5>
+					<Col md={6} className='d-flex flex-row '>
+						<img
+							className='ml-5'
+							style={{ width: "23px", height: "23px" }}
+							src={striveLogo}
+							alt='strive'
+						/>
+						<p style={{ fontWeight: "600" }} className='ml-1'>
+							Strive School
+						</p>
 					</Col>
 					<Col md={6}>
 						<p>{user.title}</p>
@@ -42,7 +53,7 @@ class TopHeader extends React.Component {
 				</Row>
 
 				<div className='text-left d-flex flex-row'>
-					<p className='ml-3 mr-3'>Turkey</p>
+					<p className='ml-3 mr-3'>{user.area}</p>
 
 					<p className=' mr-3 connections'>500+ Connections</p>
 
