@@ -18,7 +18,7 @@ import PeopleYouMayKnow from "../sideComponents/PeopleYouMayKnow";
 import InLearning from "../sideComponents/InLearning";
 
 class Profile extends React.Component {
-	state = { user: {} };
+	state = { user: {}, users: [] };
 
 	getProfileInfo = async () => {
 		let id = this.props.match.params.id;
@@ -40,9 +40,28 @@ class Profile extends React.Component {
 		}
 	};
 
+	getProfile = async () => {
+		try {
+			const response = await fetch(
+				process.env.REACT_APP_BASE_URL + "profile/",
+				{
+					headers: {
+						Authorization: `Bearer ${process.env.REACT_APP_ACCESS_TOKEN}`,
+					},
+				}
+			);
+
+			const users = await response.json();
+			console.log(users);
+			this.setState({ users });
+		} catch (err) {
+			console.log(err);
+		}
+	};
+
 	componentDidMount() {
-		//
 		this.getProfileInfo();
+		this.getProfile();
 	}
 
 	componentDidUpdate(prevProp, prevState) {
@@ -58,15 +77,15 @@ class Profile extends React.Component {
 					<AboutBlock />
 					<Dashboard />
 					<Activity />
-					<EducationBlock user={this.state.user}/>
+					<EducationBlock />
 					<Skills />
 					<Interests />
 				</div>
 				<div className='side-components mt-3'>
 					<EditAdd />
 					<SeeJobs />
-					<PeopleAlsoViewed />
-					<PeopleYouMayKnow />
+					<PeopleAlsoViewed deta={this.state.users} />
+					<PeopleYouMayKnow deta={this.state.users} />
 					<InLearning />
 				</div>
 			</div>
