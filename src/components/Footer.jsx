@@ -22,11 +22,12 @@ class Footer extends Component {
               bottom: "0",
               display: "flex",
               left: "0",
+              marginLeft: "38px",
             }}
           />
           <Row>
             <Col>
-              <ul style={{ listStyle: "none" }}>
+              <ul style={{ listStyle: "none", textAlign: "left" }}>
                 <li>About</li>
                 <li>Community Guidelines</li>
                 <li>Privacy Terms </li>
@@ -35,7 +36,7 @@ class Footer extends Component {
               </ul>
             </Col>
             <Col>
-              <ul style={{ listStyle: "none" }}>
+              <ul style={{ listStyle: "none", textAlign: "left" }}>
                 <li>Accessibility</li>
                 <li>Careers</li>
                 <li>Ad Choices</li>
@@ -43,7 +44,7 @@ class Footer extends Component {
               </ul>
             </Col>
             <Col>
-              <ul style={{ listStyle: "none" }}>
+              <ul style={{ listStyle: "none", textAlign: "left" }}>
                 <li>Talent Solutions</li>
                 <li>Marketing Solutions</li>
                 <li>Advertising</li>
@@ -51,7 +52,7 @@ class Footer extends Component {
               </ul>
             </Col>
             <Col>
-              <ul style={{ listStyle: "none" }}>
+              <ul style={{ listStyle: "none", textAlign: "left" }}>
                 <li>
                   Questions? <br />
                   <p>Visit our Help Center.</p>
