@@ -12,7 +12,13 @@ class TopHeader extends React.Component {
 			<>
 				<EditProfileModal
 					user={user}
-					onHide={() => this.setState({ showModal: false })}
+					onHide={() => {
+						this.setState({
+							showModal: false,
+						});
+
+						this.props.showChanges(this.state.showModal);
+					}}
 					show={this.state.showModal}
 				/>
 

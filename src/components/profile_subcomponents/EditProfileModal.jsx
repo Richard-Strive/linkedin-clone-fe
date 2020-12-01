@@ -44,9 +44,6 @@ class EditProfileModal extends Component {
 							<EditProfileForm user={user} />
 						</div>
 					</Modal.Body>
-					<Modal.Footer>
-						<Button>Save</Button>
-					</Modal.Footer>
 				</Modal>
 			</>
 		);

@@ -18,7 +18,7 @@ import PeopleYouMayKnow from "../sideComponents/PeopleYouMayKnow";
 import InLearning from "../sideComponents/InLearning";
 
 class Profile extends React.Component {
-	state = { user: {}, users: [], isShowEditButton: true };
+	state = { user: {}, users: [], isShowEditButton: true, showChanges: false };
 
 	getProfileInfo = async () => {
 		let id = this.props.match.params.id;
@@ -34,7 +34,19 @@ class Profile extends React.Component {
 
 			const user = await response.json();
 			console.log(user);
-			this.setState({ user });
+			this.setState({ user }, () => {
+				let id = this.props.match.params.id;
+				window.localStorage.setItem("userId", JSON.stringify(id));
+				const userId = JSON.parse(
+					window.localStorage.getItem("userId")
+				);
+
+				if (userId.localeCompare("me") === -1) {
+					this.setState({ isShowEditButton: false });
+				} else {
+					this.setState({ isShowEditButton: true });
+				}
+			});
 		} catch (err) {
 			console.log(err);
 		}
@@ -65,18 +77,26 @@ class Profile extends React.Component {
 	}
 
 	componentDidUpdate(prevProp, prevState) {
-		if (prevProp.match.params.id !== this.props.match.params.id) {
-			if (this.props.match.params.id.localeCompare("me") === -1) {
-				this.setState({ isShowEditButton: false });
-			}
+		if (
+			prevProp.match.params.id !== this.props.match.params.id ||
+			prevState.showChanges !== this.state.showChanges
+		) {
 			this.getProfileInfo();
 		}
 	}
+
+	handleShowChanges = (showModal) => {
+		if (showModal) {
+			this.setState({ showChanges: !this.state.showChanges });
+		}
+	};
+
 	render() {
 		return (
 			<div className='profile-container d-flex flex-row'>
 				<div>
 					<TopHeader
+						showChanges={this.handleShowChanges}
 						isShowEditBtn={this.state.isShowEditButton}
 						user={this.state.user}
 					/>

@@ -1,22 +1,16 @@
 import React from "react";
-import { Container, Form, Row, Col } from "react-bootstrap";
+import { Container, Form, Row, Col, Button } from "react-bootstrap";
 
 class EditProfileForm extends React.Component {
 	state = {
-		user: {
-			name: "",
-			surname: "",
-			title: "",
-			area: "",
-			email: "",
-		},
+		user: {},
 	};
 
 	componentDidMount() {
-		let { user } = { ...this.state };
-		for (let value in user) {
-			user[value] = this.props.user[value];
-		}
+		let { user } = { ...this.props };
+		// for (let value in user) {
+		// 	user[value] = value;
+		// }
 		this.setState({ user });
 	}
 	fillForm = (e) => {
@@ -29,10 +23,31 @@ class EditProfileForm extends React.Component {
 		this.setState({ user });
 	};
 
+	postUserChanges = async () => {
+		let id = this.props.user._id;
+		try {
+			const response = await fetch(
+				process.env.REACT_APP_BASE_URL + `profile/`,
+				{
+					method: "PUT",
+					body: JSON.stringify(this.state.user),
+					headers: {
+						Authorization: `Bearer ${process.env.REACT_APP_ACCESS_TOKEN}`,
+						"Content-Type": "application/json",
+					},
+				}
+			);
+			if (!response.ok) {
+				alert("something went wrong");
+			}
+		} catch (err) {
+			console.log(err);
+		}
+	};
+
 	handleFormSubmit = (e) => {
 		e.preventDefault();
-
-		//TODO Fill this function or put PROFILE component
+		this.postUserChanges();
 	};
 	render() {
 		const { user } = this.props;
@@ -108,6 +123,9 @@ class EditProfileForm extends React.Component {
 							onChange={this.fillForm}
 						/>
 					</Form.Group>
+					<div className='submit-button float-right mr-3 '>
+						<Button type='submit'>Save</Button>
+					</div>
 				</Form>
 			</Container>
 		);
