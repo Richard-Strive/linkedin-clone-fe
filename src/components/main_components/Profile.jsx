@@ -58,7 +58,7 @@ class Profile extends React.Component {
 					<AboutBlock />
 					<Dashboard />
 					<Activity />
-					<EducationBlock />
+					<EducationBlock user={this.state.user}/>
 					<Skills />
 					<Interests />
 				</div>
