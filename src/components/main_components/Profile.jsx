@@ -18,7 +18,7 @@ import PeopleYouMayKnow from "../sideComponents/PeopleYouMayKnow";
 import InLearning from "../sideComponents/InLearning";
 
 class Profile extends React.Component {
-	state = { user: {}, users: [] };
+	state = { user: {}, users: [], isShowEditButton: true };
 
 	getProfileInfo = async () => {
 		let id = this.props.match.params.id;
@@ -66,6 +66,9 @@ class Profile extends React.Component {
 
 	componentDidUpdate(prevProp, prevState) {
 		if (prevProp.match.params.id !== this.props.match.params.id) {
+			if (this.props.match.params.id.localeCompare("me") === -1) {
+				this.setState({ isShowEditButton: false });
+			}
 			this.getProfileInfo();
 		}
 	}
@@ -73,12 +76,18 @@ class Profile extends React.Component {
 		return (
 			<div className='profile-container d-flex flex-row'>
 				<div>
-					<TopHeader user={this.state.user} />
-					<AboutBlock />
+					<TopHeader
+						isShowEditBtn={this.state.isShowEditButton}
+						user={this.state.user}
+					/>
+					<AboutBlock isShowEditBtn={this.state.isShowEditButton} />
 					<Dashboard />
 					<Activity />
-					<EducationBlock />
-					<Skills />
+					<EducationBlock
+						isShowEditBtn={this.state.isShowEditButton}
+						user={this.state.user}
+					/>
+					<Skills isShowEditBtn={this.state.isShowEditButton} />
 					<Interests />
 				</div>
 				<div className='side-components mt-3'>
