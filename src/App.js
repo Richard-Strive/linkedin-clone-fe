@@ -11,6 +11,7 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import ShowSearchResult from "./components/main_components/ShowSearchResult";
 
 import Home from "./components/main_components/Home";
+import LandingPage from "./components/main_components/LandingPage";
 class App extends React.Component {
 	state = {
 		userList: [],
@@ -83,6 +84,7 @@ class App extends React.Component {
 					/>
 					<Route path='/' exact component={Home} />
 					<Route path='/profile/:id' component={Profile} />
+					<Route path='/landing' exact render={(props)=><LandingPage userList={this.state.userList}/>}/>
 					<Footer />
 				</Router>
 			</div>
