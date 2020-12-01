@@ -9,9 +9,9 @@ export default class Interests extends PureComponent {
             <div id='interests'>
                 <header>Interests</header>
                 <Row className='interests-body'>
-                    {InterestsData.map(company=>{
+                    {InterestsData.map((company, index)=>{
                         return(
-                            <Col xs={6}>
+                            <Col xs={6} key={index}>
                                 <span>
                                     <img src={company.logo} alt=""/>
                                 </span>
