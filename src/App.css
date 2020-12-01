@@ -1,24 +1,40 @@
 .App {
-  width: 100%;
-  text-align: center;
-  background-color: #f3f2ef;
+	width: 100%;
+	text-align: center;
+	background-color: #f3f2ef;
 }
 .nav-icons {
-  font-size: 25px;
-  color: rgb(80, 80, 80);
+	font-size: 25px;
+	color: rgb(80, 80, 80);
 }
 .nav-icons:hover {
-  color: black;
+	color: black;
 }
 .nav-icon-text {
-  margin-top: 2px;
-  font-size: 13px !important;
+	margin-top: 2px;
+	font-size: 13px !important;
 }
 .nav-icon-text:hover {
-  text-decoration: underline;
+	text-decoration: underline;
 }
 .footerbutton {
-  background-color: white !important;
-  border-radius: 0;
-  color: black;
+	background-color: white !important;
+	border-radius: 0;
+	color: black;
+}
+
+.search-result-popup {
+	position: fixed;
+	z-index: 1200;
+	top: 7%;
+	left: 16%;
+	width: 25%;
+
+	max-height: calc(100vh - 210px);
+	overflow-y: auto !important;
+	overflow-x: hidden;
+}
+
+.search-result-popup .list-group-item:hover {
+	cursor: pointer;
 }

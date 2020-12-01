@@ -11,10 +11,13 @@ import bootstrap, {
 	Button,
 	Col,
 	Image,
+	InputGroup,
 } from "react-bootstrap";
 import logo from "./images/logo.png";
 
 class NavBar extends Component {
+	state = {};
+
 	render() {
 		return (
 			<div>
@@ -37,13 +40,33 @@ class NavBar extends Component {
 							</Col>
 							<Col md={4}>
 								<Form inline>
-									<FormControl
-										type='text'
-										placeholder='Search'
-										className='mr-sm-2 mb-3'
-										style={{ width: "390px" }}
-									/>
+									<InputGroup>
+										<FormControl
+											aria-label='search'
+											aria-describedby='basic-addon1'
+											placeholder='Search'
+											className='mr-sm-2 mb-3'
+											value={this.props.searchString}
+											onKeyDown={this.props.handleSearch}
+											onChange={this.props.handleSearch}
+											style={{ width: "390px" }}
+										/>
+									</InputGroup>
 								</Form>
+
+								{/* <Form inline>
+									<InputGroup className='icons'>
+										<FormControl
+											className='mr-sm-2 searchBar'
+											placeholder='Search and press enter'
+											aria-label='search'
+											aria-describedby='basic-addon1'
+											onKeyDown={this.searchStringHandler}
+											onChange={this.searchStringHandler}
+											value={this.state.searchStringg}
+										/>
+									</InputGroup>
+								</Form> */}
 							</Col>
 							<Col md={1}>
 								<Nav.Link href='#home'>
