@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react'
 import '../css/EducationBlock.scss'
 import ModalForEduBlock from './ModalForEduBlock'
-import {Row, Col, Form, Button} from 'react-bootstrap'
+import {Row, Col, Form} from 'react-bootstrap'
 import ExperienceForm from '../dataExamples/ExperienceForm.json'
 import SchoolForm from '../dataExamples/SchoolForm.json'
 
@@ -30,6 +30,7 @@ export default class EducationBlock extends PureComponent {
         titleModal:'',
         fillFunction:'',
         saveFunction:'',
+        results:[]
     }
 
     showModal(){
@@ -42,7 +43,7 @@ export default class EducationBlock extends PureComponent {
                 form: ExperienceForm, 
                 titleModal: 'Add Experience', 
                 fillFunction: this.fillExp,
-                saveFunction: this.saveExp.bind(this)
+                saveFunction: this.saveExp
             })
         this.showModal()
     }
@@ -54,7 +55,45 @@ export default class EducationBlock extends PureComponent {
         this.setState({experience: exp})
     }
 
-    saveExp = ()=>{console.log(this.state.experience)}
+    saveExp = async ()=>{
+        let id = this.props.user._id
+        console.log(id)
+        let response = await fetch(
+            process.env.REACT_APP_BASE_URL + `profile/${id}/experiences`,
+            {
+                method: 'POST',
+                body: JSON.stringify(this.state.experience),
+                headers: new Headers({
+                    "Content-Type": "application/json",
+                    "Authorization":`Bearer ${process.env.REACT_APP_ACCESS_TOKEN}`
+                })
+            }
+        )
+        let result = await response.json()
+        console.log(this.state.experience, result)
+        this.showModal()
+    }
+
+    loadExp = async()=>{
+        let id = this.props.user._id
+        let response = await fetch(
+            process.env.REACT_APP_BASE_URL + `profile/${id}/experiences`,
+            {
+                headers:{
+                    Authorization:`Bearer ${process.env.REACT_APP_ACCESS_TOKEN}`
+                }
+            }
+        )
+        let result = await response.json()
+        this.setState({results: result})
+        console.log(result, this.state.results)
+    }
+
+    componentDidMount(){
+        setTimeout(()=>{
+            this.loadExp()
+        },1000)
+    }
 
     schoolForm(){
         this.setState({form: SchoolForm, titleModal: 'Add Education'})
@@ -120,8 +159,24 @@ export default class EducationBlock extends PureComponent {
                         <span>Experience</span>
                         <i className="fas fa-plus" onClick={this.experienceForm.bind(this)}></i>
                     </header>
-                    <Col xs={2}></Col>
-                    <Col xs={10}></Col>
+                    {this.state.results.map(result=>{
+                        return(
+                            <>
+                                <Col xs={2}>
+                                <img src="" alt=""/>
+                                </Col>
+                                <Col xs={10}>
+                                    <p>{result.role}</p>
+                                    <p>{result.company}</p>
+                                    <p>
+                                        <span>{result.startDate}</span>
+                                        <span>{result.endDate}</span>
+                                    </p>
+                                </Col>
+                            </>
+                        )
+                    })}
+                    
                 </Row>
 
                 {/* Education */}
