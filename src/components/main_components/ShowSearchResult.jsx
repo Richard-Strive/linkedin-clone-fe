@@ -1,5 +1,7 @@
 import React from "react";
 import { ListGroup } from "react-bootstrap";
+
+import { Link } from "react-router-dom";
 class ShowSearchResult extends React.Component {
 	state = { users: [] };
 
@@ -34,9 +36,11 @@ class ShowSearchResult extends React.Component {
 					{users.length > 0 &&
 						users.map((user) => {
 							return (
-								<ListGroup.Item key={user._id}>
-									{user.name} {user.surname}
-								</ListGroup.Item>
+								<Link to={`/profile/${user._id}`}>
+									<ListGroup.Item key={user._id}>
+										{user.name} {user.surname}
+									</ListGroup.Item>
+								</Link>
 							);
 						})}
 				</ListGroup>

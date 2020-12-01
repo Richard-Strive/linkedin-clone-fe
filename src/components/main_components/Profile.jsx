@@ -21,9 +21,10 @@ class Profile extends React.Component {
 	state = { user: {} };
 
 	getProfileInfo = async () => {
+		let id = this.props.match.params.id;
 		try {
 			const response = await fetch(
-				process.env.REACT_APP_BASE_URL + "profile/me",
+				process.env.REACT_APP_BASE_URL + `profile/${id}`,
 				{
 					headers: {
 						Authorization: `Bearer ${process.env.REACT_APP_ACCESS_TOKEN}`,
@@ -40,7 +41,14 @@ class Profile extends React.Component {
 	};
 
 	componentDidMount() {
+		//
 		this.getProfileInfo();
+	}
+
+	componentDidUpdate(prevProp, prevState) {
+		if (prevProp.match.params.id !== this.props.match.params.id) {
+			this.getProfileInfo();
+		}
 	}
 	render() {
 		return (

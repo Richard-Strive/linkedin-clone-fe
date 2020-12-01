@@ -9,6 +9,8 @@ import Profile from "./components/main_components/Profile";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
 import ShowSearchResult from "./components/main_components/ShowSearchResult";
+
+import Home from "./components/main_components/Home";
 class App extends React.Component {
 	state = { userList: [], showResult: false, searchString: "" };
 
@@ -71,7 +73,8 @@ class App extends React.Component {
 						searchString={this.state.searchString}
 						handleSearch={this.handleSearch}
 					/>
-					<Profile />
+					<Route path='/' exact component={Home} />
+					<Route path='/profile/:id' component={Profile} />
 					<Footer />
 				</Router>
 			</div>
