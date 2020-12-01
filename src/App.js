@@ -60,18 +60,20 @@ class App extends React.Component {
 	render() {
 		return (
 			<div className='App'>
-				<ShowSearchResult
-					keyword={this.state.searchString}
-					users={this.state.userList}
-					onHide={() => this.setState({ showResult: false })}
-					show={this.state.showResult}
-				/>
-				<NavBar
-					searchString={this.state.searchString}
-					handleSearch={this.handleSearch}
-				/>
-				<Profile />
-				<Footer />
+				<Router>
+					<ShowSearchResult
+						keyword={this.state.searchString}
+						users={this.state.userList}
+						onHide={() => this.setState({ showResult: false })}
+						show={this.state.showResult}
+					/>
+					<NavBar
+						searchString={this.state.searchString}
+						handleSearch={this.handleSearch}
+					/>
+					<Profile />
+					<Footer />
+				</Router>
 			</div>
 		);
 	}

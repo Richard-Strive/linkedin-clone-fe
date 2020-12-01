@@ -21,7 +21,7 @@ class NavBar extends Component {
 		return (
 			<div>
 				<Navbar
-					className='mb-4 navnavbar '
+					className='mb-4 navnavbar  '
 					style={{ height: 50 }}
 					bg='light'
 					expand='lg'>
