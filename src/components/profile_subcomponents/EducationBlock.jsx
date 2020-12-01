@@ -1,18 +1,19 @@
 import React, { PureComponent } from 'react'
 import '../css/EducationBlock.scss'
 import ModalForEduBlock from './ModalForEduBlock'
-import {Row, Col} from 'react-bootstrap'
+import {Row, Col, Form} from 'react-bootstrap'
 import ExperienceForm from '../dataExamples/ExperienceForm.json'
 import SchoolForm from '../dataExamples/SchoolForm.json'
 
 export default class EducationBlock extends PureComponent {
     state={
         experience:{
-            title:'',
+            role:'',
             employment:'',
             company:'',
-            location:'',
-            time:''
+            area:'',
+            startDate:'',
+            endDate:''
         },
         education:{
             schoolName:'',
@@ -27,16 +28,79 @@ export default class EducationBlock extends PureComponent {
         showModal:true,
         form:[],
         titleModal:'',
-        filled:[]
+        fillFunction:'',
+        saveFunction:'',
+        results:[]
     }
 
+    //SHOW MODAL FUNCTION
     showModal(){
         this.setState({showModal: !this.state.showModal})
     }
 
     experienceForm(){
-        this.setState({form: ExperienceForm, titleModal: 'Add Experience'})
+        this.setState(
+            {
+                form: ExperienceForm, 
+                titleModal: 'Add Experience', 
+                fillFunction: this.fillExp,
+                saveFunction: this.saveExp
+            })
         this.showModal()
+    }
+
+    fillExp = (e)=>{
+        let exp = {...this.state.experience}
+        let currentId = e.currentTarget.id
+        exp[currentId]=e.currentTarget.value
+        this.setState({experience: exp})
+    }
+
+    saveExp = async ()=>{
+        let id = this.props.user._id
+        console.log(id)
+        let response = await fetch(
+            process.env.REACT_APP_BASE_URL + `profile/${id}/experiences`,
+            {
+                method: 'POST',
+                body: JSON.stringify(this.state.experience),
+                headers: new Headers({
+                    "Content-Type": "application/json",
+                    "Authorization":`Bearer ${process.env.REACT_APP_ACCESS_TOKEN}`
+                })
+            }
+        )
+        let result = await response.json()
+        // this.setState({results: [...this.state.results, result[0]]})
+        console.log(result)
+        this.showModal()
+    }
+
+    loadExp = async()=>{
+        let id = this.props.user._id
+        let response = await fetch(
+            process.env.REACT_APP_BASE_URL + `profile/${id}/experiences`,
+            {
+                headers:{
+                    Authorization:`Bearer ${process.env.REACT_APP_ACCESS_TOKEN}`
+                }
+            }
+        )
+        let result = await response.json()
+        this.setState({results: [...this.state.results, ...result]})
+        console.log(result, this.state.results)
+    }
+
+    componentDidMount(){
+        setTimeout(()=>{
+            this.loadExp()
+        },1000)
+    }
+
+    componentDidUpdate(prevProps, prevState){
+        if(prevState.results !== this.state.results){
+            console.log(this.state.results)
+        }
     }
 
     schoolForm(){
@@ -48,13 +112,52 @@ export default class EducationBlock extends PureComponent {
         let show= this.state.showModal? '-150vh' : ''
         return (
             <div id='edu-section'>
-
                 <ModalForEduBlock 
                 style={show} 
                 showModal={this.showModal.bind(this)}
                 typeForm={this.state.form}
                 titleModal={this.state.titleModal}
-                />
+                save={this.state.saveFunction}
+                >
+                    <Form>
+                        {this.state.form.filter(input=>input.as!=="select"||input.as==="textarea").map((input, index)=>{
+                            return(
+                                <Form.Group key={index}>
+                                    <Form.Label htmlFor={input.htmlFor}>{input.title}</Form.Label>
+                                    <Form.Control
+                                        required
+                                        type={input.type}
+                                        name={input.name}
+                                        id={input.id}
+                                        placeholder={input.placeholder}
+                                        as={input.as}
+                                        rows={input.rows}
+                                        onChange={this.state.fillFunction}
+                                    />
+
+                                </Form.Group>
+                            )
+                        })}
+                        {this.state.form.filter(input=>input.as==="select").map((input, index)=>{
+                            return(
+                                <Form.Group key={index}>
+                                    <Form.Label htmlFor={input.htmlFor}>{input.title}</Form.Label>
+                                    <Form.Control
+                                        as="select"
+                                        name={input.name}
+                                        id={input.id}
+                                    >
+                                        {input.options.map((title, index)=>{
+                                            return(
+                                                <option key={index}>{title}</option>
+                                            )
+                                        })}
+                                    </Form.Control>
+                                </Form.Group>
+                            )
+                        })}
+                    </Form>   
+                </ModalForEduBlock>
 
                 {/* Experience */}
 
@@ -64,8 +167,24 @@ export default class EducationBlock extends PureComponent {
                         <span>Experience</span>
                         <i className="fas fa-plus" onClick={this.experienceForm.bind(this)}></i>
                     </header>
-                    <Col xs={2}></Col>
-                    <Col xs={10}></Col>
+                    {this.state.results.map(result=>{
+                        return(
+                            <Row className='exp-details' key={result._id}>
+                                <Col xs={2}>
+                                    <img src="" alt=""/>
+                                </Col>
+                                <Col xs={10}>
+                                    <p>{result.role}</p>
+                                    <p>{result.company}</p>
+                                    <p>
+                                        <span>{result.startDate}</span>
+                                        <span>{result.endDate}</span>
+                                    </p>
+                                </Col>
+                            </Row>
+                        )
+                    })}
+                    
                 </Row>
 
                 {/* Education */}

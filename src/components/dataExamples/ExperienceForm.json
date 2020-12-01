@@ -1,8 +1,8 @@
 [
     {
-        "htmlFor":"title",
-        "name" :"title",
-        "id":"title",
+        "htmlFor":"role",
+        "name" :"role",
+        "id":"role",
         "placeholder":"Ex: Retail Sales Manager",
         "title":"Title",
         "type": "text"        
@@ -35,9 +35,9 @@
         "type": "text"      
     },
     {
-        "htmlFor":"location",
-        "name" :"location",
-        "id":"location",
+        "htmlFor":"area",
+        "name" :"area",
+        "id":"area",
         "placeholder":"Ex: London, United Kingdom",
         "title":"Location",
         "type": "text"            
@@ -58,5 +58,21 @@
         "title":"Description",
         "as": "textarea",
         "rows": 3            
+    },
+    {
+        "htmlFor":"startDate",
+        "name" :"startDate",
+        "id":"startDate",
+        "placeholder":"",
+        "title":"Start Date",
+        "type": "date"      
+    },
+    {
+        "htmlFor":"endDate",
+        "name" :"endDate",
+        "id":"endDate",
+        "placeholder":"",
+        "title":"End Date",
+        "type": "date"      
     }
 ]
