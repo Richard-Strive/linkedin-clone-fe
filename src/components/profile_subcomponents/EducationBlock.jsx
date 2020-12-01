@@ -1,18 +1,19 @@
 import React, { PureComponent } from 'react'
 import '../css/EducationBlock.scss'
 import ModalForEduBlock from './ModalForEduBlock'
-import {Row, Col} from 'react-bootstrap'
+import {Row, Col, Form, Button} from 'react-bootstrap'
 import ExperienceForm from '../dataExamples/ExperienceForm.json'
 import SchoolForm from '../dataExamples/SchoolForm.json'
 
 export default class EducationBlock extends PureComponent {
     state={
         experience:{
-            title:'',
+            role:'',
             employment:'',
             company:'',
-            location:'',
-            time:''
+            area:'',
+            startDate:'',
+            endDate:''
         },
         education:{
             schoolName:'',
@@ -27,7 +28,8 @@ export default class EducationBlock extends PureComponent {
         showModal:true,
         form:[],
         titleModal:'',
-        filled:[]
+        fillFunction:'',
+        saveFunction:'',
     }
 
     showModal(){
@@ -35,9 +37,24 @@ export default class EducationBlock extends PureComponent {
     }
 
     experienceForm(){
-        this.setState({form: ExperienceForm, titleModal: 'Add Experience'})
+        this.setState(
+            {
+                form: ExperienceForm, 
+                titleModal: 'Add Experience', 
+                fillFunction: this.fillExp,
+                saveFunction: this.saveExp.bind(this)
+            })
         this.showModal()
     }
+
+    fillExp = (e)=>{
+        let exp = {...this.state.experience}
+        let currentId = e.currentTarget.id
+        exp[currentId]=e.currentTarget.value
+        this.setState({experience: exp})
+    }
+
+    saveExp = ()=>{console.log(this.state.experience)}
 
     schoolForm(){
         this.setState({form: SchoolForm, titleModal: 'Add Education'})
@@ -48,13 +65,52 @@ export default class EducationBlock extends PureComponent {
         let show= this.state.showModal? '-150vh' : ''
         return (
             <div id='edu-section'>
-
                 <ModalForEduBlock 
                 style={show} 
                 showModal={this.showModal.bind(this)}
                 typeForm={this.state.form}
                 titleModal={this.state.titleModal}
-                />
+                save={this.state.saveFunction}
+                >
+                    <Form>
+                        {this.state.form.filter(input=>input.as!=="select"||input.as==="textarea").map((input, index)=>{
+                            return(
+                                <Form.Group key={index}>
+                                    <Form.Label htmlFor={input.htmlFor}>{input.title}</Form.Label>
+                                    <Form.Control
+                                        required
+                                        type={input.type}
+                                        name={input.name}
+                                        id={input.id}
+                                        placeholder={input.placeholder}
+                                        as={input.as}
+                                        rows={input.rows}
+                                        onChange={this.state.fillFunction}
+                                    />
+
+                                </Form.Group>
+                            )
+                        })}
+                        {this.state.form.filter(input=>input.as==="select").map((input, index)=>{
+                            return(
+                                <Form.Group key={index}>
+                                    <Form.Label htmlFor={input.htmlFor}>{input.title}</Form.Label>
+                                    <Form.Control
+                                        as="select"
+                                        name={input.name}
+                                        id={input.id}
+                                    >
+                                        {input.options.map((title, index)=>{
+                                            return(
+                                                <option key={index}>{title}</option>
+                                            )
+                                        })}
+                                    </Form.Control>
+                                </Form.Group>
+                            )
+                        })}
+                    </Form>   
+                </ModalForEduBlock>
 
                 {/* Experience */}
 
