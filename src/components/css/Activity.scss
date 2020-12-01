@@ -4,6 +4,7 @@
   border: 1px solid rgba($color: black, $alpha: 0.3);
   border-radius: 10px;
   margin: 1rem;
+  background-color: white;
   header {
     display: flex;
     flex-direction: column;
@@ -32,10 +33,13 @@
     }
   }
   .activity-body {
+    position: relative;
+    width: 100%;
+    margin: 0;
     .activity {
-      width: 50%;
-      display: inline-flex;
+      display: flex;
       align-items: center;
+      padding: 0.5rem 0;
       span:nth-of-type(1) {
         margin: 0.5rem;
         img {
