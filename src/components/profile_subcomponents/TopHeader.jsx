@@ -30,6 +30,11 @@ class TopHeader extends React.Component {
 								alt='profile-pic'
 							/>
 							<div
+								style={{
+									visibility: this.props.isShowEditBtn
+										? "visible"
+										: "hidden",
+								}}
 								onClick={() =>
 									this.setState({
 										showModal: true,

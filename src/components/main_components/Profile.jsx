@@ -18,12 +18,13 @@ import PeopleYouMayKnow from "../sideComponents/PeopleYouMayKnow";
 import InLearning from "../sideComponents/InLearning";
 
 class Profile extends React.Component {
-	state = { user: {} };
+	state = { user: {}, users: [], isShowEditButton: true };
 
 	getProfileInfo = async () => {
+		let id = this.props.match.params.id;
 		try {
 			const response = await fetch(
-				process.env.REACT_APP_BASE_URL + "profile/me",
+				process.env.REACT_APP_BASE_URL + `profile/${id}`,
 				{
 					headers: {
 						Authorization: `Bearer ${process.env.REACT_APP_ACCESS_TOKEN}`,
@@ -39,26 +40,61 @@ class Profile extends React.Component {
 		}
 	};
 
+	getProfile = async () => {
+		try {
+			const response = await fetch(
+				process.env.REACT_APP_BASE_URL + "profile/",
+				{
+					headers: {
+						Authorization: `Bearer ${process.env.REACT_APP_ACCESS_TOKEN}`,
+					},
+				}
+			);
+
+			const users = await response.json();
+			console.log(users);
+			this.setState({ users });
+		} catch (err) {
+			console.log(err);
+		}
+	};
+
 	componentDidMount() {
 		this.getProfileInfo();
+		this.getProfile();
+	}
+
+	componentDidUpdate(prevProp, prevState) {
+		if (prevProp.match.params.id !== this.props.match.params.id) {
+			if (this.props.match.params.id.localeCompare("me") === -1) {
+				this.setState({ isShowEditButton: false });
+			}
+			this.getProfileInfo();
+		}
 	}
 	render() {
 		return (
 			<div className='profile-container d-flex flex-row'>
 				<div>
-					<TopHeader user={this.state.user} />
-					<AboutBlock />
+					<TopHeader
+						isShowEditBtn={this.state.isShowEditButton}
+						user={this.state.user}
+					/>
+					<AboutBlock isShowEditBtn={this.state.isShowEditButton} />
 					<Dashboard />
 					<Activity />
-					<EducationBlock user={this.state.user}/>
-					<Skills />
+					<EducationBlock
+						isShowEditBtn={this.state.isShowEditButton}
+						user={this.state.user}
+					/>
+					<Skills isShowEditBtn={this.state.isShowEditButton} />
 					<Interests />
 				</div>
 				<div className='side-components mt-3'>
 					<EditAdd />
 					<SeeJobs />
-					<PeopleAlsoViewed />
-					<PeopleYouMayKnow />
+					<PeopleAlsoViewed deta={this.state.users} />
+					<PeopleYouMayKnow deta={this.state.users} />
 					<InLearning />
 				</div>
 			</div>

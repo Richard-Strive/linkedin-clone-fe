@@ -133,7 +133,7 @@ class NavBar extends Component {
 										</i>
 									</li>
 								</Link>
-								<Link to='/'>
+								<Link to='/profile/me'>
 									<li className='navli'>
 										<i className='fas nav-icons fa-user-circle '>
 											<br />{" "}
