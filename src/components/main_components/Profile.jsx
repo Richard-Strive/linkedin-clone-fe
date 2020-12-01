@@ -7,27 +7,28 @@ import Dashboard from "../profile_subcomponents/Dashboard";
 import Activity from '../profile_subcomponents/Activity'
 import EducationBlock from '../profile_subcomponents/EducationBlock'
 class Profile extends React.Component {
-	state = { user: {} };
+  state = { user: {} };
 
-	getProfileInfo = async () => {
-		try {
-			const response = await fetch(
-				process.env.REACT_APP_BASE_URL + "profile/me",
-				{
-					headers: {
-						Authorization: `Bearer ${process.env.REACT_APP_ACCESS_TOKEN}`,
-					},
-				}
-			);
+  getProfileInfo = async () => {
+    try {
+      const response = await fetch(
+        process.env.REACT_APP_BASE_URL + "profile/me",
+        {
+          headers: {
+            Authorization: `Bearer ${process.env.REACT_APP_ACCESS_TOKEN}`,
+          },
+        }
+      );
 
-			const user = await response.json();
-			console.log(user);
-			this.setState({ user });
-		} catch (err) {
-			console.log(err);
-		}
-	};
+      const user = await response.json();
+      console.log(user);
+      this.setState({ user });
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
+<<<<<<< Updated upstream
 	componentDidMount() {
 		this.getProfileInfo();
 	}
@@ -42,6 +43,33 @@ class Profile extends React.Component {
 			</div>
 		);
 	}
+=======
+  componentDidMount() {
+    this.getProfileInfo();
+  }
+  render() {
+    return (
+      <div className="profile-container d-flex flex-row">
+        <div>
+          <TopHeader user={this.state.user} />
+          <AboutBlock />
+          <Dashboard />
+          <Activity />
+          <EducationBlock />
+          <Skills />
+          <Interests />
+        </div>
+        <div className="side-components mt-3">
+          <EditAdd />
+          <SeeJobs />
+          <PeopleAlsoViewed />
+          <PeopleYouMayKnow />
+          <InLearning />
+        </div>
+      </div>
+    );
+  }
+>>>>>>> Stashed changes
 }
 
 export default Profile;
