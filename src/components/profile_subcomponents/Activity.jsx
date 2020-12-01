@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react'
+import { Col, Row } from 'react-bootstrap'
 import '../css/Activity.scss'
 import activityData from '../dataExamples/ActivityData.json'
 
@@ -21,10 +22,10 @@ export default class Activity extends PureComponent {
                         <span>Manage Followers</span>
                     </span>
                 </header>
-                <div className='activity-body'>
+                <Row className='activity-body'>
                     {this.activities.map((activity, index)=>{
                         return(
-                            <div className='activity' key={index}>
+                            <Col xs={6} className='activity' key={index}>
                                 <span>
                                     <img src={activity.img} alt=""/>
                                 </span>
@@ -33,10 +34,10 @@ export default class Activity extends PureComponent {
                                     <p>Username shared this</p>
                                     <p>{activity["reactions-n"]} Reactions</p>
                                 </span>
-                            </div>
+                            </Col>
                         )
                     })}
-                </div>
+                </Row>
             </div>
         )
     }

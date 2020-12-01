@@ -1,30 +1,20 @@
 import React, { PureComponent } from 'react'
-import '../css/AboutBlock.scss'
+import '../css/Skills.scss'
+import SkillsData from '../dataExamples/SkillsData.json'
 import {Modal, Button} from 'react-bootstrap'
 
-export default class AboutBlock extends PureComponent {
+export default class Skills extends PureComponent {
     state={
         showModal:true,
-        about:''
     }
-
-    about = ''
 
     showModal(){this.setState({showModal: !this.state.showModal})}
     
-    fillAbout=(event)=>{
-        this.setState({about: event.currentTarget.value})
-    }
-
-    save=()=>{
-        this.about=this.state.about
-        this.showModal()
-    }
     
     render() {
         let show = this.state.showModal? '-150vh' : ''
         return (
-            <div id='about'>
+            <div id='skills'>
                 <Modal.Dialog style={{marginTop: `${show}`}}>
                     <Modal.Header closeButton onClick={this.showModal.bind(this)}>
                         <Modal.Title>Edit About</Modal.Title>
@@ -38,8 +28,6 @@ export default class AboutBlock extends PureComponent {
                         cols="30" 
                         rows="5"
                         placeholder='Talk about you...'
-                        value={this.state.about}
-                        onChange={this.fillAbout}
                         >
                         </textarea>
                     </Modal.Body>
@@ -47,20 +35,20 @@ export default class AboutBlock extends PureComponent {
                     <Modal.Footer>
                         <Button 
                         variant="primary"
-                        onClick={this.save.bind(this)}
+                        onClick={this.showModal.bind(this)}
                         >Save</Button>
                     </Modal.Footer>
                 </Modal.Dialog>
                 <header>
-                    <span>About</span>
-                    <i 
-                    className="fas fa-pencil-alt" 
-                    onClick={this.showModal.bind(this)}
-                    ></i>
+                    <span>
+                        Skills & endorements
+                    </span>
+                    <span>
+                        <input type='button' value='Add a new skill' onClick={this.showModal.bind(this)}></input>
+                        <i className="fas fa-pencil-alt"></i>
+                    </span>
                 </header>
-                <div className="about-body">
-                    <p>{this.about}</p>
-                </div>
+                <input type="button" value="View Skill Assessments"/>
             </div>
         )
     }

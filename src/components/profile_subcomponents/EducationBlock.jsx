@@ -1,7 +1,9 @@
 import React, { PureComponent } from 'react'
 import '../css/EducationBlock.scss'
 import ModalForEduBlock from './ModalForEduBlock'
-import {Row} from 'react-bootstrap'
+import {Row, Col} from 'react-bootstrap'
+import ExperienceForm from '../dataExamples/ExperienceForm.json'
+import SchoolForm from '../dataExamples/SchoolForm.json'
 
 export default class EducationBlock extends PureComponent {
     state={
@@ -22,21 +24,36 @@ export default class EducationBlock extends PureComponent {
             organization:'',
             time:''
         },
-        showModal:true
+        showModal:true,
+        form:[],
+        titleModal:'',
+        filled:[]
     }
 
     showModal(){
         this.setState({showModal: !this.state.showModal})
     }
 
+    experienceForm(){
+        this.setState({form: ExperienceForm, titleModal: 'Add Experience'})
+        this.showModal()
+    }
+
+    schoolForm(){
+        this.setState({form: SchoolForm, titleModal: 'Add Education'})
+        this.showModal()
+    }
+
     render() {
-        let show= this.state.showModal? '-100%' : ''
+        let show= this.state.showModal? '-150vh' : ''
         return (
             <div id='edu-section'>
 
                 <ModalForEduBlock 
                 style={show} 
                 showModal={this.showModal.bind(this)}
+                typeForm={this.state.form}
+                titleModal={this.state.titleModal}
                 />
 
                 {/* Experience */}
@@ -45,8 +62,10 @@ export default class EducationBlock extends PureComponent {
                     
                     <header>
                         <span>Experience</span>
-                        <i className="fas fa-plus" onClick={this.showModal.bind(this)}></i>
+                        <i className="fas fa-plus" onClick={this.experienceForm.bind(this)}></i>
                     </header>
+                    <Col xs={2}></Col>
+                    <Col xs={10}></Col>
                 </Row>
 
                 {/* Education */}
@@ -55,7 +74,7 @@ export default class EducationBlock extends PureComponent {
                    
                     <header>
                         <span>Education</span>
-                        <i className="fas fa-plus" onClick={this.showModal.bind(this)}></i>
+                        <i className="fas fa-plus" onClick={this.schoolForm.bind(this)}></i>
                     </header>
                 </Row>
 
