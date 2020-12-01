@@ -54,26 +54,51 @@ class Footer extends Component {
             <Col>
               <ul style={{ listStyle: "none", textAlign: "left" }}>
                 <li>
-                  Questions? <br />
-                  <p>Visit our Help Center.</p>
+                  <i class="fas fa-question-circle"></i>Questions? <br />
+                  <p style={{ color: "Grey", fontSize: "12px" }}>
+                    Visit our Help Center.
+                  </p>
                 </li>
                 <li>
-                  Manage your account and privacy <br />
-                  <p>Go to your Settings.</p>
+                  <i class="fas fa-cog"></i>Manage your account and privacy{" "}
+                  <br />
+                  <p style={{ color: "Grey", fontSize: "12px" }}>
+                    Go to your Settings.
+                  </p>
                 </li>
               </ul>
             </Col>
             <Col>
               Select Language
-              <DropdownButton
-                className="footerbutton"
-                title="English"
-                style={{ borderRadius: "0", backgroundColor: "white" }}
-              >
-                <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
-                <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
-                <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
-              </DropdownButton>
+              <div class="dropdown">
+                <button
+                  style={{
+                    borderRadius: "0",
+                    backgroundColor: "white",
+                    color: "black",
+                    width: "200px",
+                  }}
+                  class="btn  dropdown-toggle"
+                  type="button"
+                  id="dropdownMenuButton"
+                  data-toggle="dropdown"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                >
+                  English
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  <a class="dropdown-item" href="#">
+                    Action
+                  </a>
+                  <a class="dropdown-item" href="#">
+                    Another action
+                  </a>
+                  <a class="dropdown-item" href="#">
+                    Something else here
+                  </a>
+                </div>
+              </div>
             </Col>
           </Row>
         </Container>

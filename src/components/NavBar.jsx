@@ -26,7 +26,7 @@ class NavBar extends Component {
           expand="lg"
         >
           <button
-            class="navbar-toggler"
+            className="navbar-toggler"
             type="button"
             data-toggle="collapse"
             data-target="#navbarSupportedContent"
@@ -34,7 +34,7 @@ class NavBar extends Component {
             aria-expanded="false"
             aria-label="Toggle navigation"
           >
-            <span class="navbar-toggler-icon"></span>
+            <span className="navbar-toggler-icon"></span>
           </button>
           <Row
             className="align-items-center justify-content-center mt-4 collapse navbar-collapse"
@@ -44,9 +44,8 @@ class NavBar extends Component {
               <Link to="/">
                 <Image
                   style={{
-                    height: 50,
-                    width: 50,
-                    marginBottom: "15px",
+                    height: 60,
+                    width: 60,
                   }}
                   src={logo}
                 />
@@ -57,8 +56,12 @@ class NavBar extends Component {
                 <FormControl
                   type="text"
                   placeholder="Search"
-                  className="mr-sm-2 mb-3"
-                  style={{ width: "390px" }}
+                  className="mr-sm-2 "
+                  style={{
+                    width: "390px",
+                    height: "45px",
+                    marginLeft: "-35px",
+                  }}
                 />
               </Form>
             </Col>
