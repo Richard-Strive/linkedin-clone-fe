@@ -26,9 +26,9 @@
 .search-result-popup {
 	position: fixed;
 	z-index: 1200;
-	top: 7%;
-	left: 16%;
-	width: 25%;
+	top: 9%;
+	left: 13%;
+	width: 35%;
 
 	max-height: calc(100vh - 210px);
 	overflow-y: auto !important;
@@ -38,19 +38,38 @@
 .search-result-popup .list-group-item:hover {
 	cursor: pointer;
 }
+.search-result-popup a {
+	text-decoration: none;
+	color: black;
+}
+.search-result-popup .user-avatar {
+	border-radius: 50%;
+	width: 25px;
+	height: 25px;
+}
+.search-result-popup .user-name {
+	font-weight: bold;
+	margin-left: 0;
+}
+.search-result-popup .user-info {
+	color: rgb(97, 96, 96);
+	font-size: 13px;
+	margin-top: 0.11rem !important;
+}
+
 .navul {
-  list-style-type: none;
-  margin-top: 20px;
+	list-style-type: none;
+	margin-top: 20px;
 }
 
 .navli {
-  display: inline;
-  margin: 19px;
+	display: inline;
+	margin: 19px;
 }
 .navnavbar {
-  align-items: center;
-  display: flex;
-  margin: 0 auto;
-  min-height: 100%;
-  width: 1128px;
+	align-items: center;
+	display: flex;
+	margin: 0 auto;
+	min-height: 100%;
+	width: 1128px;
 }

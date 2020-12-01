@@ -37,8 +37,23 @@ class ShowSearchResult extends React.Component {
 						users.map((user) => {
 							return (
 								<Link to={`/profile/${user._id}`}>
-									<ListGroup.Item key={user._id}>
-										{user.name} {user.surname}
+									<ListGroup.Item
+										key={user._id}
+										className='d-flex flex-row'>
+										<img
+											className='user-avatar mr-2'
+											src={user.image}
+											alt='user-avatar'
+										/>
+										<span className='user-name mr-2'>
+											{user.name} {user.surname} &middot;
+										</span>
+
+										<span className='user-info '>
+											{user.title &&
+												user.title.substring(0, 14)}
+											...
+										</span>
 									</ListGroup.Item>
 								</Link>
 							);

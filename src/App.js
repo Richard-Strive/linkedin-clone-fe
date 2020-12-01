@@ -12,7 +12,12 @@ import ShowSearchResult from "./components/main_components/ShowSearchResult";
 
 import Home from "./components/main_components/Home";
 class App extends React.Component {
-	state = { userList: [], showResult: false, searchString: "" };
+	state = {
+		userList: [],
+		filteredUserList: [],
+		showResult: false,
+		searchString: "",
+	};
 
 	getUserList = async () => {
 		try {
@@ -50,9 +55,12 @@ class App extends React.Component {
 							.includes(this.state.searchString))
 			);
 
-			this.setState({ userList: filteredUserList });
+			this.setState({ filteredUserList });
 		} else {
-			this.setState({ searchString: e.currentTarget.value });
+			this.setState({
+				searchString: e.currentTarget.value,
+				filteredUserList: this.state.userList,
+			});
 		}
 	};
 
@@ -65,7 +73,7 @@ class App extends React.Component {
 				<Router>
 					<ShowSearchResult
 						keyword={this.state.searchString}
-						users={this.state.userList}
+						users={this.state.filteredUserList}
 						onHide={() => this.setState({ showResult: false })}
 						show={this.state.showResult}
 					/>
