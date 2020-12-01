@@ -20,9 +20,37 @@
   }
   .exp-details {
     height: 15vh;
+    margin-bottom: 0.5rem;
+    border-bottom: 1px solid rgba($color: black, $alpha: 0.3);
     .col-10 {
+      position: relative;
       p {
         margin: 0;
+        text-align: left;
+      }
+      p:nth-of-type(1) {
+        font-weight: 600;
+      }
+      p:nth-of-type(2) {
+        font-size: 0.8rem;
+      }
+      p:nth-of-type(3) {
+        font-size: 0.7rem;
+      }
+      p:nth-of-type(4) {
+        font-size: 0.7rem;
+      }
+      .fa-pencil-alt {
+        position: absolute;
+        top: 0;
+        right: 1rem;
+        color: #0a66c2;
+        border-radius: 50%;
+        padding: 0.2rem;
+        background-color: white;
+      }
+      .fa-pencil-alt:hover {
+        background-color: #9bc3eb91;
       }
     }
   }

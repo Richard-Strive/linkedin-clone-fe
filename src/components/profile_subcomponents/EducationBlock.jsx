@@ -30,13 +30,16 @@ export default class EducationBlock extends PureComponent {
         titleModal:'',
         fillFunction:'',
         saveFunction:'',
-        results:[]
+        results:[],
+        idToEdit:''
     }
 
     //SHOW MODAL FUNCTION
     showModal(){
         this.setState({showModal: !this.state.showModal})
     }
+
+    //PASSING FORM DATA FOR INPUTS ON MODAL
 
     experienceForm(){
         this.setState(
@@ -49,11 +52,34 @@ export default class EducationBlock extends PureComponent {
         this.showModal()
     }
 
+    
+    schoolForm(){
+        this.setState({form: SchoolForm, titleModal: 'Add Education'})
+        this.showModal()
+    }
+
+    //FILL FUNCTION
+
     fillExp = (e)=>{
         let exp = {...this.state.experience}
         let currentId = e.currentTarget.id
         exp[currentId]=e.currentTarget.value
         this.setState({experience: exp})
+    }
+
+    //EDIT FUNCTION
+
+    editFillExp = (id)=>{
+        this.setState(
+            {
+                form: ExperienceForm, 
+                titleModal: 'Edit Experience', 
+                fillFunction: this.fillExp,
+                saveFunction: this.saveExp,
+                idToEdit: id
+            })
+            console.log(this.state.idToEdit, id)
+        this.showModal()
     }
 
     saveExp = async ()=>{
@@ -71,7 +97,7 @@ export default class EducationBlock extends PureComponent {
             }
         )
         let result = await response.json()
-        // this.setState({results: [...this.state.results, result[0]]})
+        this.setState({results: [...this.state.results, result]})
         console.log(result)
         this.showModal()
     }
@@ -91,6 +117,10 @@ export default class EducationBlock extends PureComponent {
         console.log(result, this.state.results)
     }
 
+    // editExp = async ()=>{
+
+    // }
+
     componentDidMount(){
         setTimeout(()=>{
             this.loadExp()
@@ -103,10 +133,6 @@ export default class EducationBlock extends PureComponent {
         }
     }
 
-    schoolForm(){
-        this.setState({form: SchoolForm, titleModal: 'Add Education'})
-        this.showModal()
-    }
 
     render() {
         let show= this.state.showModal? '-150vh' : ''
@@ -176,10 +202,12 @@ export default class EducationBlock extends PureComponent {
                                 <Col xs={10}>
                                     <p>{result.role}</p>
                                     <p>{result.company}</p>
-                                    <p>
-                                        <span>{result.startDate}</span>
-                                        <span>{result.endDate}</span>
-                                    </p>
+                                    <p>{result.startDate.substring(0, 10)} {result.endDate.substring(0, 10)}</p>
+                                    <p>{result.area}</p>
+                                    <i 
+                                    className="fas fa-pencil-alt" 
+                                    onClick={this.editFillExp.bind(this, result._id)}
+                                    ></i>
                                 </Col>
                             </Row>
                         )
