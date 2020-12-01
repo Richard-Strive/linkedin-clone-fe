@@ -155,7 +155,7 @@ export default class EducationBlock extends PureComponent {
 
     //EDIT FUNCTION
     editFillExp = async (id)=>{
-        let userId = this.props.user._id
+        let userId = this.props.user/*._id */
         let result=[]
         this.fetchGet(userId, '/experiences/',id, result)
         let exp = await{
@@ -181,28 +181,28 @@ export default class EducationBlock extends PureComponent {
 
     //POST EXPERIENCE
     saveExp =()=>{
-        let id = this.props.user._id
+        let id = this.props.user/*._id*/
         this.fetchPost(id, 'experiences')
         this.showModal()
     }
 
     //LOAD ALL EXPERIENCES
     loadExp (){
-        let id = this.props.user._id
+        let id = this.props.user/*._id*/
         let result=[];
         this.fetchGet(id,'/experiences', null, result)
     }
 
     //EDIT EXPERIENCE
     editExp = async ()=>{
-        let id = this.props.user._id
+        let id = this.props.user/*._id*/
         this.fetchPut(id, 'experiences', this.state.idToEdit)
         this.showModal()
     }
 
     //DELETE EXPERIENCE
     deleteExp = async (id)=>{
-        let userId = this.props.user._id
+        let userId = this.props.user/*._id*/
         this.fetchDelete(userId, 'experiences', id)
     }
 
@@ -215,12 +215,17 @@ export default class EducationBlock extends PureComponent {
     componentDidUpdate(prevProps, prevState){
         if(prevState.results !== this.state.results){
             console.log(this.state.results)
+        }else{}
+        if(prevProps.user !== this.props.user){
+            this.setState({results: []})
+            this.loadExp()
         }
     }
 
 
     render() {
         let show= this.state.showModal? '-150vh' : ''
+        let showBtn=this.props.isShowEditBtn? 'block' : 'none'
         return (
             <div id='edu-section'>
                 <ModalForEduBlock 
@@ -279,7 +284,11 @@ export default class EducationBlock extends PureComponent {
                     
                     <header>
                         <span>Experience</span>
-                        <i className="fas fa-plus" onClick={this.experienceForm.bind(this)}></i>
+                        <i 
+                        className="fas fa-plus" 
+                        onClick={this.experienceForm.bind(this)}
+                        style={{display:`${showBtn}`}}
+                        ></i>
                     </header>
                     {this.state.results.map((result, index)=>{
                         return(
@@ -295,9 +304,11 @@ export default class EducationBlock extends PureComponent {
                                     <i 
                                     className="fas fa-pencil-alt" 
                                     onClick={this.editFillExp.bind(this, result._id)}
+                                    style={{display:`${showBtn}`}}
                                     ></i>
                                     <i className="fas fa-trash"
                                     onClick={this.deleteExp.bind(this, result._id)}
+                                    style={{display:`${showBtn}`}}
                                     ></i>
                                 </Col>
                             </Row>
@@ -312,7 +323,11 @@ export default class EducationBlock extends PureComponent {
                    
                     <header>
                         <span>Education</span>
-                        <i className="fas fa-plus" onClick={this.schoolForm.bind(this)}></i>
+                        <i 
+                        className="fas fa-plus" 
+                        onClick={this.schoolForm.bind(this)}
+                        style={{display:`${showBtn}`}}
+                        ></i>
                     </header>
                 </Row>
 
@@ -322,7 +337,11 @@ export default class EducationBlock extends PureComponent {
                     
                     <header>
                         <span>Licenses and Certifications</span>
-                        <i className="fas fa-plus" onClick={this.showModal.bind(this)}></i>
+                        <i 
+                        className="fas fa-plus" 
+                        onClick={this.showModal.bind(this)}
+                        style={{display:`${showBtn}`}}
+                        ></i>
                     </header>
                 </Row>
 
