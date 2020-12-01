@@ -67,7 +67,7 @@ class NavBar extends Component {
 									<FormControl
 										aria-label='search'
 										aria-describedby='basic-addon1'
-										placeholder='Search'
+										placeholder='Search and press enter'
 										className='mr-sm-2 '
 										value={this.props.searchString}
 										onKeyDown={this.props.handleSearch}

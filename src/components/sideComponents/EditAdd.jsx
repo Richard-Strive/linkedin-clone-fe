@@ -5,7 +5,7 @@ export default class EditAdd extends Component {
   render() {
     return (
       <div>
-        <Card style={{ width: "18rem" }}>
+        <Card className="mb-3" style={{ width: "18rem" }}>
           <Card.Body>
             <Card.Text>Edit public profile & URL</Card.Text>
             <hr />
