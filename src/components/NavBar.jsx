@@ -20,12 +20,26 @@ class NavBar extends Component {
     return (
       <div>
         <Navbar
-          className="mb-4 navnavbar"
+          className="mb-4 navnavbar "
           style={{ height: 50 }}
           bg="light"
           expand="lg"
         >
-          <Row className="align-items-center justify-content-center mt-4">
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <Row
+            className="align-items-center justify-content-center mt-4 collapse navbar-collapse"
+            id="navbarSupportedContent"
+          >
             <Col md={1}>
               <Link to="/">
                 <Image
