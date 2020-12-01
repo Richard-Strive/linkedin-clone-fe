@@ -33,6 +33,7 @@ export default class EducationBlock extends PureComponent {
         results:[]
     }
 
+    //SHOW MODAL FUNCTION
     showModal(){
         this.setState({showModal: !this.state.showModal})
     }
@@ -70,7 +71,8 @@ export default class EducationBlock extends PureComponent {
             }
         )
         let result = await response.json()
-        console.log(this.state.experience, result)
+        // this.setState({results: [...this.state.results, result[0]]})
+        console.log(result)
         this.showModal()
     }
 
@@ -85,7 +87,7 @@ export default class EducationBlock extends PureComponent {
             }
         )
         let result = await response.json()
-        this.setState({results: result})
+        this.setState({results: [...this.state.results, ...result]})
         console.log(result, this.state.results)
     }
 
@@ -93,6 +95,12 @@ export default class EducationBlock extends PureComponent {
         setTimeout(()=>{
             this.loadExp()
         },1000)
+    }
+
+    componentDidUpdate(prevProps, prevState){
+        if(prevState.results !== this.state.results){
+            console.log(this.state.results)
+        }
     }
 
     schoolForm(){
@@ -161,9 +169,9 @@ export default class EducationBlock extends PureComponent {
                     </header>
                     {this.state.results.map(result=>{
                         return(
-                            <>
+                            <Row className='exp-details' key={result._id}>
                                 <Col xs={2}>
-                                <img src="" alt=""/>
+                                    <img src="" alt=""/>
                                 </Col>
                                 <Col xs={10}>
                                     <p>{result.role}</p>
@@ -173,7 +181,7 @@ export default class EducationBlock extends PureComponent {
                                         <span>{result.endDate}</span>
                                     </p>
                                 </Col>
-                            </>
+                            </Row>
                         )
                     })}
                     
