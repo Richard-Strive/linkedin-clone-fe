@@ -9,27 +9,8 @@ class CommentList extends React.Component {
 
 		deletedSize: 0,
 		errorMessage: false,
-		user: {},
 	};
-	getProfileInfo = async () => {
-		const userId = JSON.parse(window.localStorage.getItem("userId"));
-		try {
-			const response = await fetch(
-				process.env.REACT_APP_BASE_URL + `profile/${userId}`,
-				{
-					headers: {
-						Authorization: `Bearer ${process.env.REACT_APP_ACCESS_TOKEN}`,
-					},
-				}
-			);
 
-			const user = await response.json();
-			console.log(user);
-			this.setState({ user });
-		} catch (err) {
-			console.log(err);
-		}
-	};
 	getComments = async () => {
 		try {
 			let response = await fetch(
@@ -95,7 +76,6 @@ class CommentList extends React.Component {
 			// this.setState({ update: !this.state.update });
 		}
 		if (prevProps.fetchComment !== this.props.fetchComment) {
-			this.getProfileInfo();
 			this.getComments();
 		}
 	}
@@ -107,42 +87,52 @@ class CommentList extends React.Component {
 				<div className='mb-5'>
 					{this.state.comments.map((comment, index) => {
 						return (
-							<ListGroup
-								key={index}
-								className='comment-item d-flex justify-content-between mt-2'>
-								<ListGroup.Item className='text-dark d-flex flex-column'>
-									<div>
-										<Link to={`/profile/${user._id}`}>
-											<img
-												className='user-img float-left'
-												src={user.image}
-												alt='user-avatar'
-											/>
-											<div className='user-info float-left d-flex flex-column'>
+							<div className='d-flex flex-row'>
+								<img
+									className='comment-user-avatar mt-1'
+									src='https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_960_720.png'
+									alt='comment-user-avatar'
+								/>
+								<ListGroup
+									key={index}
+									className='comment-item d-flex justify-content-between mb-3'>
+									<ListGroup.Item className='text-dark d-flex flex-column'>
+										{/* <div>
+										<img
+											className='user-img float-left'
+											src={comment.author.image}
+											alt='user-avatar'
+										/>
+										<div className='user-info float-left d-flex flex-column'>
+											<Link
+												to={`/profile/${comment.author._id}`}>
 												<h5 className='ml-0'>
-													{user.name} {user.surname}
+													{comment.author.name}{" "}
+													{comment.author.surname}
 													&middot; <span>1st</span>
 												</h5>
-												<p
-													style={{
-														textAlign: "left",
-													}}
-													className='ml-2 '>
-													{user.title}
-												</p>
-											</div>
-										</Link>
+											</Link>
+											<p
+												style={{
+													textAlign: "left",
+												}}
+												className='ml-2 '>
+												{comment.author.title}
+											</p>
+										</div>
+
 										<div className='mt-1 '>
 											<i className='three-dot float-right fas fa-ellipsis-h'></i>
 										</div>
-									</div>
-									<p
-										style={{ textAlign: "left" }}
-										className='float-left'>
-										{comment.comment}
-									</p>
-								</ListGroup.Item>
-							</ListGroup>
+									</div> */}
+										<p
+											style={{ textAlign: "left" }}
+											className='float-left'>
+											{comment.comment}
+										</p>
+									</ListGroup.Item>
+								</ListGroup>
+							</div>
 						);
 					})}
 				</div>
@@ -154,7 +144,14 @@ class CommentList extends React.Component {
 		) {
 			body = (
 				<div className='d-flex justify-content-center align-items-center mt-3'>
-					<Alert variant='primary'>&#9780; There is no comment</Alert>
+					<ListGroup className='comment-item comment-warning mb-3'>
+						<ListGroup.Item>
+							<span className='float-left'>
+								&#9780; There is no comment for this post
+							</span>
+						</ListGroup.Item>
+					</ListGroup>
+					{/* <Alert variant='primary'>&#9780; There is no comment</Alert> */}
 				</div>
 			);
 		} else if (this.state.errorMessage) {
@@ -168,7 +165,7 @@ class CommentList extends React.Component {
 		} else {
 			body = (
 				<Spinner
-					style={{ marginLeft: "10%" }}
+					className='comment-spinner'
 					animation='grow'
 					variant='primary'
 				/>

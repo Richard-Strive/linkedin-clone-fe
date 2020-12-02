@@ -5,7 +5,7 @@
 	background-color: white;
 	/* margin-left: 30%; */
 	border-radius: 10px;
-	
+
 	text-overflow: ellipsis;
 	overflow-x: hidden;
 }
@@ -62,8 +62,32 @@
 
 .commentArea {
 	border-radius: 20px;
+	width: 200%;
+	margin-left: 1rem;
+	margin-bottom: 0.2rem !important ;
 }
 .main-page-spinner {
 	margin-top: 10%;
 	margin-bottom: 10%;
+}
+.comment-item {
+	width: 200%;
+	margin-left: 1rem !important;
+}
+.comment-item.comment-warning {
+	width: 50% !important;
+}
+.list-group-item {
+	width: 200%;
+	background-color: #f2f2f2 !important;
+}
+.comment-user-avatar {
+	width: 25px;
+	height: 25px;
+	border-radius: 50%;
+}
+
+.comment-spinner {
+	margin-left: 100% !important;
+	margin-bottom: 1rem;
 }
