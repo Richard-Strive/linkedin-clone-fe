@@ -22,7 +22,9 @@ class Home extends React.Component {
               <Posts />
             </Col>
             <Col xs={3}>
+
               <RightSide />
+
             </Col>
           </Row>
         </Container>
