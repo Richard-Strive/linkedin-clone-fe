@@ -28,7 +28,7 @@
 
 .post-card .user-info p {
 	font-size: 80% !important;
-	color: gray;
+	color: rgb(97, 95, 95);
 }
 
 .post-card .user-info h5 {
@@ -39,7 +39,7 @@
 }
 
 .post-card .user-info span {
-	font-size: 0.6rem !important;
+	font-size: 0.8rem !important;
 	color: gray;
 	margin-bottom: 2rem !important;
 	text-align: top;
