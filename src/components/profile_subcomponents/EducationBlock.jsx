@@ -150,7 +150,11 @@ export default class EducationBlock extends PureComponent {
         let exp = {...this.state.experience}
         let currentId = e.currentTarget.id
         exp[currentId]=e.currentTarget.value
+        if(currentId ==='checkEnd' && exp[currentId]===e.currentTarget.checked){
+            exp.endDate=''
+        }
         this.setState({experience: exp})
+
     }
 
     //EDIT FUNCTION
@@ -251,6 +255,7 @@ export default class EducationBlock extends PureComponent {
                                         rows={input.rows}
                                         onChange={this.state.fillFunction}
                                         value={this.state.experience[input.id]}
+                                        label={input.label}
                                         
                                     />
 
