@@ -5,7 +5,7 @@ export default class InLearning extends Component {
   render() {
     return (
       <div>
-        <Card style={{ width: "18rem" }}>
+        <Card className="mt-3 mb-3" style={{ width: "18rem" }}>
           <Card.Body>
             <Card.Title className="text-left">People you may know</Card.Title>
             <Row>

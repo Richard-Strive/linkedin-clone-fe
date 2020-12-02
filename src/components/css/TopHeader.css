@@ -97,3 +97,6 @@
 .profile-edit-form label {
 	color: gray !important;
 }
+.profile-edit-form .submit-button {
+	position: sticky;
+}

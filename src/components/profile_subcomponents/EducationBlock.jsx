@@ -1,9 +1,9 @@
-import React, { PureComponent } from 'react'
-import '../css/EducationBlock.scss'
-import ModalForEduBlock from './ModalForEduBlock'
-import {Row, Col, Form} from 'react-bootstrap'
-import ExperienceForm from '../dataExamples/ExperienceForm.json'
-import SchoolForm from '../dataExamples/SchoolForm.json'
+import React, { PureComponent } from "react";
+import "../css/EducationBlock.scss";
+import ModalForEduBlock from "./ModalForEduBlock";
+import { Row, Col, Form, Alert } from "react-bootstrap";
+import ExperienceForm from "../dataExamples/ExperienceForm.json";
+import SchoolForm from "../dataExamples/SchoolForm.json";
 
 export default class EducationBlock extends PureComponent {
     state={
@@ -30,37 +30,48 @@ export default class EducationBlock extends PureComponent {
         titleModal:'',
         fillFunction:'',
         saveFunction:'',
-        results:[]
+        results:[],
+        idToEdit:'',
+        buttonModal:'Save',
+        stateForValue:''
     }
 
-    //SHOW MODAL FUNCTION
-    showModal(){
-        this.setState({showModal: !this.state.showModal})
-    }
+    //FETCH FUNCTIONS
 
-    experienceForm(){
-        this.setState(
-            {
-                form: ExperienceForm, 
-                titleModal: 'Add Experience', 
-                fillFunction: this.fillExp,
-                saveFunction: this.saveExp
+    //GET ALL EXPERIENCES OR ONLY ONE
+    fetchGet = async (id, content, idContent, result)=>{
+        if(idContent===null){
+            let response = await fetch(process.env.REACT_APP_BASE_URL+`profile/${id}`+content,{
+                headers:{
+                    "Authorization":`Bearer ${process.env.REACT_APP_ACCESS_TOKEN}`
+                }
             })
-        this.showModal()
+            result = await response.json()
+            this.setState({results: [...this.state.results, ...result]})
+        }else{
+            let response = await fetch(process.env.REACT_APP_BASE_URL+`profile/${id}`+content+idContent,{
+                headers:{
+                    "Authorization":`Bearer ${process.env.REACT_APP_ACCESS_TOKEN}`
+                }
+            })
+            result=await response.json()
+            let exp = {
+                role:result.role,
+                employment:'',
+                company:result.company,
+                area:result.area,
+                startDate:result.startDate,
+                endDate:result.endDate
+            }
+            this.setState({experience: exp})
+        }
+        return result 
     }
 
-    fillExp = (e)=>{
-        let exp = {...this.state.experience}
-        let currentId = e.currentTarget.id
-        exp[currentId]=e.currentTarget.value
-        this.setState({experience: exp})
-    }
-
-    saveExp = async ()=>{
-        let id = this.props.user._id
-        console.log(id)
+    //FETCH POST
+    fetchPost = async (id, content)=>{
         let response = await fetch(
-            process.env.REACT_APP_BASE_URL + `profile/${id}/experiences`,
+            process.env.REACT_APP_BASE_URL + `profile/${id}/${content}`,
             {
                 method: 'POST',
                 body: JSON.stringify(this.state.experience),
@@ -71,24 +82,128 @@ export default class EducationBlock extends PureComponent {
             }
         )
         let result = await response.json()
-        // this.setState({results: [...this.state.results, result[0]]})
-        console.log(result)
-        this.showModal()
+        this.setState({results: [...this.state.results, result]})
     }
 
-    loadExp = async()=>{
-        let id = this.props.user._id
+    //FETCH PUT
+    fetchPut = async (id, content, contentId)=>{
         let response = await fetch(
-            process.env.REACT_APP_BASE_URL + `profile/${id}/experiences`,
+            process.env.REACT_APP_BASE_URL + `profile/${id}/${content}/${contentId}`,
             {
-                headers:{
-                    Authorization:`Bearer ${process.env.REACT_APP_ACCESS_TOKEN}`
-                }
+                method: 'PUT',
+                body: JSON.stringify(this.state.experience),
+                headers: new Headers({
+                    "Content-Type": "application/json",
+                    "Authorization":`Bearer ${process.env.REACT_APP_ACCESS_TOKEN}`
+                })
             }
         )
         let result = await response.json()
-        this.setState({results: [...this.state.results, ...result]})
-        console.log(result, this.state.results)
+        this.setState({results: [...this.state.results, result]})
+    }
+
+    fetchDelete = async (id, content, contentId)=>{
+        let response = await fetch(process.env.REACT_APP_BASE_URL+`profile/${id}/${content}/${contentId}`,
+        {
+            method:'DELETE',
+            headers:{
+                "Authorization":`Bearer ${process.env.REACT_APP_ACCESS_TOKEN}`
+            }
+        })
+        let result = await response.json()
+        console.log(result)
+        // return(
+        //     <Alert variant='danger'>
+        //         Your Experience has been deleted
+        //     </Alert>
+        // )
+    }
+
+    //SHOW MODAL FUNCTION
+    showModal(){
+        this.setState({showModal: !this.state.showModal})
+    }
+
+    //PASSING FORM DATA FOR INPUTS ON MODAL
+
+    //FOR EXPERIENCE
+    experienceForm(){
+        this.setState(
+            {
+                form: ExperienceForm, 
+                titleModal: 'Add Experience', 
+                fillFunction: this.fillExp,
+                saveFunction: this.saveExp,
+                stateForValue:'experience'
+            })
+        this.showModal()
+    }
+
+    //FOR SCHOOL
+    schoolForm(){
+        this.setState({form: SchoolForm, titleModal: 'Add Education'})
+        this.showModal()
+    }
+
+    //FILL FUNCTION
+    fillExp = (e)=>{
+        let exp = {...this.state.experience}
+        let currentId = e.currentTarget.id
+        exp[currentId]=e.currentTarget.value
+        this.setState({experience: exp})
+    }
+
+    //EDIT FUNCTION
+    editFillExp = async (id)=>{
+        let userId = this.props.user/*._id */
+        let result=[]
+        this.fetchGet(userId, '/experiences/',id, result)
+        let exp = await{
+            role:result.role,
+            employment:'',
+            company:result.company,
+            area:result.area,
+            startDate:result.startDate,
+            endDate:result.endDate
+        }
+        this.setState(
+            {
+                form: ExperienceForm, 
+                titleModal: 'Edit Experience', 
+                fillFunction: this.fillExp,
+                saveFunction: this.editExp,
+                idToEdit: id,
+                buttonModal: 'Edit',
+                experience: exp
+            })
+        this.showModal()
+    }
+
+    //POST EXPERIENCE
+    saveExp =()=>{
+        let id = this.props.user/*._id*/
+        this.fetchPost(id, 'experiences')
+        this.showModal()
+    }
+
+    //LOAD ALL EXPERIENCES
+    loadExp (){
+        let id = this.props.user/*._id*/
+        let result=[];
+        this.fetchGet(id,'/experiences', null, result)
+    }
+
+    //EDIT EXPERIENCE
+    editExp = async ()=>{
+        let id = this.props.user/*._id*/
+        this.fetchPut(id, 'experiences', this.state.idToEdit)
+        this.showModal()
+    }
+
+    //DELETE EXPERIENCE
+    deleteExp = async (id)=>{
+        let userId = this.props.user/*._id*/
+        this.fetchDelete(userId, 'experiences', id)
     }
 
     componentDidMount(){
@@ -100,16 +215,17 @@ export default class EducationBlock extends PureComponent {
     componentDidUpdate(prevProps, prevState){
         if(prevState.results !== this.state.results){
             console.log(this.state.results)
+        }else{}
+        if(prevProps.user !== this.props.user){
+            this.setState({results: []})
+            this.loadExp()
         }
     }
 
-    schoolForm(){
-        this.setState({form: SchoolForm, titleModal: 'Add Education'})
-        this.showModal()
-    }
 
     render() {
         let show= this.state.showModal? '-150vh' : ''
+        let showBtn=this.props.isShowEditBtn? 'block' : 'none'
         return (
             <div id='edu-section'>
                 <ModalForEduBlock 
@@ -118,6 +234,7 @@ export default class EducationBlock extends PureComponent {
                 typeForm={this.state.form}
                 titleModal={this.state.titleModal}
                 save={this.state.saveFunction}
+                buttonModal={this.state.buttonModal}
                 >
                     <Form>
                         {this.state.form.filter(input=>input.as!=="select"||input.as==="textarea").map((input, index)=>{
@@ -133,6 +250,8 @@ export default class EducationBlock extends PureComponent {
                                         as={input.as}
                                         rows={input.rows}
                                         onChange={this.state.fillFunction}
+                                        value={this.state.experience[input.id]}
+                                        
                                     />
 
                                 </Form.Group>
@@ -165,21 +284,32 @@ export default class EducationBlock extends PureComponent {
                     
                     <header>
                         <span>Experience</span>
-                        <i className="fas fa-plus" onClick={this.experienceForm.bind(this)}></i>
+                        <i 
+                        className="fas fa-plus" 
+                        onClick={this.experienceForm.bind(this)}
+                        style={{display:`${showBtn}`}}
+                        ></i>
                     </header>
-                    {this.state.results.map(result=>{
+                    {this.state.results.map((result, index)=>{
                         return(
-                            <Row className='exp-details' key={result._id}>
+                            <Row className='exp-details' key={index}>
                                 <Col xs={2}>
                                     <img src="" alt=""/>
                                 </Col>
                                 <Col xs={10}>
                                     <p>{result.role}</p>
                                     <p>{result.company}</p>
-                                    <p>
-                                        <span>{result.startDate}</span>
-                                        <span>{result.endDate}</span>
-                                    </p>
+                                    <p>{result.startDate.substring(0, 10)} {result.endDate.substring(0, 10)}</p>
+                                    <p>{result.area}</p>
+                                    <i 
+                                    className="fas fa-pencil-alt" 
+                                    onClick={this.editFillExp.bind(this, result._id)}
+                                    style={{display:`${showBtn}`}}
+                                    ></i>
+                                    <i className="fas fa-trash"
+                                    onClick={this.deleteExp.bind(this, result._id)}
+                                    style={{display:`${showBtn}`}}
+                                    ></i>
                                 </Col>
                             </Row>
                         )
@@ -193,7 +323,11 @@ export default class EducationBlock extends PureComponent {
                    
                     <header>
                         <span>Education</span>
-                        <i className="fas fa-plus" onClick={this.schoolForm.bind(this)}></i>
+                        <i 
+                        className="fas fa-plus" 
+                        onClick={this.schoolForm.bind(this)}
+                        style={{display:`${showBtn}`}}
+                        ></i>
                     </header>
                 </Row>
 
@@ -203,7 +337,11 @@ export default class EducationBlock extends PureComponent {
                     
                     <header>
                         <span>Licenses and Certifications</span>
-                        <i className="fas fa-plus" onClick={this.showModal.bind(this)}></i>
+                        <i 
+                        className="fas fa-plus" 
+                        onClick={this.showModal.bind(this)}
+                        style={{display:`${showBtn}`}}
+                        ></i>
                     </header>
                 </Row>
 
