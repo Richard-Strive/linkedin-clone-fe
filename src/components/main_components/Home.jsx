@@ -8,6 +8,8 @@ import LeftSide from "../sideComponents/LeftSide";
 import RightSide from "../sideComponents/RightSide";
 
 class Home extends React.Component {
+  // fetch posts here 
+  // pass fetch func to down make post
   state = {};
   render() {
     return (
