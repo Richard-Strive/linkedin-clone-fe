@@ -5,6 +5,9 @@
 	background-color: white;
 	/* margin-left: 30%; */
 	border-radius: 10px;
+	
+	text-overflow: ellipsis;
+	overflow-x: hidden;
 }
 
 .post-card .user-img {
@@ -39,7 +42,10 @@
 }
 
 .post-card .post-text {
-	word-wrap: break-word;
+	width: 100%;
+	/* word-wrap: break-word; */
+	text-overflow: ellipsis;
+	text-align: left;
 }
 
 .post-card .icon-container {
