@@ -12,7 +12,7 @@ import footericon from "./images/footericon.png";
 class Footer extends Component {
   render() {
     return (
-      <div>
+      <div className='linkedin-footer'>
         <Container>
           <Image
             src={footericon}
