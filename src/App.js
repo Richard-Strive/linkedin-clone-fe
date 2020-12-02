@@ -12,6 +12,7 @@ import ShowSearchResult from "./components/main_components/ShowSearchResult";
 
 import Home from "./components/main_components/Home";
 import LandingPage from "./components/main_components/LandingPage";
+import MakePost from "./components/home_subcomponents/MakePost";
 class App extends React.Component {
 	state = {
 		userList: [],
@@ -85,6 +86,7 @@ class App extends React.Component {
 					<Route path='/' exact component={Home} />
 					<Route path='/profile/:id' component={Profile} />
 					<Route path='/landing' exact render={(props)=><LandingPage userList={this.state.userList}/>}/>
+					<Route path='/postEdit' exact render={(props)=><MakePost {...props}/>}/>
 					<Footer />
 				</Router>
 			</div>
