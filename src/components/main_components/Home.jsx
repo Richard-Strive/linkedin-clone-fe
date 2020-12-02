@@ -1,9 +1,15 @@
 import React from "react";
 
+import Posts from "../home_subcomponents/Posts";
+
 class Home extends React.Component {
 	state = {};
 	render() {
-		return null;
+		return (
+			<div>
+				<Posts />
+			</div>
+		);
 	}
 }
 
