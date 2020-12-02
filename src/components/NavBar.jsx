@@ -19,7 +19,7 @@ import logo from "./images/logo.png";
 class NavBar extends Component {
 	render() {
 		return (
-			<div>
+			<div className='linkedin-nav'>
 				<Navbar
 					className='mb-4 navnavbar  '
 					style={{ height: 50 }}
