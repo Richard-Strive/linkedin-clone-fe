@@ -21,7 +21,9 @@ class Home extends React.Component {
               <MakePost />
               <Posts />
             </Col>
-            <Col xs={3}></Col>
+            <Col xs={3}>
+              <RightSide/>
+            </Col>
           </Row>
         </Container>
       </div>
