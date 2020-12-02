@@ -6,7 +6,7 @@ class CommentList extends React.Component {
 	state = {
 		comments: [],
 		isLoading: true,
-		update: true,
+
 		deletedSize: 0,
 		errorMessage: false,
 		user: {},
@@ -85,23 +85,18 @@ class CommentList extends React.Component {
 		}
 	};
 
-	componentDidMount = () => {
-		this.getProfileInfo();
-		this.getComments();
-	};
-
 	// componentWillUnmount() {
 	// 	this.getComments();
 	// }
-
-	shouldComponentUpdate() {
-		return this.state.update;
-	}
 
 	componentDidUpdate(prevProps, prevState) {
 		if (prevProps.submittedSize !== this.props.submittedSize) {
 			this.getComments();
 			// this.setState({ update: !this.state.update });
+		}
+		if (prevProps.fetchComment !== this.props.fetchComment) {
+			this.getProfileInfo();
+			this.getComments();
 		}
 	}
 	render() {
@@ -159,10 +154,7 @@ class CommentList extends React.Component {
 		) {
 			body = (
 				<div className='d-flex justify-content-center align-items-center mt-3'>
-					<Alert variant='warning'>
-						&#9780; There is no comment for this movie!{" "}
-						<strong>Leave the first comment</strong>
-					</Alert>
+					<Alert variant='primary'>&#9780; There is no comment</Alert>
 				</div>
 			);
 		} else if (this.state.errorMessage) {

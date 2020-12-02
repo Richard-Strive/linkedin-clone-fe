@@ -17,10 +17,14 @@ class PostContent extends Component {
 		},
 		submittedSize: 0,
 		showComment: false,
+		fetchComment: false,
 	};
 
 	handleComment = () => {
-		this.setState({ showComment: !this.state.showComment });
+		this.setState({
+			showComment: !this.state.showComment,
+			fetchComment: !this.state.fetchComment,
+		});
 	};
 	updateCommentField = (e) => {
 		let addComment = { ...this.state.addComment };
@@ -123,6 +127,7 @@ class PostContent extends Component {
 
 							<Col md={12}>
 								<CommentList
+									fetchComment={this.state.fetchComment}
 									submittedSize={this.state.submittedSize}
 									postId={post._id}
 								/>
