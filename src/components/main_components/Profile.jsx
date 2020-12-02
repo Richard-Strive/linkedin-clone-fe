@@ -92,6 +92,13 @@ class Profile extends React.Component {
 	};
 
 	render() {
+		let id = this.props.match.params.id
+		let userInfo;
+		if(id==='me'){
+			userInfo= this.state.user._id
+		}else{
+			userInfo = id
+		}
 		return (
 			<div className='profile-container d-flex flex-row'>
 				<div>
@@ -105,7 +112,7 @@ class Profile extends React.Component {
 					<Activity />
 					<EducationBlock
 						isShowEditBtn={this.state.isShowEditButton}
-						user={this.state.user}
+						user={userInfo}
 					/>
 					<Skills isShowEditBtn={this.state.isShowEditButton} />
 					<Interests />
