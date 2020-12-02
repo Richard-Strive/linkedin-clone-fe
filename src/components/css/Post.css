@@ -5,7 +5,7 @@
 	background-color: white;
 	/* margin-left: 30%; */
 	border-radius: 10px;
-	
+
 	text-overflow: ellipsis;
 	overflow-x: hidden;
 }
@@ -16,11 +16,19 @@
 	border-radius: 50%;
 }
 .three-dot {
+	padding: 0.7rem;
 	color: gray;
+
+	border-radius: 50%;
 }
+.three-dot:hover {
+	background-color: rgba(182, 180, 180, 0.267);
+	cursor: pointer;
+}
+
 .post-card .user-info p {
 	font-size: 80% !important;
-	color: gray;
+	color: rgb(97, 95, 95);
 }
 
 .post-card .user-info h5 {
@@ -31,7 +39,7 @@
 }
 
 .post-card .user-info span {
-	font-size: 0.6rem !important;
+	font-size: 0.8rem !important;
 	color: gray;
 	margin-bottom: 2rem !important;
 	text-align: top;
@@ -62,8 +70,33 @@
 
 .commentArea {
 	border-radius: 20px;
+	width: 180%;
+	margin-left: 1rem;
+	margin-right: 1rem !important;
+
+	margin-bottom: 0.2rem !important ;
 }
 .main-page-spinner {
 	margin-top: 10%;
 	margin-bottom: 10%;
+}
+.comment-item {
+	width: 180%;
+	margin-left: 1rem !important;
+	margin-right: 1rem !important;
+}
+
+.list-group-item {
+	/* width: 200%; */
+	background-color: #f2f2f2 !important;
+}
+.comment-user-avatar {
+	width: 25px;
+	height: 25px;
+	border-radius: 50%;
+}
+
+.comment-spinner {
+	margin-left: 100% !important;
+	margin-bottom: 1rem;
 }
