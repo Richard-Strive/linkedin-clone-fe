@@ -2,7 +2,7 @@ import React from "react";
 import { Form, Row, Button } from "react-bootstrap";
 const AddComment = (props) => {
 	return (
-		<Form className='add-comment-form w-100 mb-3'>
+		<Form className='add-comment-form  mb-3'>
 			<Form.Group>
 				<Form.Control
 					className='commentArea'

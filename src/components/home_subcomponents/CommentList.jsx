@@ -143,16 +143,7 @@ class CommentList extends React.Component {
 			!this.state.errorMessage
 		) {
 			body = (
-				<div className='d-flex justify-content-center align-items-center mt-3'>
-					<ListGroup className='comment-item comment-warning mb-3'>
-						<ListGroup.Item>
-							<span className='float-left'>
-								&#9780; There is no comment for this post
-							</span>
-						</ListGroup.Item>
-					</ListGroup>
-					{/* <Alert variant='primary'>&#9780; There is no comment</Alert> */}
-				</div>
+				<div className='d-flex justify-content-center align-items-center mt-3'></div>
 			);
 		} else if (this.state.errorMessage) {
 			body = (

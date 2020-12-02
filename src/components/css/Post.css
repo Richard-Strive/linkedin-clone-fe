@@ -16,8 +16,16 @@
 	border-radius: 50%;
 }
 .three-dot {
+	padding: 0.7rem;
 	color: gray;
+
+	border-radius: 50%;
 }
+.three-dot:hover {
+	background-color: rgba(182, 180, 180, 0.267);
+	cursor: pointer;
+}
+
 .post-card .user-info p {
 	font-size: 80% !important;
 	color: gray;
@@ -62,8 +70,10 @@
 
 .commentArea {
 	border-radius: 20px;
-	width: 200%;
+	width: 180%;
 	margin-left: 1rem;
+	margin-right: 1rem !important;
+
 	margin-bottom: 0.2rem !important ;
 }
 .main-page-spinner {
@@ -71,14 +81,13 @@
 	margin-bottom: 10%;
 }
 .comment-item {
-	width: 200%;
+	width: 180%;
 	margin-left: 1rem !important;
+	margin-right: 1rem !important;
 }
-.comment-item.comment-warning {
-	width: 50% !important;
-}
+
 .list-group-item {
-	width: 200%;
+	/* width: 200%; */
 	background-color: #f2f2f2 !important;
 }
 .comment-user-avatar {
