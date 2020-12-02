@@ -1,10 +1,13 @@
 import React from "react";
+
 import {Container, Row, Col} from 'react-bootstrap'
+
 
 import Posts from "../home_subcomponents/Posts";
 import MakePost from '../home_subcomponents/MakePost'
 
 class Home extends React.Component {
+
 	state = {};
 	render() {
 		return (
