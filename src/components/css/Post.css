@@ -1,0 +1,62 @@
+.post-card {
+	width: 40%;
+	/* height: 50vh; */
+	background-color: white;
+	margin-left: 30%;
+	border-radius: 10px;
+}
+
+.post-card .user-img {
+	width: 2rem;
+	height: 2rem;
+	border-radius: 50%;
+}
+.three-dot {
+	color: gray;
+}
+.post-card .user-info p {
+	font-size: 80% !important;
+	color: gray;
+}
+
+.post-card .user-info h5 {
+	text-align: left;
+	margin-bottom: 0 !important;
+	margin-left: 0.7rem !important;
+	color: black !important;
+}
+
+.post-card .user-info span {
+	font-size: 0.6rem !important;
+	color: gray;
+	margin-bottom: 2rem !important;
+	text-align: top;
+}
+
+.post-card a {
+	text-decoration: none;
+}
+
+.post-card .post-text {
+	word-wrap: break-word;
+}
+
+.post-card .icon-container {
+	color: rgba(0, 0, 0, 0.6);
+}
+.post-card .action-icons {
+	padding: 0.7rem;
+}
+.post-card .action-icons:hover {
+	background-color: rgba(182, 180, 180, 0.267);
+	cursor: pointer;
+	border-radius: 4px;
+}
+
+.commentArea {
+	border-radius: 20px;
+}
+.main-page-spinner {
+	margin-top: 10%;
+	margin-bottom: 10%;
+}

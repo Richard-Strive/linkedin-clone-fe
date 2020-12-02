@@ -290,30 +290,34 @@ export default class EducationBlock extends PureComponent {
                         style={{display:`${showBtn}`}}
                         ></i>
                     </header>
-                    {this.state.results.map((result, index)=>{
-                        return(
-                            <Row className='exp-details' key={index}>
-                                <Col xs={2}>
-                                    <img src="" alt=""/>
-                                </Col>
-                                <Col xs={10}>
-                                    <p>{result.role}</p>
-                                    <p>{result.company}</p>
-                                    <p>{result.startDate.substring(0, 10)} {result.endDate.substring(0, 10)}</p>
-                                    <p>{result.area}</p>
-                                    <i 
-                                    className="fas fa-pencil-alt" 
-                                    onClick={this.editFillExp.bind(this, result._id)}
-                                    style={{display:`${showBtn}`}}
-                                    ></i>
-                                    <i className="fas fa-trash"
-                                    onClick={this.deleteExp.bind(this, result._id)}
-                                    style={{display:`${showBtn}`}}
-                                    ></i>
-                                </Col>
-                            </Row>
-                        )
-                    })}
+                    {this.state.results.length>0 && (
+                        this.state.results.map((result, index)=>{
+                            return(
+                                <Row className='exp-details' key={index}>
+                                    <Col xs={2}>
+                                        <img src="" alt=""/>
+                                    </Col>
+                                    <Col xs={10}>
+                                        <p>{result.role}</p>
+                                        <p>{result.company}</p>
+                                        <p>{result.startDate.substring(0, 10)} </p>
+                                        <p>{result.area}</p>
+                                        <i 
+                                        className="fas fa-pencil-alt" 
+                                        onClick={this.editFillExp.bind(this, result._id)}
+                                        style={{display:`${showBtn}`}}
+                                        ></i>
+                                        <i className="fas fa-trash"
+                                        onClick={this.deleteExp.bind(this, result._id)}
+                                        style={{display:`${showBtn}`}}
+                                        ></i>
+                                    </Col>
+                                </Row>
+                            )
+                        })
+                    )
+                    
+                    }
                     
                 </Row>
 
