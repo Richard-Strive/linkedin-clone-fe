@@ -35,16 +35,16 @@ class Profile extends React.Component {
 			const user = await response.json();
 			console.log(user);
 			this.setState({ user }, () => {
-				let id = this.props.match.params.id;
-				window.localStorage.setItem("userId", JSON.stringify(id));
-				const userId = JSON.parse(
-					window.localStorage.getItem("userId")
-				);
-
-				if (userId.localeCompare("me") === -1) {
+				if (this.props.match.params.id.localeCompare("me") === -1) {
 					this.setState({ isShowEditButton: false });
 				} else {
 					this.setState({ isShowEditButton: true });
+
+					let id = this.state.user._id;
+					window.localStorage.setItem("userId", JSON.stringify(id));
+					const userId = JSON.parse(
+						window.localStorage.getItem("userId")
+					);
 				}
 			});
 		} catch (err) {
@@ -92,12 +92,12 @@ class Profile extends React.Component {
 	};
 
 	render() {
-		let id = this.props.match.params.id
+		let id = this.props.match.params.id;
 		let userInfo;
-		if(id==='me'){
-			userInfo= this.state.user._id
-		}else{
-			userInfo = id
+		if (id === "me") {
+			userInfo = this.state.user._id;
+		} else {
+			userInfo = id;
 		}
 		return (
 			<div className='profile-container d-flex flex-row'>
