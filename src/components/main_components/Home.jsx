@@ -1,4 +1,5 @@
 import React from "react";
+import {Container, Row, Col} from 'react-bootstrap'
 
 import Posts from "../home_subcomponents/Posts";
 import MakePost from '../home_subcomponents/MakePost'
@@ -8,8 +9,21 @@ class Home extends React.Component {
 	render() {
 		return (
 			<div>
-				<MakePost/>
-				<Posts />
+				<Container>
+					<Row>
+						<Col xs={3}>
+							left component
+						</Col>
+						<Col xs={6}>
+						<MakePost/>
+						<Posts />
+						</Col>
+						<Col xs={3}>
+							right component
+						</Col>
+					</Row>
+				</Container>
+				
 			</div>
 		);
 	}
