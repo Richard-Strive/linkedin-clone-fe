@@ -1,5 +1,7 @@
 .modal-dialog {
+  position: absolute;
   height: 60vh;
+  transition: margin-top 0.5s ease;
   .modal-body {
     padding: 1.5rem;
     height: 300px !important;
@@ -71,7 +73,12 @@
       justify-content: space-between;
       align-items: center;
       button {
+        width: 3rem;
         margin-right: 1rem;
+        padding: 0.5rem;
+        border: none;
+        border-radius: 20px;
+        color: white;
       }
       .add {
         display: flex;

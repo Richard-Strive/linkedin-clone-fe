@@ -24,10 +24,12 @@ export default class ModalPost extends PureComponent {
         this.fetchGet()
     }
 
+
     render() {
+        let {show, showFunction, fillFunction, postFunction, showPost, clickable}=this.props
         return (
-            <Modal.Dialog>
-                <Modal.Header closeButton>
+            <Modal.Dialog style={{marginTop:`${show}`}}>
+                <Modal.Header closeButton onClick={showFunction}>
                     <Modal.Title>Create a post</Modal.Title>
                 </Modal.Header>
 
@@ -45,7 +47,14 @@ export default class ModalPost extends PureComponent {
                             </button>
                         </Col>
                     </Row>
-                    <textarea name="" id="" cols="30" rows="10" placeholder='Write your post'></textarea>
+                    <textarea 
+                    name="" 
+                    id="" 
+                    cols="30" 
+                    rows="10" 
+                    placeholder='Write your post'
+                    onChange={(e)=>fillFunction(e)}
+                    ></textarea>
                     <div className="hashtag">
                         <button>Add hashtag</button>
                         <p>Help the right people see your post</p>
@@ -60,7 +69,14 @@ export default class ModalPost extends PureComponent {
                             <i className="fab fa-youtube"></i>
                             <i className="far fa-newspaper"></i>
                         </div>
-                        <Button>Post</Button>
+                        <button
+                        onClick={postFunction}
+                        style={
+                            {
+                                backgroundColor:`${showPost}`,
+                                pointerEvents:`${clickable}`
+                            }}
+                        >Post</button>
                     </Row>
                     <Row className='modal-footer-body'>
                         <i className="fas fa-caret-up"></i>
