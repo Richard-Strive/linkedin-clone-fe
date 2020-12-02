@@ -2,13 +2,11 @@ import React from "react";
 import { Form, Row, Button } from "react-bootstrap";
 const AddComment = (props) => {
 	return (
-		<Form
-			className='add-comment-form w-100 mb-5'
-			onSubmit={props.onSubmitComment}>
+		<Form className='add-comment-form w-100 mb-3'>
 			<Form.Group>
 				<Form.Control
 					className='commentArea'
-					as='textarea'
+					type='text'
 					name='comment'
 					id='comment'
 					rows={1}
@@ -21,9 +19,9 @@ const AddComment = (props) => {
 			</Form.Group>
 
 			<Row className='flex justify-content-center mr-2'>
-				<Button variant='secondary' type='submit'>
+				{/* <Button variant='secondary' type='submit'>
 					Send
-				</Button>
+				</Button> */}
 			</Row>
 		</Form>
 	);
