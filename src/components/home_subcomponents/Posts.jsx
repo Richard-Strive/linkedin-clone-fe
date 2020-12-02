@@ -19,7 +19,7 @@ class Posts extends Component {
 			if (response.ok) {
 				const posts = await response.json();
 				console.log("posts", posts);
-				this.setState({ posts, isLoading: false });
+				this.setState({ posts: posts.reverse(), isLoading: false });
 			}
 		} catch (err) {
 			this.setState({ isLoading: false });
