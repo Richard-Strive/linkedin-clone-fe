@@ -31,13 +31,16 @@ class Posts extends Component {
 		this.getPosts();
 	}
 
+	componentDidUpdate(prevProps) {
+		prevProps.postSize !== this.props.postSize && this.getPosts();
+	}
+
 	// componentDidUpdate(prevProps, prevState){
 	// 	if(prevState.posts !== this.state.posts){
 	// 		this.getPosts()
 	// 		console.log('update')
 	// 	}
 	// }
-
 
 	render() {
 		const { posts, isLoading } = this.state;
