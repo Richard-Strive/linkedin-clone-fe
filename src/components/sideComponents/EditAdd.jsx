@@ -10,7 +10,7 @@ export default class EditAdd extends Component {
             <Card.Text className="text-left d-flex justify-content-around">
               <p className="links">Edit public profile & URL</p>
 
-              <i className="fas fa-question-circle ml-4"></i>
+              <i className="fas fa-question-circle ml-4 links"></i>
             </Card.Text>
             <hr />
             <Card.Text className="text-left d-flex justify-content-around">
@@ -19,7 +19,7 @@ export default class EditAdd extends Component {
                 <br />
                 language
               </p>
-              <i class="fas fa-question-circle ml-5 "></i>
+              <i class="fas fa-question-circle ml-5 links "></i>
             </Card.Text>
           </Card.Body>
         </Card>

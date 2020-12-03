@@ -145,7 +145,7 @@ nav {
   background-color: rgb(228, 215, 215);
 }
 
-.text-left {
+.links {
   color: grey;
 }
 
@@ -154,5 +154,9 @@ nav {
 }
 
 .links:hover {
+  text-decoration: underline;
+}
+
+.link:hover {
   text-decoration: underline;
 }
