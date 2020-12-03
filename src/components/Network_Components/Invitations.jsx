@@ -25,9 +25,9 @@ export default class Invitations extends PureComponent {
                 className='toggle-list'
                 onClick={()=>this.showInv()}
                 > {text}</p>
-            {this.props.userList.map(user=>{
+            {this.props.userList.map((user, index)=>{
                 return(
-                        <div id='invitations'>
+                        <div id='invitations' key={index}>
                             <header>
                                 <p>Invitations</p>
                                 <button>Manage</button>

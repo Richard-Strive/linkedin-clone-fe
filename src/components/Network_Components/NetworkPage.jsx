@@ -3,6 +3,7 @@ import './Network_Style/NetworkPage.scss'
 import SideBarNetwork from './SideBarNetwork'
 import {Container, Row, Col} from 'react-bootstrap'
 import Invitations from './Invitations'
+import Events from './Events'
 
 export default class NetworkPage extends PureComponent {
     
@@ -17,6 +18,7 @@ export default class NetworkPage extends PureComponent {
                     </Col>
                     <Col xs={8}>
                         <Invitations userList={this.props.userList}/>
+                        <Events/>
                     </Col>
                 </Row>
             </Container>
