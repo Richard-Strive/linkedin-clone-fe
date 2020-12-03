@@ -42,9 +42,6 @@ class Profile extends React.Component {
 
 					let id = this.state.user._id;
 					window.localStorage.setItem("userId", JSON.stringify(id));
-					const userId = JSON.parse(
-						window.localStorage.getItem("userId")
-					);
 				}
 			});
 		} catch (err) {
