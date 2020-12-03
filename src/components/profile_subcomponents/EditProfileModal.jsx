@@ -27,6 +27,9 @@ class EditProfileModal extends Component {
 					</Modal.Header>
 					<Modal.Body>
 						<ProfileImage
+							message={this.props.message}
+							isLoading={this.props.isLoading}
+							uploadImage={this.props.uploadImage}
 							show={this.state.modalShow}
 							onHide={() => this.setState({ modalShow: false })}
 						/>

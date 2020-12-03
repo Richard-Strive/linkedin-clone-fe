@@ -3,14 +3,19 @@ import { Col, Container, Row, Dropdown, DropdownButton } from "react-bootstrap";
 import "../css/TopHeader.css";
 import striveLogo from "../images/strive-logo.jpeg";
 import EditProfileModal from "./EditProfileModal";
+import CreateIcon from "@material-ui/icons/Create";
+import ProfileImage from "./ProfileImage";
 class TopHeader extends React.Component {
-	state = { showModal: false };
+	state = { showModal: false, modalShow: false };
 
 	render() {
 		const { user } = this.props;
 		return (
 			<>
 				<EditProfileModal
+					message={this.props.message}
+					isLoading={this.props.isLoading}
+					uploadImage={this.props.uploadImage}
 					user={user}
 					onHide={() => {
 						this.setState({
@@ -20,6 +25,14 @@ class TopHeader extends React.Component {
 						this.props.showChanges(this.state.showModal);
 					}}
 					show={this.state.showModal}
+				/>
+
+				<ProfileImage
+					message={this.props.message}
+					isLoading={this.props.isLoading}
+					uploadImage={this.props.uploadImage}
+					show={this.state.modalShow}
+					onHide={() => this.setState({ modalShow: false })}
 				/>
 
 				<div className='top-header-card'>
@@ -35,6 +48,14 @@ class TopHeader extends React.Component {
 								src={user.image}
 								alt='profile-pic'
 							/>
+							<div
+								className='profile-img-edit'
+								onClick={() =>
+									this.setState({ modalShow: true })
+								}>
+								<CreateIcon />
+							</div>
+
 							<div
 								style={{
 									visibility: this.props.isShowEditBtn

@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { Button, Form, Modal, Alert, Spinner } from "react-bootstrap";
 import AddAPhotoIcon from "@material-ui/icons/AddAPhoto";
-class ProfileImage extends Component {
-	state = { isImage: false };
+class PostImage extends Component {
+	state = { message: "", isLoading: false, isImage: false };
 
 	styles = {
 		largeIcon: {
@@ -13,7 +13,7 @@ class ProfileImage extends Component {
 		imagePreview: {
 			width: "150px",
 			height: "150px",
-			borderRadius: "50%",
+			borderRadius: "10px",
 			marginLeft: "25%",
 			backgroundColor: "gray",
 			border: "3px",
@@ -23,13 +23,55 @@ class ProfileImage extends Component {
 	preview_image = (event) => {
 		let reader = new FileReader();
 		reader.onload = function () {
-			let output = document.getElementById("output_image_user");
+			let output = document.getElementById("output_image");
 			output.src = reader.result;
 		};
 		reader.readAsDataURL(event.target.files[0]);
 		this.setState({ isImage: true });
 	};
+	uploadImage = async (e) => {
+		e.preventDefault();
 
+		this.setState({ isLoading: true });
+		let postId = this.props.post._id;
+
+		const inputFile = document.querySelector("#post-image-upload-file");
+
+		let formData = new FormData();
+		formData.append("post", inputFile.files[0]);
+
+		try {
+			let response = await fetch(
+				`https://striveschool-api.herokuapp.com/api/posts/${postId}`,
+				{
+					method: "POST",
+					body: formData,
+					headers: new Headers({
+						// "Content-Type": "multipart/form-data",
+						Authorization: `Bearer ${process.env.REACT_APP_ACCESS_TOKEN}`,
+					}),
+				}
+			);
+
+			if (response.ok) {
+				const data = await response.json();
+				this.setState({
+					message: "Successfully Uploaded",
+					isLoading: false,
+				});
+			} else {
+				this.setState({
+					message: "Something went wrong",
+					isLoading: false,
+				});
+			}
+		} catch (e) {
+			this.setState({
+				message: "Something went wrong",
+				isLoading: false,
+			});
+		}
+	};
 	render() {
 		return (
 			<Modal
@@ -41,12 +83,12 @@ class ProfileImage extends Component {
 				<Modal.Body>
 					<div>
 						<Form
-							onSubmit={this.props.uploadImage}
+							onSubmit={this.uploadImage}
 							className='profile-image-upload'>
 							<Form.Group>
 								<Form.File
 									onChange={this.preview_image}
-									id='profile-image-upload-file'
+									id='post-image-upload-file'
 									type='file'
 								/>
 								<Form.Label
@@ -54,7 +96,7 @@ class ProfileImage extends Component {
 										marginLeft: "40%",
 										marginTop: "5%",
 									}}
-									htmlFor='profile-image-upload-file'>
+									htmlFor='post-image-upload-file'>
 									<AddAPhotoIcon
 										className='add-photo-icon'
 										style={this.styles.largeIcon}
@@ -64,7 +106,7 @@ class ProfileImage extends Component {
 
 							<img
 								style={this.styles.imagePreview}
-								id='output_image_user'
+								id='output_image'
 							/>
 							<Button
 								className={
@@ -76,7 +118,7 @@ class ProfileImage extends Component {
 								Save Image
 							</Button>
 						</Form>
-						{this.props.isLoading && (
+						{this.state.isLoading && (
 							<Spinner
 								style={{ marginLeft: "40%" }}
 								className='main-page-spinner'
@@ -85,9 +127,9 @@ class ProfileImage extends Component {
 							/>
 						)}
 						<div>
-							{this.props.message.length > 3 && (
-								<Alert variant='secondary' className='mt-2'>
-									{this.props.message}
+							{this.state.message && (
+								<Alert variant='secondary' className='mt-3'>
+									{this.state.message}
 								</Alert>
 							)}
 						</div>
@@ -98,4 +140,4 @@ class ProfileImage extends Component {
 	}
 }
 
-export default ProfileImage;
+export default PostImage;
