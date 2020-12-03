@@ -68,6 +68,13 @@
         "type": "date"      
     },
     {
+        "htmlFor":"checkEnd",
+        "name" :"checkEnd",
+        "id":"checkEnd",
+        "type": "checkbox",
+        "title": "Are you working until now?"      
+    },
+    {
         "htmlFor":"endDate",
         "name" :"endDate",
         "id":"endDate",

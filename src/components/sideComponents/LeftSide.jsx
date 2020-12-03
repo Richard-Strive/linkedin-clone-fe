@@ -33,7 +33,7 @@ class LeftSide extends React.Component {
   render() {
     return (
       <>
-        <Card style={{ width: "14rem", borderRadius: "10px" }}>
+        <Card style={{ borderRadius: "10px" }}>
           <Card.Header className="card-header">
             <Card.Img
               style={{
@@ -105,7 +105,7 @@ class LeftSide extends React.Component {
           </Card.Body>
         </Card>
         <Card
-          style={{ width: "14rem", borderRadius: "10px", marginTop: "8px" }}
+          style={{ borderRadius: "10px", marginTop: "8px", position: 'sticky', top: '60px'}}
         >
           <Card.Body>
             <Card.Text>

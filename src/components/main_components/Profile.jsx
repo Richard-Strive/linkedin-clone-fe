@@ -91,42 +91,42 @@ class Profile extends React.Component {
 		}
 	};
 
-	render() {
-		let id = this.props.match.params.id;
-		let userInfo;
-		if (id === "me") {
-			userInfo = this.state.user._id;
-		} else {
-			userInfo = id;
-		}
-		return (
-			<div className='container d-flex flex-row'>
-				<div>
-					<TopHeader
-						showChanges={this.handleShowChanges}
-						isShowEditBtn={this.state.isShowEditButton}
-						user={this.state.user}
-					/>
-					<AboutBlock isShowEditBtn={this.state.isShowEditButton} />
-					<Dashboard />
-					<Activity />
-					<EducationBlock
-						isShowEditBtn={this.state.isShowEditButton}
-						user={userInfo}
-					/>
-					<Skills isShowEditBtn={this.state.isShowEditButton} />
-					<Interests />
-				</div>
-				<div className='side-components mt-3'>
-					<EditAdd />
-					<SeeJobs />
-					<PeopleAlsoViewed deta={this.state.users} />
-					<PeopleYouMayKnow deta={this.state.users} />
-					<InLearning />
-				</div>
-			</div>
-		);
-	}
+  render() {
+    let id = this.props.match.params.id;
+    let userInfo;
+    if (id === "me") {
+      userInfo = JSON.parse(window.localStorage.getItem("userId"))
+    } else {
+      userInfo = id;
+    }
+    return (
+      <div className="container d-flex flex-row" id='profile-page'>
+        <div>
+          <TopHeader
+            showChanges={this.handleShowChanges}
+            isShowEditBtn={this.state.isShowEditButton}
+            user={this.state.user}
+          />
+          <AboutBlock isShowEditBtn={this.state.isShowEditButton} />
+          <Dashboard />
+          <Activity />
+          <EducationBlock
+            isShowEditBtn={this.state.isShowEditButton}
+            user={userInfo}
+          />
+          <Skills isShowEditBtn={this.state.isShowEditButton} />
+          <Interests />
+        </div>
+        <div className="side-components mt-3">
+          <EditAdd />
+          <SeeJobs />
+          <PeopleAlsoViewed deta={this.state.users} />
+          <PeopleYouMayKnow deta={this.state.users} />
+          <InLearning />
+        </div>
+      </div>
+    );
+  }
 }
 
 export default Profile;

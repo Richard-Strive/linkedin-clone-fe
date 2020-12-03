@@ -86,7 +86,6 @@ class App extends React.Component {
 					<Route path='/' exact component={Home} />
 					<Route path='/profile/:id' component={Profile} />
 					<Route path='/landing' exact render={(props)=><LandingPage userList={this.state.userList}/>}/>
-					<Route path='/postEdit' exact render={(props)=><MakePost {...props}/>}/>
 					<Footer />
 				</Router>
 			</div>
