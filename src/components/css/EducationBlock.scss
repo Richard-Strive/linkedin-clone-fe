@@ -25,13 +25,17 @@
     height: 15vh;
     margin-bottom: 0.5rem;
     border-bottom: 1px solid rgba($color: black, $alpha: 0.3);
+    overflow: hidden;
     .col-2 {
+      height: 100%;
+      padding: 0.5rem;
       img {
         width: 100%;
         height: 100%;
       }
     }
     .col-10 {
+      height: 100%;
       position: relative;
       p {
         margin: 0;
