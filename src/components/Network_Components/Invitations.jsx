@@ -2,7 +2,9 @@ import React, { PureComponent } from 'react'
 import './Network_Style/Invitations.scss'
 
 export default class Invitations extends PureComponent {
-    state={}
+    state={
+        invitations:[]
+    }
 
     fetchGet=async(content, contentId)=>{
         let response = await fetch(process.env.REACT_APP_BASE_URL=`https://striveschool-api.herokuapp.com/api/${content}/${contentId}`, {
@@ -12,12 +14,13 @@ export default class Invitations extends PureComponent {
         })
         let result = await response.json()
         console.log(result)
+        this.setState({invitations:result})
 
     }
 
-    componentDidMount(){
-        this.fetchGet('profile', '')
-    }
+    // componentDidMount(){
+    //     this.fetchGet('profile', '')
+    // }
 
     render() {
         return (
