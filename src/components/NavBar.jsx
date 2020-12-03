@@ -74,7 +74,7 @@ class NavBar extends Component {
 						</Col>
 						<Col md={7}>
 							<ul className='navul'>
-								<Link to='/'>
+								<Link to='/feed'>
 									<li className='navli'>
 										<i className='fas nav-icons fa-home '>
 											<br />
