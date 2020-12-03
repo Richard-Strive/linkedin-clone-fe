@@ -27,7 +27,7 @@ export default class LandingPage extends PureComponent {
         this.state.login.token===process.env.REACT_APP_ACCESS_TOKEN? tokenConfirmed='yes': tokenConfirmed='no'
         console.log(tokenConfirmed)
         if(reply==='yes' && tokenConfirmed==='yes'){
-            window.location.href='/profile/me'
+            window.location.href='/feed'
         }
         else{
             console.log('cannot access')

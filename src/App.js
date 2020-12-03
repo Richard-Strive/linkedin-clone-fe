@@ -83,9 +83,9 @@ class App extends React.Component {
 						searchString={this.state.searchString}
 						handleSearch={this.handleSearch}
 					/>
-					<Route path='/' exact component={Home} />
+					<Route path='/' exact render={(props)=><LandingPage userList={this.state.userList}/>}/>
+					<Route path='/feed' exact component={Home} />
 					<Route path='/profile/:id' component={Profile} />
-					<Route path='/landing' exact render={(props)=><LandingPage userList={this.state.userList}/>}/>
 					<Footer />
 				</Router>
 			</div>
