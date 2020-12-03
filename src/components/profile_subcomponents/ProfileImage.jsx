@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Button, Form, Modal, Alert, Spinner } from "react-bootstrap";
 import AddAPhotoIcon from "@material-ui/icons/AddAPhoto";
 class ProfileImage extends Component {
-	state = { message: "", isLoading: false, isImage: false };
+	state = { isImage: false };
 
 	styles = {
 		largeIcon: {
@@ -30,49 +30,6 @@ class ProfileImage extends Component {
 		this.setState({ isImage: true });
 	};
 
-	uploadImage = async (e) => {
-		e.preventDefault();
-
-		this.setState({ isLoading: true });
-		let userId = JSON.parse(window.localStorage.getItem("userId"));
-
-		const inputFile = document.querySelector("#profile-image-upload-file");
-
-		let formData = new FormData();
-		formData.append("profile", inputFile.files[0]);
-
-		try {
-			let response = await fetch(
-				`https://striveschool-api.herokuapp.com/api/profile/${userId}/picture`,
-				{
-					method: "POST",
-					body: formData,
-					headers: new Headers({
-						// "Content-Type": "multipart/form-data",
-						Authorization: `Bearer ${process.env.REACT_APP_ACCESS_TOKEN}`,
-					}),
-				}
-			);
-
-			if (response.ok) {
-				const data = await response.json();
-				this.setState({
-					message: "Successfully Uploaded",
-					isLoading: false,
-				});
-			} else {
-				this.setState({
-					message: "Something went wrong",
-					isLoading: false,
-				});
-			}
-		} catch (e) {
-			this.setState({
-				message: "Something went wrong",
-				isLoading: false,
-			});
-		}
-	};
 	render() {
 		return (
 			<Modal
@@ -84,7 +41,7 @@ class ProfileImage extends Component {
 				<Modal.Body>
 					<div>
 						<Form
-							onSubmit={this.uploadImage}
+							onSubmit={this.props.uploadImage}
 							className='profile-image-upload'>
 							<Form.Group>
 								<Form.File
@@ -119,17 +76,18 @@ class ProfileImage extends Component {
 								Save Image
 							</Button>
 						</Form>
-						{this.state.isLoading && (
+						{this.props.isLoading && (
 							<Spinner
+								style={{ marginLeft: "40%" }}
 								className='main-page-spinner'
 								animation='border'
 								variant='primary'
 							/>
 						)}
 						<div>
-							{this.state.message && (
+							{this.props.message.length > 3 && (
 								<Alert variant='secondary' className='mt-2'>
-									{this.state.message}
+									{this.props.message}
 								</Alert>
 							)}
 						</div>

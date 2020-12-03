@@ -18,8 +18,60 @@ import PeopleYouMayKnow from "../sideComponents/PeopleYouMayKnow";
 import InLearning from "../sideComponents/InLearning";
 
 class Profile extends React.Component {
-	state = { user: {}, users: [], isShowEditButton: true, showChanges: false };
+	state = {
+		user: {},
+		users: [],
+		isShowEditButton: true,
+		showChanges: false,
+		isImgUploaded: false,
+		message: "",
+		isLoading: "",
+	};
 
+	uploadImage = async (e) => {
+		e.preventDefault();
+
+		this.setState({ isLoading: true });
+		let userId = JSON.parse(window.localStorage.getItem("userId"));
+
+		const inputFile = document.querySelector("#profile-image-upload-file");
+
+		let formData = new FormData();
+		formData.append("profile", inputFile.files[0]);
+
+		try {
+			let response = await fetch(
+				`https://striveschool-api.herokuapp.com/api/profile/${userId}/picture`,
+				{
+					method: "POST",
+					body: formData,
+					headers: new Headers({
+						// "Content-Type": "multipart/form-data",
+						Authorization: `Bearer ${process.env.REACT_APP_ACCESS_TOKEN}`,
+					}),
+				}
+			);
+
+			if (response.ok) {
+				const data = await response.json();
+				this.setState({
+					message: "Successfully Uploaded",
+					isLoading: false,
+					isImgUploaded: !this.state.isImgUploaded,
+				});
+			} else {
+				this.setState({
+					message: "Something went wrong",
+					isLoading: false,
+				});
+			}
+		} catch (e) {
+			this.setState({
+				message: "Something went wrong",
+				isLoading: false,
+			});
+		}
+	};
 	getProfileInfo = async () => {
 		let id = this.props.match.params.id;
 		try {
@@ -76,7 +128,8 @@ class Profile extends React.Component {
 	componentDidUpdate(prevProp, prevState) {
 		if (
 			prevProp.match.params.id !== this.props.match.params.id ||
-			prevState.showChanges !== this.state.showChanges
+			prevState.showChanges !== this.state.showChanges ||
+			prevState.isImgUploaded !== this.state.isImgUploaded
 		) {
 			this.getProfileInfo();
 		}
@@ -88,42 +141,45 @@ class Profile extends React.Component {
 		}
 	};
 
-  render() {
-    let id = this.props.match.params.id;
-    let userInfo;
-    if (id === "me") {
-      userInfo = JSON.parse(window.localStorage.getItem("userId"))
-    } else {
-      userInfo = id;
-    }
-    return (
-      <div className="container d-flex flex-row" id='profile-page'>
-        <div>
-          <TopHeader
-            showChanges={this.handleShowChanges}
-            isShowEditBtn={this.state.isShowEditButton}
-            user={this.state.user}
-          />
-          <AboutBlock isShowEditBtn={this.state.isShowEditButton} />
-          <Dashboard />
-          <Activity />
-          <EducationBlock
-            isShowEditBtn={this.state.isShowEditButton}
-            user={userInfo}
-          />
-          <Skills isShowEditBtn={this.state.isShowEditButton} />
-          <Interests />
-        </div>
-        <div className="side-components mt-3">
-          <EditAdd />
-          <SeeJobs />
-          <PeopleAlsoViewed deta={this.state.users} />
-          <PeopleYouMayKnow deta={this.state.users} />
-          <InLearning />
-        </div>
-      </div>
-    );
-  }
+	render() {
+		let id = this.props.match.params.id;
+		let userInfo;
+		if (id === "me") {
+			userInfo = JSON.parse(window.localStorage.getItem("userId"));
+		} else {
+			userInfo = id;
+		}
+		return (
+			<div className='container d-flex flex-row' id='profile-page'>
+				<div>
+					<TopHeader
+						message={this.state.message}
+						isLoading={this.state.isLoading}
+						uploadImage={this.uploadImage}
+						showChanges={this.handleShowChanges}
+						isShowEditBtn={this.state.isShowEditButton}
+						user={this.state.user}
+					/>
+					<AboutBlock isShowEditBtn={this.state.isShowEditButton} />
+					<Dashboard />
+					<Activity />
+					<EducationBlock
+						isShowEditBtn={this.state.isShowEditButton}
+						user={userInfo}
+					/>
+					<Skills isShowEditBtn={this.state.isShowEditButton} />
+					<Interests />
+				</div>
+				<div className='side-components mt-3'>
+					<EditAdd />
+					<SeeJobs />
+					<PeopleAlsoViewed deta={this.state.users} />
+					<PeopleYouMayKnow deta={this.state.users} />
+					<InLearning />
+				</div>
+			</div>
+		);
+	}
 }
 
 export default Profile;
