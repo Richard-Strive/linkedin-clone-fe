@@ -62,7 +62,6 @@ class App extends React.Component {
     }
   };
 
-<<<<<<< HEAD
 	componentDidMount() {
 		this.getUserList();
 	}
@@ -88,36 +87,5 @@ class App extends React.Component {
 			</div>
 		);
 	}
-=======
-  componentDidMount() {
-    this.getUserList();
-  }
-  render() {
-    return (
-      <div className="App">
-        <Router>
-          <ShowSearchResult
-            keyword={this.state.searchString}
-            users={this.state.filteredUserList}
-            onHide={() => this.setState({ showResult: false })}
-            show={this.state.showResult}
-          />
-          <NavBar
-            searchString={this.state.searchString}
-            handleSearch={this.handleSearch}
-          />
-          <Route path="/" exact component={Home} />
-          <Route path="/profile/:id" component={Profile} />
-          <Route
-            path="/landing"
-            exact
-            render={(props) => <LandingPage userList={this.state.userList} />}
-          />
-          <Footer />
-        </Router>
-      </div>
-    );
-  }
->>>>>>> Richard
 }
 export default App;
