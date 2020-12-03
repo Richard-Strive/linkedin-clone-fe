@@ -13,9 +13,6 @@ class ProfileImage extends Component {
 		let formData = new FormData();
 		formData.append("profile", inputFile.files[0]);
 
-		console.log("input", inputFile);
-		console.log("formdata", formData);
-
 		try {
 			let response = await fetch(
 				`https://striveschool-api.herokuapp.com/api/profile/${userId}/picture`,
