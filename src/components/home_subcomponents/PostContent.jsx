@@ -11,32 +11,63 @@ class PostContent extends Component {
 		comments: [],
 		addComment: {
 			comment: "",
-			author: this.props.post.user._id,
+			author: {},
+			test: "test",
 			rate: 1,
 			elementId: this.props.post._id,
 		},
 		submittedSize: 0,
 		showComment: false,
 		fetchComment: false,
+		user: {},
 	};
+	getProfileInfo = async () => {
+		const userId = JSON.parse(window.localStorage.getItem("userId"));
+		try {
+			const response = await fetch(
+				process.env.REACT_APP_BASE_URL + `profile/${userId}`,
+				{
+					headers: {
+						Authorization: `Bearer ${process.env.REACT_APP_ACCESS_TOKEN}`,
+					},
+				}
+			);
 
+			const user = await response.json();
+			console.log(user);
+			this.setState({ user }, () => {
+				let addComment = { ...this.state.addComment };
+				addComment.author = this.state.user;
+
+				this.setState({ addComment });
+			});
+		} catch (err) {
+			console.log(err);
+		}
+	};
 	handleComment = () => {
 		this.setState({
 			showComment: !this.state.showComment,
 			fetchComment: !this.state.fetchComment,
 		});
 	};
+
 	updateCommentField = (e) => {
-		let addComment = { ...this.state.addComment };
-		let currentId = e.currentTarget.id;
+		if (e.keyCode === 13 || e.key === "Enter") {
+			e.preventDefault();
+			this.submitComment();
+		} else {
+			let addComment = { ...this.state.addComment };
+			let currentId = e.currentTarget.id;
 
-		addComment[currentId] = e.currentTarget.value;
+			addComment[currentId] = e.currentTarget.value;
 
-		this.setState({ addComment });
+			this.setState({ addComment });
+		}
 	};
 
-	submitComment = async (e) => {
-		e.preventDefault();
+	submitComment = async () => {
+		// e.preventDefault();
 
 		try {
 			let response = await fetch(
@@ -73,6 +104,9 @@ class PostContent extends Component {
 		}
 	};
 
+	componentDidMount() {
+		this.getProfileInfo();
+	}
 	render() {
 		const { post } = this.props;
 		return (
@@ -99,7 +133,7 @@ class PostContent extends Component {
 								</div>
 							</Link>
 
-							<div className='mt-1 '>
+							<div className='mt-1 edit-post-button'>
 								<i className='three-dot float-right fas fa-ellipsis-h'></i>
 							</div>
 						</Col>
@@ -120,7 +154,6 @@ class PostContent extends Component {
 								<AddComment
 									addComment={this.state.addComment}
 									onChangeElement={this.updateCommentField}
-									onSubmitComment={this.submitComment}
 									postId={post._id}
 								/>
 							</Col>
