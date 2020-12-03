@@ -3,18 +3,30 @@ import './Network_Style/Invitations.scss'
 
 export default class Invitations extends PureComponent {
     state={
-        invitations:[]
+        showInvitations:true
     }
 
-    
+    showInv(){this.setState({showInvitations: !this.state.showInvitations})}
 
 
     render() {
-        console.log(this.props.userList)
+        let overflow = this.state.showInvitations? 'hidden' : 'auto'
+        let height = this.state.showInvitations? '50vh' : '70vh'
+        let text = this.state.showInvitations? 'See More' : 'See Less'
         return (
-            this.props.userList.map(user=>{
+            <div 
+            id='invitations-container'
+            style={{
+                overflowY: `${overflow}`,
+                height: `${height}`
+            }}
+            >
+                <p 
+                className='toggle-list'
+                onClick={()=>this.showInv()}
+                > {text}</p>
+            {this.props.userList.map(user=>{
                 return(
-                    <>
                         <div id='invitations'>
                             <header>
                                 <p>Invitations</p>
@@ -33,9 +45,10 @@ export default class Invitations extends PureComponent {
                                 </div>
                             </div>
                         </div>
-                    </>
                 )
-            })
+            })}
+            
+            </div>
             
         )
     }
