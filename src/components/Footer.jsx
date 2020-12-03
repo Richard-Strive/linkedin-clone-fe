@@ -8,11 +8,34 @@ import bootstrap, {
   Dropdown,
 } from "react-bootstrap";
 import footericon from "./images/footericon.png";
+import {useLocation} from 'react-router-dom'
 
 class Footer extends Component {
+  state={
+    show:true,
+    path:''
+  }
+
+  checkPath(){
+    this.setState({path: window.location.href})
+    console.log(this.state.path)
+  }
+
+
+  componentDidMount(){
+    this.checkPath()
+  }
+
+  componentDidUpdate(prevProps, prevState){
+    if(prevState.path !== this.state.path){
+      this.checkPath()
+    }
+  }
+
   render() {
+    let show = this.state.show? 'block' : 'none'
     return (
-      <div className='linkedin-footer'>
+      <div className='linkedin-footer' style={{display: `${show}`}}>
         <Container>
           <Image
             src={footericon}
