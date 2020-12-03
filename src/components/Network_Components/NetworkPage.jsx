@@ -5,6 +5,9 @@ import {Container, Row, Col} from 'react-bootstrap'
 import Invitations from './Invitations'
 
 export default class NetworkPage extends PureComponent {
+    
+    
+    
     render() {
         return (
             <Container id='network-page'>
@@ -13,7 +16,7 @@ export default class NetworkPage extends PureComponent {
                         <SideBarNetwork/>
                     </Col>
                     <Col xs={8}>
-                        <Invitations/>
+                        <Invitations userList={this.props.userList}/>
                     </Col>
                 </Row>
             </Container>

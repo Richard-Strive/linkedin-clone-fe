@@ -35,6 +35,8 @@
       border-radius: 50%;
     }
     .invitation-info {
+      width: 45%;
+      margin-left: 5px;
       p {
         text-align: left;
         margin: 0;
@@ -46,6 +48,9 @@
       p:nth-of-type(2) {
         font-size: 0.9rem;
         color: rgba($color: black, $alpha: 0.5);
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
       }
       p:nth-of-type(3) {
         font-size: 0.6rem;
