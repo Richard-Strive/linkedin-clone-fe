@@ -93,7 +93,7 @@ class Profile extends React.Component {
     let id = this.props.match.params.id;
     let userInfo;
     if (id === "me") {
-      userInfo = this.state.user._id;
+      userInfo = JSON.parse(window.localStorage.getItem("userId"))
     } else {
       userInfo = id;
     }
