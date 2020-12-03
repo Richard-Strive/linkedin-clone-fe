@@ -1,4 +1,5 @@
 import React from "react";
+import '../../App.css'
 
 import { Container, Row, Col } from "react-bootstrap";
 
@@ -56,7 +57,7 @@ class Home extends React.Component {
 		let showPost = this.state.showPost ? "grey" : "#0078b9";
 		let canClick = this.state.showPost ? "none" : "all";
 		return (
-			<div>
+			<div id='home-page'>
 				<Container>
 					<Row>
 						<Col xs={3}>

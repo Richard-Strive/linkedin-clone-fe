@@ -13,7 +13,8 @@ export default class EducationBlock extends PureComponent {
             company:'',
             area:'',
             startDate:'',
-            endDate:''
+            endDate:'',
+            image:''
         },
         education:{
             schoolName:'',
@@ -33,7 +34,8 @@ export default class EducationBlock extends PureComponent {
         results:[],
         idToEdit:'',
         buttonModal:'Save',
-        stateForValue:''
+        stateForValue:'',
+        imageToUpload:''
     }
 
     //FETCH FUNCTIONS
@@ -61,7 +63,8 @@ export default class EducationBlock extends PureComponent {
                 company:result.company,
                 area:result.area,
                 startDate:result.startDate,
-                endDate:result.endDate
+                endDate:result.endDate,
+                image:result.image
             }
             this.setState({experience: exp})
         }
@@ -150,7 +153,16 @@ export default class EducationBlock extends PureComponent {
         let exp = {...this.state.experience}
         let currentId = e.currentTarget.id
         exp[currentId]=e.currentTarget.value
+        if(currentId ==='checkEnd' && exp[currentId]===e.currentTarget.checked){
+            exp.endDate=''
+        }
         this.setState({experience: exp})
+
+    }
+
+    fillExpImg = (e)=>{
+        let img=e.currentTarget.value
+        this.setState({imageToUpload: img})
     }
 
     //EDIT FUNCTION
@@ -183,12 +195,34 @@ export default class EducationBlock extends PureComponent {
     saveExp =()=>{
         let id = this.props.user/*._id*/
         this.fetchPost(id, 'experiences')
+        // this.loadExp()
         this.showModal()
+    }
+
+    //POST IMAGE EXPERIENCE
+    postImgExp=async(expId)=>{
+        let userId = this.props.user
+        let image= document.querySelector('#expFile')
+        let data=new FormData()
+        data.append('experience', image.files[0])
+        let response=await fetch(process.env.REACT_APP_BASE_URL+`profile/${userId}/experiences/${expId}/picture`, {
+            method: 'POST',
+            body: data,
+            headers: new Headers({
+                //"Content-Type": "multipart/form-data",
+                Authorization: `Bearer ${process.env.REACT_APP_ACCESS_TOKEN}`,
+            })
+        })
+        let result = await response.json()
+        console.log(result)
+        this.setState({experience:{image: result.image}})
+
     }
 
     //LOAD ALL EXPERIENCES
     loadExp (){
         let id = this.props.user/*._id*/
+        console.log(id)
         let result=[];
         this.fetchGet(id,'/experiences', null, result)
     }
@@ -197,6 +231,7 @@ export default class EducationBlock extends PureComponent {
     editExp = async ()=>{
         let id = this.props.user/*._id*/
         this.fetchPut(id, 'experiences', this.state.idToEdit)
+        this.postImgExp(this.state.idToEdit)
         this.showModal()
     }
 
@@ -204,23 +239,21 @@ export default class EducationBlock extends PureComponent {
     deleteExp = async (id)=>{
         let userId = this.props.user/*._id*/
         this.fetchDelete(userId, 'experiences', id)
+        let result=[];
+        this.fetchGet(id,'/experiences', null, result)
     }
 
     componentDidMount(){
-        setTimeout(()=>{
-            this.loadExp()
-        },1000)
+        this.loadExp()
     }
 
-    componentDidUpdate(prevProps, prevState){
-        if(prevState.results !== this.state.results){
-            console.log(this.state.results)
-        }else{}
-        if(prevProps.user !== this.props.user){
-            this.setState({results: []})
-            this.loadExp()
-        }
-    }
+    // componentDidUpdate(prevProps, prevState){
+    //     if(prevState.results !== this.state.results){
+    //         let userId = this.props.user/*._id*/
+    //         console.log(this.state.results)
+    //     }
+        
+    // }
 
 
     render() {
@@ -251,6 +284,7 @@ export default class EducationBlock extends PureComponent {
                                         rows={input.rows}
                                         onChange={this.state.fillFunction}
                                         value={this.state.experience[input.id]}
+                                        label={input.label}
                                         
                                     />
 
@@ -275,6 +309,17 @@ export default class EducationBlock extends PureComponent {
                                 </Form.Group>
                             )
                         })}
+                        <Form>
+                            <Form.Group>
+                                <Form.File 
+                                id="expFile" 
+                                label="Upload Image" 
+                                type='file'
+                                onChange={this.fillExpImg}
+                                />
+                            </Form.Group>
+                        </Form>
+                            <button onClick={()=>console.log(this.state.imageToUpload)}>Confirm</button>
                     </Form>   
                 </ModalForEduBlock>
 
@@ -295,7 +340,7 @@ export default class EducationBlock extends PureComponent {
                             return(
                                 <Row className='exp-details' key={index}>
                                     <Col xs={2}>
-                                        <img src="" alt=""/>
+                                        <img src={result.image} alt=""/>
                                     </Col>
                                     <Col xs={10}>
                                         <p>{result.role}</p>
