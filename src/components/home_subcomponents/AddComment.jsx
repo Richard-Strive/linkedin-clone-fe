@@ -8,7 +8,7 @@ const AddComment = (props) => {
 					className='commentArea'
 					type='text'
 					name='comment'
-					id='comment'
+					//id='comment'
 					rows={1}
 					cols={50}
 					placeholder='Add a comment...'

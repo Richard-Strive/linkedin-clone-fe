@@ -6,6 +6,8 @@ import ActionButtons from "./ActionButtons";
 import AddComment from "./AddComment";
 
 import CommentList from "./CommentList";
+import PostImage from "./PostImage";
+import DropdownPost from "./DropdowPost";
 class PostContent extends Component {
 	state = {
 		comments: [],
@@ -20,7 +22,34 @@ class PostContent extends Component {
 		showComment: false,
 		fetchComment: false,
 		user: {},
+		postImage: null,
 	};
+
+	// getPostImage = async () => {
+	// 	let postId = this.props.post._id;
+	// 	try {
+	// 		let response = await fetch(
+	// 			`https://striveschool-api.herokuapp.com/api/posts/${postId}`,
+	// 			{
+	// 				method: "GET",
+
+	// 				headers: new Headers({
+	// 					// "Content-Type": "multipart/form-data",
+	// 					Authorization: `Bearer ${process.env.REACT_APP_ACCESS_TOKEN}`,
+	// 				}),
+	// 			}
+	// 		);
+
+	// 		if (response.ok) {
+	// 			const data = await response.json();
+	// 			console.log("post iamge", data);
+	// 			this.setState({ postImage: data });
+	// 		}
+	// 	} catch (e) {
+	// 		console.log(e);
+	// 	}
+	// };
+
 	getProfileInfo = async () => {
 		const userId = JSON.parse(window.localStorage.getItem("userId"));
 		try {
@@ -58,7 +87,7 @@ class PostContent extends Component {
 			this.submitComment();
 		} else {
 			let addComment = { ...this.state.addComment };
-			let currentId = e.currentTarget.id;
+			let currentId = e.currentTarget.name;
 
 			addComment[currentId] = e.currentTarget.value;
 
@@ -106,12 +135,17 @@ class PostContent extends Component {
 
 	componentDidMount() {
 		this.getProfileInfo();
+		// this.getPostImage();
 	}
 	render() {
 		const { post } = this.props;
 		return (
 			<div className='post-card mb-3'>
 				<Container>
+					<DropdownPost
+						toggleModal={true}
+						post={post}
+						userId={post.user._id}></DropdownPost>
 					<Row>
 						<Col md={12} className='mt-4'>
 							<Link to={`/profile/${post.user._id}`}>
@@ -141,7 +175,17 @@ class PostContent extends Component {
 						<Col md={12}>
 							<p className='post-text float-left'>{post.text}</p>
 						</Col>
+						<Col md={12}>
+							{post.image && (
+								<img
+									style={{ width: "90%" }}
+									src={post.image}
+									alt='post-image'
+								/>
+							)}
 
+							{/* <PostImage postId={post._id} /> */}
+						</Col>
 						<Col md={12} className='icon-container d-flex flex-row'>
 							<ActionButtons onComment={this.handleComment} />
 						</Col>
