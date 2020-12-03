@@ -168,7 +168,7 @@ class PostContent extends Component {
 							</Link>
 
 							<div className='mt-1 edit-post-button'>
-								<i className='three-dot float-right fas fa-ellipsis-h'></i>
+								{/* <i className='three-dot float-right fas fa-ellipsis-h'></i> */}
 							</div>
 						</Col>
 						<hr />
@@ -178,7 +178,7 @@ class PostContent extends Component {
 						<Col md={12}>
 							{post.image && (
 								<img
-									style={{ width: "90%" }}
+									style={{ width: "100%" }}
 									src={post.image}
 									alt='post-image'
 								/>

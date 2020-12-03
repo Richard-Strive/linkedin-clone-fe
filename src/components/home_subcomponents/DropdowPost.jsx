@@ -6,8 +6,9 @@ import TurnedInNotIcon from "@material-ui/icons/TurnedInNot";
 import LinkIcon from "@material-ui/icons/Link";
 import HighlightOffIcon from "@material-ui/icons/HighlightOff";
 import VisibilityOffIcon from "@material-ui/icons/VisibilityOff";
-// import FlagIcon from "@material-ui/icons/Flag";
+import FlagIcon from "@material-ui/icons/Flag";
 import VisibilityIcon from "@material-ui/icons/Visibility";
+import ImageIcon from "@material-ui/icons/Image";
 import "../css/DropdownPost.css";
 
 import PostImage from "./PostImage";
@@ -24,10 +25,17 @@ class DropdownPost extends Component {
 				/>
 				<Dropdown className='dropdown-btn'>
 					<Dropdown.Toggle variant={"trasparent-grey-post"}>
-						<MoreHorizIcon />
+						<MoreHorizIcon
+							style={{ marginLeft: "-50%", marginBottom: "10%" }}
+						/>
 					</Dropdown.Toggle>
 
 					<Dropdown.Menu className='dropdown-post'>
+						<Dropdown.Item
+							onClick={() => this.setState({ modalShow: true })}>
+							<ImageIcon /> <strong>Upload Image</strong>
+							<p className='text-muted'>Save for later</p>
+						</Dropdown.Item>
 						{userId === post.user._id && (
 							<Dropdown.Item onClick={() => toggleModal(post)}>
 								<TurnedInNotIcon /> <strong>Edit</strong>
@@ -54,7 +62,7 @@ class DropdownPost extends Component {
 							</p>{" "}
 						</Dropdown.Item>
 						<Dropdown.Item>
-							{/* <FlagIcon /> <strong>Report this post</strong>{" "} */}
+							<FlagIcon /> <strong>Report this post</strong>{" "}
 							<p className='text-muted'>
 								This post is offensive or the account is hacked
 							</p>
@@ -65,11 +73,6 @@ class DropdownPost extends Component {
 							<p className='text-muted'>
 								Visible to anyone on or off Linkedln
 							</p>{" "}
-						</Dropdown.Item>
-
-						<Dropdown.Item
-							onClick={() => this.setState({ modalShow: true })}>
-							<p>Upload Image</p>
 						</Dropdown.Item>
 					</Dropdown.Menu>
 				</Dropdown>
