@@ -162,3 +162,17 @@ input[type="file"] + label {
 .add-photo-icon:hover {
 	cursor: pointer;
 }
+
+.preview-image-modal .modal-content {
+	margin-bottom: 120%;
+	margin-left: -50%;
+}
+
+.preview-image-modal .modal-dialog .modal-content {
+	height: 90%;
+}
+
+.preview-image-modal .modal-content {
+	background-color: transparent !important;
+	border: none !important;
+}

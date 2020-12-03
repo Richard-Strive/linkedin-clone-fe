@@ -5,13 +5,24 @@ import striveLogo from "../images/strive-logo.jpeg";
 import EditProfileModal from "./EditProfileModal";
 import CreateIcon from "@material-ui/icons/Create";
 import ProfileImage from "./ProfileImage";
+
+import ImagePreviewModal from "../main_components/ImagePreviewModal";
 class TopHeader extends React.Component {
-	state = { showModal: false, modalShow: false };
+	state = { showModal: false, modalShow: false, imgPreviewModal: false };
 
 	render() {
 		const { user } = this.props;
 		return (
 			<>
+				<ImagePreviewModal
+					image={user.image}
+					show={this.state.imgPreviewModal}
+					onHide={() => {
+						this.setState({
+							imgPreviewModal: false,
+						});
+					}}
+				/>
 				<EditProfileModal
 					message={this.props.message}
 					isLoading={this.props.isLoading}
@@ -44,6 +55,9 @@ class TopHeader extends React.Component {
 								alt='top-image'
 							/>
 							<img
+								onClick={() =>
+									this.setState({ imgPreviewModal: true })
+								}
 								className='profile-img'
 								src={user.image}
 								alt='profile-pic'

@@ -123,10 +123,12 @@
 	width: 70% !important;
 	height: 50%;
 }
-.edit-image-modal .modal-dialog {
+.modal-dialog {
 	background-color: transparent !important;
 }
-
+.edit-profile-modal .modal-dialog .modal-content {
+	height: 90%;
+}
 .profile-img-edit {
 	position: absolute;
 	background-color: rgb(199, 199, 199);
@@ -139,5 +141,9 @@
 }
 .profile-img-edit:hover {
 	background-color: rgb(58, 58, 58);
+	cursor: pointer;
+}
+
+.profile-img:hover {
 	cursor: pointer;
 }

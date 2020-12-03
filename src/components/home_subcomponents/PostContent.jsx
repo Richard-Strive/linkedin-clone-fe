@@ -8,6 +8,7 @@ import AddComment from "./AddComment";
 import CommentList from "./CommentList";
 import PostImage from "./PostImage";
 import DropdownPost from "./DropdowPost";
+import ImagePreviewModal from "../main_components/ImagePreviewModal";
 class PostContent extends Component {
 	state = {
 		comments: [],
@@ -23,6 +24,7 @@ class PostContent extends Component {
 		fetchComment: false,
 		user: {},
 		postImage: null,
+		imgPreviewModal: false,
 	};
 
 	// getPostImage = async () => {
@@ -141,6 +143,15 @@ class PostContent extends Component {
 		const { post } = this.props;
 		return (
 			<div className='post-card mb-3'>
+				<ImagePreviewModal
+					image={post.image && post.image}
+					show={this.state.imgPreviewModal}
+					onHide={() => {
+						this.setState({
+							imgPreviewModal: false,
+						});
+					}}
+				/>
 				<Container>
 					<DropdownPost
 						toggleModal={true}
@@ -180,6 +191,10 @@ class PostContent extends Component {
 						<Col md={12}>
 							{post.image && (
 								<img
+									className='post-img'
+									onClick={() =>
+										this.setState({ imgPreviewModal: true })
+									}
 									style={{ width: "100%" }}
 									src={post.image}
 									alt='post-image'

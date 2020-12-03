@@ -43,8 +43,6 @@ class App extends React.Component {
 		if (e.keyCode === 13 || e.key === "Enter") {
 			e.preventDefault();
 
-			this.setState({ showResult: true });
-
 			let filteredUserList = this.state.userList.filter(
 				(user) =>
 					(user.name &&
@@ -58,6 +56,7 @@ class App extends React.Component {
 			);
 
 			this.setState({ filteredUserList });
+			this.setState({ showResult: true });
 		} else {
 			this.setState({
 				searchString: e.currentTarget.value,
