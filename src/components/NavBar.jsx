@@ -19,11 +19,11 @@ import logo from "./images/logo.png";
 class NavBar extends Component {
 	render() {
 		return (
-			<div className='linkedin-nav'>
+			<Row className='linkedin-nav'>
+				<Container>
+
 				<Navbar
 					className='mb-4 navnavbar  '
-					style={{ height: 50 }}
-					bg='light'
 					expand='lg'>
 					<button
 						className='navbar-toggler'
@@ -41,10 +41,6 @@ class NavBar extends Component {
 						<Col md={1}>
 							<Link to='/'>
 								<Image
-									style={{
-										height: 60,
-										width: 60,
-									}}
 									src={logo}
 								/>
 							</Link>
@@ -72,11 +68,6 @@ class NavBar extends Component {
 										value={this.props.searchString}
 										onKeyDown={this.props.handleSearch}
 										onChange={this.props.handleSearch}
-										style={{
-											width: "390px",
-											height: "45px",
-											marginLeft: "-35px",
-										}}
 									/>
 								</InputGroup>
 							</Form>
@@ -157,7 +148,8 @@ class NavBar extends Component {
 						</Col>
 					</Row>
 				</Navbar>
-			</div>
+				</Container>
+			</Row>
 		);
 	}
 }

@@ -1,10 +1,12 @@
 import React, { Component } from "react";
 import bootstrap, { Row, Col } from "react-bootstrap";
+import '../css/RightSide.scss'
+import footericon from "../images/footericon.png"
 class RightSide extends Component {
   render() {
     return (
       <div>
-        <div class="card" style={{ width: "16rem", borderRadius: "10px" }}>
+        <div class="card" style={{ borderRadius: "10px" }}>
           <div class="card-body">
             <h5 class="card-title">Add to your feed</h5>
             <Row>
@@ -58,44 +60,47 @@ class RightSide extends Component {
           </div>
         </div>
 
-        <div
-          class="card"
-          style={{ width: "16rem", borderRadius: "10px", marginTop: "5px" }}
-        >
-          <img
-            src="https://via.placeholder.com/150C/O https://placeholder.com/"
-            class="card-img-top"
-            alt="..."
-          />
-          <div class="card-body">
-            <ul
-              style={{
-                listStyle: "none",
-                textAlign: "center",
-                marginRight: "31px",
-              }}
-            >
-              <li>
-                <a href="/">About </a>
-              </li>
-              <li>
-                <a href="/">Accessibility </a>
-              </li>
-              <li>
-                <a href="/">Help Center </a>
-              </li>
-              <li>
-                <a href="/">Privacy Terms </a>
-              </li>
-              <li>
-                <a href="/">Ad Choices </a>
-              </li>
-              <li>
-                <a href="/">Advertising </a>
-              </li>
-            </ul>
+        <div id='ads-course'>
+          <header>
+            <p>Today's most viewed courses</p>
+            <i className="fas fa-info"></i>
+          </header>
+          <ul>
+            <li>
+              <p>The Six Morning Habits</p>
+              <p>Pete Mockaitis | How to Be Awesome at Your Job</p>
+            </li>
+            <li>
+              <p>Unconsious Bias</p>
+              <p>Stacey Gordon</p>
+            </li>
+            <li>
+              <p>Time Management for Busy People</p>
+              <p>Madecraft and Samantha Bennett</p>
+            </li>
+          </ul>
+          <p className='linkedin-learning'>Show more on LinkedIn Learning</p>
+        </div>
+        
+        <div id='footer-right' style={{position:'sticky', top:'60px'}}>
+          <div className="links-footer-right">
+            <span>About</span>
+            <span>Accessibility</span>
+            <span>Help Center</span>
+            <span>Privacy & Terms</span>
+            <span>Ad Choices</span>
+            <span>Advertising</span>
+            <span>Business Services</span>
+            <span>Get the LinkedIn app</span>
+
+          </div>
+          <p>More</p>
+          <div className="linkedin-rights">
+            <span><img src={footericon} alt=""/></span>
+            <span>Linkedin Corporation © 2020</span>
           </div>
         </div>
+
       </div>
     );
   }

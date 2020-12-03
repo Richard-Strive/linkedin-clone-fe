@@ -98,7 +98,7 @@ class Profile extends React.Component {
       userInfo = id;
     }
     return (
-      <div className="container d-flex flex-row">
+      <div className="container d-flex flex-row" id='profile-page'>
         <div>
           <TopHeader
             showChanges={this.handleShowChanges}
