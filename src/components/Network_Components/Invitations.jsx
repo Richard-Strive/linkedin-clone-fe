@@ -2,6 +2,23 @@ import React, { PureComponent } from 'react'
 import './Network_Style/Invitations.scss'
 
 export default class Invitations extends PureComponent {
+    state={}
+
+    fetchGet=async(content, contentId)=>{
+        let response = await fetch(process.env.REACT_APP_BASE_URL=`https://striveschool-api.herokuapp.com/api/${content}/${contentId}`, {
+            headers: {
+                Authorization : `Bearer ${process.env.REACT_APP_ACCESS_TOKEN}`
+            }
+        })
+        let result = await response.json()
+        console.log(result)
+
+    }
+
+    componentDidMount(){
+        this.fetchGet('profile', '')
+    }
+
     render() {
         return (
             <div id='invitations'>
