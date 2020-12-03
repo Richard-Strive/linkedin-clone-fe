@@ -1,0 +1,58 @@
+#invitations {
+  header {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.5rem;
+  }
+  .invitation-card {
+    display: flex;
+    align-items: center;
+    img {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+    }
+    .invitation-info {
+      p {
+        text-align: left;
+        margin: 0;
+      }
+      p:nth-of-type(1) {
+        font-size: 1rem;
+        font-weight: 600;
+      }
+      p:nth-of-type(2) {
+        font-size: 0.9rem;
+        color: rgba($color: black, $alpha: 0.5);
+      }
+      p:nth-of-type(3) {
+        font-size: 0.6rem;
+        color: rgba($color: black, $alpha: 0.5);
+      }
+    }
+    .choose-invitation {
+      button:nth-of-type(1) {
+        font-weight: 600;
+        color: rgba($color: black, $alpha: 0.7);
+        background-color: white;
+        border: none;
+        border-radius: 10px;
+      }
+      button:nth-of-type(1):hover {
+        background-color: rgba($color: black, $alpha: 0.4);
+      }
+      button:nth-of-type(2) {
+        font-weight: 600;
+        color: #0a66c2;
+        border: 1px #0a66c2 solid;
+        border-radius: 30%;
+        background-color: white;
+      }
+      button:nth-of-type(2) {
+        border: 2px #0a66c2 solid;
+      }
+    }
+  }
+}
