@@ -1,9 +1,10 @@
 import React from "react";
-import { Container, Form, Row, Col, Button } from "react-bootstrap";
+import { Container, Form, Row, Col, Button, Alert } from "react-bootstrap";
 
 class EditProfileForm extends React.Component {
 	state = {
 		user: {},
+		ok: false,
 	};
 
 	componentDidMount() {
@@ -39,6 +40,8 @@ class EditProfileForm extends React.Component {
 			);
 			if (!response.ok) {
 				alert("something went wrong");
+			} else {
+				this.setState({ ok: true });
 			}
 		} catch (err) {
 			console.log(err);
@@ -124,7 +127,7 @@ class EditProfileForm extends React.Component {
 						/>
 					</Form.Group>
 					<div className='submit-button float-right mr-3 '>
-						<Button type='submit'>Save</Button>
+						<Button type='submit'>Save </Button>
 					</div>
 				</Form>
 			</Container>

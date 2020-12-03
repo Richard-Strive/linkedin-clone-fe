@@ -57,7 +57,10 @@ class EditProfileModal extends Component {
 							</Col>
 						</Row>
 						<div>
-							<EditProfileForm user={user} />
+							<EditProfileForm
+								modalShow={this.state.modalShow}
+								user={user}
+							/>
 						</div>
 					</Modal.Body>
 				</Modal>

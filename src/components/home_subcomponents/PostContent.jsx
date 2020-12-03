@@ -149,11 +149,13 @@ class PostContent extends Component {
 					<Row>
 						<Col md={12} className='mt-4'>
 							<Link to={`/profile/${post.user._id}`}>
-								<img
-									className='user-img float-left'
-									src={post.user.image}
-									alt='user-avatar'
-								/>
+								{post.user.image && (
+									<img
+										className='user-img float-left'
+										src={post.user.image}
+										alt='user-avatar'
+									/>
+								)}
 								<div className='user-info float-left d-flex flex-column'>
 									<h5 className='ml-0'>
 										{post.user.name} {post.user.surname}
