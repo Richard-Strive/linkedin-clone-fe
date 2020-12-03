@@ -318,7 +318,6 @@ export default class EducationBlock extends PureComponent {
                                 />
                             </Form.Group>
                         </Form>
-                            <button onClick={()=>console.log(this.state.imageToUpload)}>Confirm</button>
                     </Form>   
                 </ModalForEduBlock>
 
