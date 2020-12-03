@@ -4,11 +4,11 @@
   background-color: #f3f2ef;
 }
 
-#home-page{
+#home-page {
   margin-top: 60px;
 }
 
-.linkedin-nav{
+.linkedin-nav {
   width: 100%;
   margin: 0;
   height: 50px;
@@ -18,43 +18,45 @@
   z-index: 10;
 }
 
-nav{
+nav {
   height: 50px;
 }
 
-.navnavbar{
+.navnavbar {
   min-height: auto !important;
   padding: 0.2rem;
 }
 
-#navbarSupportedContent{
+#navbarSupportedContent {
   height: 100%;
   margin: 0;
   margin-top: 0 !important;
   align-items: center;
 }
 
-.col-md-1, .col-md-4, .col-md-7{
+.col-md-1,
+.col-md-4,
+.col-md-7 {
   height: 100%;
 }
 
-.col-md-1 a img{
+.col-md-1 a img {
   height: 100%;
 }
 
-.col-md-4{
-  padding: .25rem;
+.col-md-4 {
+  padding: 0.25rem;
 }
 
-.form-inline{
+.form-inline {
   width: 100%;
 }
 
-.form-inline .input-group{
+.form-inline .input-group {
   width: 100%;
 }
 
-.form-inline .input-group input{
+.form-inline .input-group input {
   width: 100%;
 }
 
@@ -143,4 +145,14 @@ nav{
   background-color: rgb(228, 215, 215);
 }
 
+.text-left {
+  color: grey;
+}
 
+.editAdd {
+  border-radius: 13px;
+}
+
+.links:hover {
+  text-decoration: underline;
+}
