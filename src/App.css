@@ -145,6 +145,17 @@ nav {
   background-color: rgb(228, 215, 215);
 }
 
+input[type="file"] {
+  border: 0;
+  clip: rect(0, 0, 0, 0);
+  height: 1px;
+  overflow: hidden;
+  padding: 0;
+  /* position: absolute !important; */
+  white-space: nowrap;
+  width: 1px;
+}
+
 .links {
   color: grey;
 }
@@ -159,4 +170,24 @@ nav {
 
 .link:hover {
   text-decoration: underline;
+}
+/* input[type="file"] + label {
+} */
+
+.add-photo-icon:hover {
+  cursor: pointer;
+}
+
+.preview-image-modal .modal-content {
+  margin-bottom: 120%;
+  margin-left: -50%;
+}
+
+.preview-image-modal .modal-dialog .modal-content {
+  height: 90%;
+}
+
+.preview-image-modal .modal-content {
+  background-color: transparent !important;
+  border: none !important;
 }
