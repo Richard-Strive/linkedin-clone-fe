@@ -13,7 +13,8 @@ export default class MainMsg extends PureComponent {
 			elementId: '5fca3098d0446f00154e1016',
         },
         me:'',
-        lastMsg:''
+        lastMsg:'',
+        receiveFrom:''
     }
 
     getProfileUserName=async()=>{
@@ -41,7 +42,7 @@ export default class MainMsg extends PureComponent {
             console.log(comments)
             this.setState({msg:comments})
             let lastComment=comments[comments.length -1]
-            this.setState({targetMsg: [...this.state.targetMsg, lastComment]})
+            this.setState({targetMsg: [...this.state.targetMsg, lastComment], lastMsg: lastComment})
 
     };
     
@@ -61,14 +62,14 @@ export default class MainMsg extends PureComponent {
 			);
             let result = await response.json()
             console.log(result)
-            let lastComment=result.comment
+            let lastComment=result
             this.setState({lastMsg: lastComment})
             
 	};
 
-    componentDidMount(){
-        this.getCommentForMsg()
-        this.getProfileUserName()
+    componentDidMount=async()=>{
+        let profile=await this.getProfileUserName()
+        let msg= await this.getCommentForMsg()
     }
 
     componentDidUpdate(prevProps, prevState){
@@ -80,9 +81,14 @@ export default class MainMsg extends PureComponent {
 		this.setState({ sendComment:{...this.state.sendComment, comment: comment} });
     }
 
-    sendText=()=>{
-        this.sendCommentMsg()
-        this.getCommentForMsg()
+    whoText=(e)=>{
+        let receiver = e.currentTarget.value
+        this.setState({receiveFrom: receiver})
+    }
+
+    sendText=async()=>{
+        let msg = await this.sendCommentMsg()
+        let lastMsg = this.getCommentForMsg()
     }
 
     render() {
@@ -91,7 +97,11 @@ export default class MainMsg extends PureComponent {
                 <header>
                     New Message
                 </header>
-                <input type="text" placeholder='Type a name or multiple names...'/>
+                <input 
+                type="text" 
+                placeholder='Type a name or multiple names...'
+                onChange={this.whoText}
+                />
                 <div className="msg-dialog">
                     {/* {this.state.msg.filter(msg=>msg.author==='Reniejr').map((msg, index)=>{
                         return(
@@ -105,7 +115,25 @@ export default class MainMsg extends PureComponent {
                     })} */}
                     {this.state.targetMsg.map((msg, index)=>{
                         return(
-                        <p key={index}>{msg.comment}</p>
+                            <div 
+                            className='dialog'
+                            style={{
+                                alignItems: this.state.lastMsg.author===this.state.me? 'flex-end' : 'flex-start'
+                            }}
+                            >
+                                <p
+                                style={{
+                                    color: this.state.lastMsg.author===this.state.me? 'green' : 'blue'
+                                }}
+                                >{msg.author}</p>
+                                <p 
+                                key={index}
+                                style={{
+                                    backgroundColor: this.state.lastMsg.author===this.state.me? 'green' : 'blue'
+                                }}
+                                
+                                >{msg.comment}</p>
+                            </div>
                         )
                     })}
                 </div>
