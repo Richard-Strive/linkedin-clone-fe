@@ -12,7 +12,8 @@ export default class MainMsg extends PureComponent {
 			rate: 1,
 			elementId: '5fca3098d0446f00154e1016',
         },
-        me:''
+        me:'',
+        lastMsg:''
     }
 
     getProfileUserName=async()=>{
@@ -60,6 +61,9 @@ export default class MainMsg extends PureComponent {
 			);
             let result = await response.json()
             console.log(result)
+            let lastComment=result.comment
+            this.setState({lastMsg: lastComment})
+            
 	};
 
     componentDidMount(){
@@ -67,14 +71,18 @@ export default class MainMsg extends PureComponent {
         this.getProfileUserName()
     }
 
+    componentDidUpdate(prevProps, prevState){
+        if(prevState.lastMsg !== this.state.lastMsg){}
+    }
+
     writeText=(e)=>{
         let comment = e.currentTarget.value
-
 		this.setState({ sendComment:{...this.state.sendComment, comment: comment} });
     }
 
     sendText=()=>{
-        this.sendCommentMsg(this.state.sendComment)
+        this.sendCommentMsg()
+        this.getCommentForMsg()
     }
 
     render() {
