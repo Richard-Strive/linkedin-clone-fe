@@ -6,8 +6,9 @@
 	/* margin-left: 30%; */
 	border-radius: 10px;
 
-	text-overflow: ellipsis;
-	overflow-x: hidden;
+	/* text-overflow: ellipsis; */
+	/* overflow-x: hidden; */
+	height: auto;
 }
 
 .post-card .user-img {
@@ -70,7 +71,7 @@
 
 .commentArea {
 	border-radius: 20px;
-	width: 180%;
+	width: 28rem;
 	margin-left: 1rem;
 	margin-right: 1rem !important;
 
@@ -81,9 +82,17 @@
 	margin-bottom: 10%;
 }
 .comment-item {
-	width: 180%;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	width: 27rem;
 	margin-left: 1rem !important;
 	margin-right: 1rem !important;
+}
+
+.comment-item:hover {
+	text-overflow: initial;
+	white-space: pre-wrap;
 }
 
 .list-group-item {
@@ -97,6 +106,24 @@
 }
 
 .comment-spinner {
-	margin-left: 100% !important;
 	margin-bottom: 1rem;
+}
+
+.post-img:hover {
+	cursor: pointer;
+}
+
+.delete-actions {
+	background-color: rgb(219, 215, 215);
+	padding: 1rem 1rem 0.5rem 1rem;
+	padding-bottom: 0.2rem;
+	border-radius: 20px;
+}
+.delete-actions:hover {
+	background-color: rgb(90, 90, 90);
+	cursor: pointer;
+}
+
+.delete-actions p {
+	font-weight: bold;
 }

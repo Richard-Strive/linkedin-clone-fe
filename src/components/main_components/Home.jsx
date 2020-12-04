@@ -1,4 +1,5 @@
 import React from "react";
+import "../../App.css";
 
 import { Container, Row, Col } from "react-bootstrap";
 
@@ -15,6 +16,42 @@ class Home extends React.Component {
 		post: { text: "" },
 		showPost: true,
 		postSize: 0,
+
+		formData: null,
+		addImageModalShow: false,
+	};
+
+	saveImage = () => {
+		const inputFile = document.querySelector("#post-image-upload-file");
+
+		let formData = new FormData();
+		formData.append("post", inputFile.files[0]);
+
+		this.setState({ formData }, () => {
+			this.setState({ addImageModalShow: false });
+		});
+	};
+
+	uploadImage = async (postId) => {
+		try {
+			let response = await fetch(
+				`https://striveschool-api.herokuapp.com/api/posts/${postId}`,
+				{
+					method: "POST",
+					body: this.state.formData,
+					headers: new Headers({
+						// "Content-Type": "multipart/form-data",
+						Authorization: `Bearer ${process.env.REACT_APP_ACCESS_TOKEN}`,
+					}),
+				}
+			);
+
+			if (response.ok) {
+				const data = await response.json();
+			}
+		} catch (e) {
+			console.log(e);
+		}
 	};
 
 	fetchPost = async () => {
@@ -27,13 +64,17 @@ class Home extends React.Component {
 			}),
 		});
 		let result = await response.json();
-		console.log(result);
+
+		let imageUpload = await this.uploadImage(result._id);
 	};
 
 	postConfirm = () => {
 		this.fetchPost();
-		this.showModal();
-		this.setState({ postSize: this.state.postSize + 1 });
+
+		setTimeout(() => {
+			this.showModal();
+			this.setState({ postSize: this.state.postSize + 1 });
+		}, 100);
 	};
 
 	showModal = () => {
@@ -56,7 +97,7 @@ class Home extends React.Component {
 		let showPost = this.state.showPost ? "grey" : "#0078b9";
 		let canClick = this.state.showPost ? "none" : "all";
 		return (
-			<div>
+			<div id='home-page'>
 				<Container>
 					<Row>
 						<Col xs={3}>
@@ -64,6 +105,14 @@ class Home extends React.Component {
 						</Col>
 						<Col xs={6}>
 							<MakePost
+								addImageModalShow={this.state.addImageModalShow}
+								onHide={() =>
+									this.setState({ addImageModalShow: false })
+								}
+								showImageModal={() =>
+									this.setState({ addImageModalShow: true })
+								}
+								saveImage={this.saveImage}
 								show={showModal}
 								showFunction={this.showModal}
 								fillFunction={this.fillUp}
@@ -72,7 +121,10 @@ class Home extends React.Component {
 								clickable={canClick}
 								onClick={this.showModal}
 							/>
-							<Posts postSize={this.state.postSize} />
+							<Posts
+								showDelete={this.state}
+								postSize={this.state.postSize}
+							/>
 						</Col>
 						<Col xs={3}>
 							<RightSide />

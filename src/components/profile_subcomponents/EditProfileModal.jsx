@@ -3,8 +3,9 @@ import React, { Component } from "react";
 import { Button, Modal, Row, Col } from "react-bootstrap";
 
 import EditProfileForm from "./EditProfileForm";
+import ProfileImage from "./ProfileImage";
 class EditProfileModal extends Component {
-	state = { show: false };
+	state = { show: false, modalShow: false };
 
 	componentDidMount() {
 		this.setState({ show: this.props.show });
@@ -25,8 +26,16 @@ class EditProfileModal extends Component {
 						</Modal.Title>
 					</Modal.Header>
 					<Modal.Body>
+						<ProfileImage
+							message={this.props.message}
+							isLoading={this.props.isLoading}
+							uploadImage={this.props.uploadImage}
+							show={this.state.modalShow}
+							onHide={() => this.setState({ modalShow: false })}
+						/>
+
 						<Row className='mb-5'>
-							<Col md={12} className='images-contain '>
+							<Col md={12} className='images-container '>
 								<img
 									className='header-img'
 									src='https://media-exp1.licdn.com/dms/image/C4D16AQGmIeY20UG-TA/profile-displaybackgroundimage-shrink_200_800/0/1601315645175?e=1612396800&v=beta&t=AbFSYaklOIuXGuLEY-usz4EZRg1rbhXC_jLq1X22GDI'
@@ -38,10 +47,20 @@ class EditProfileModal extends Component {
 									src={user.image}
 									alt='profile-pic'
 								/>
+								<div
+									className='edit-profile-img'
+									onClick={() =>
+										this.setState({ modalShow: true })
+									}>
+									<i className='fas fa-pencil-alt '></i>
+								</div>
 							</Col>
 						</Row>
 						<div>
-							<EditProfileForm user={user} />
+							<EditProfileForm
+								modalShow={this.state.modalShow}
+								user={user}
+							/>
 						</div>
 					</Modal.Body>
 				</Modal>

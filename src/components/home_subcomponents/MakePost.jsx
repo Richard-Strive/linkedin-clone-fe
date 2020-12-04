@@ -3,12 +3,15 @@ import "../css/MakePost.scss";
 import ModalPost from "./ModalPost";
 
 export default class MakePost extends PureComponent {
-	state = {};
-
 	render() {
 		return (
 			<div id='create-post'>
 				<ModalPost
+					addImageModalShow={this.props.addImageModalShow}
+					onHide={this.props.onHide}
+					showImageModal={this.props.showImageModal}
+					isImageLoading={this.props.isImageLoading}
+					saveImage={this.props.saveImage}
 					show={this.props.show}
 					showFunction={this.props.showFunction}
 					fillFunction={this.props.fillFunction}
