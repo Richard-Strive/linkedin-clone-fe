@@ -40,11 +40,6 @@ class DropdownPost extends Component {
 					</Dropdown.Toggle>
 
 					<Dropdown.Menu className='dropdown-post'>
-						<Dropdown.Item
-							onClick={() => this.setState({ modalShow: true })}>
-							<ImageIcon /> <strong>Upload Image</strong>
-							<p className='text-muted'>Save for later</p>
-						</Dropdown.Item>
 						{userId === post.user._id && (
 							<Dropdown.Item onClick={() => toggleModal(post)}>
 								<TurnedInNotIcon /> <strong>Edit</strong>
