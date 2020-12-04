@@ -7,6 +7,10 @@ export default class MakePost extends PureComponent {
 		return (
 			<div id='create-post'>
 				<ModalPost
+					addImageModalShow={this.props.addImageModalShow}
+					onHide={this.props.onHide}
+					showImageModal={this.props.showImageModal}
+					isImageLoading={this.props.isImageLoading}
 					saveImage={this.props.saveImage}
 					show={this.props.show}
 					showFunction={this.props.showFunction}

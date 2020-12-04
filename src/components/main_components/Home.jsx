@@ -18,6 +18,7 @@ class Home extends React.Component {
 		postSize: 0,
 
 		formData: null,
+		addImageModalShow: false,
 	};
 
 	saveImage = () => {
@@ -26,7 +27,9 @@ class Home extends React.Component {
 		let formData = new FormData();
 		formData.append("post", inputFile.files[0]);
 
-		this.setState({ formData });
+		this.setState({ formData }, () => {
+			this.setState({ addImageModalShow: false });
+		});
 	};
 
 	uploadImage = async (postId) => {
@@ -71,7 +74,7 @@ class Home extends React.Component {
 		setTimeout(() => {
 			this.showModal();
 			this.setState({ postSize: this.state.postSize + 1 });
-		}, 1000);
+		}, 100);
 	};
 
 	showModal = () => {
@@ -102,6 +105,13 @@ class Home extends React.Component {
 						</Col>
 						<Col xs={6}>
 							<MakePost
+								addImageModalShow={this.state.addImageModalShow}
+								onHide={() =>
+									this.setState({ addImageModalShow: false })
+								}
+								showImageModal={() =>
+									this.setState({ addImageModalShow: true })
+								}
 								saveImage={this.saveImage}
 								show={showModal}
 								showFunction={this.showModal}
@@ -111,7 +121,10 @@ class Home extends React.Component {
 								clickable={canClick}
 								onClick={this.showModal}
 							/>
-							<Posts postSize={this.state.postSize} />
+							<Posts
+								showDelete={this.state}
+								postSize={this.state.postSize}
+							/>
 						</Col>
 						<Col xs={3}>
 							<RightSide />
