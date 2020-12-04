@@ -24,7 +24,9 @@ class PostImage extends Component {
 		let reader = new FileReader();
 		reader.onload = function () {
 			let output = document.getElementById("output_image");
+			let modal = document.querySelector(".modal-image-preview");
 			output.src = reader.result;
+			modal.src = reader.result;
 		};
 		reader.readAsDataURL(event.target.files[0]);
 		this.setState({ isImage: true });
@@ -64,9 +66,20 @@ class PostImage extends Component {
 								style={this.styles.imagePreview}
 								id='output_image'
 							/>
+
+							{this.props.isImageLoading && (
+								<Spinner
+									style={{ marginLeft: "40%" }}
+									animation='border'
+									variant='primary'
+								/>
+							)}
+
 							<Button
 								className={
-									this.state.isImage ? "d-block" : "d-none"
+									this.state.isImage
+										? "d-block save-image-button"
+										: "d-none"
 								}
 								style={{ marginLeft: "30%", marginTop: "10%" }}
 								onClick={this.props.saveImage}
@@ -74,21 +87,6 @@ class PostImage extends Component {
 								Save Image
 							</Button>
 						</Form>
-						{this.state.isLoading && (
-							<Spinner
-								style={{ marginLeft: "40%" }}
-								className='main-page-spinner'
-								animation='border'
-								variant='primary'
-							/>
-						)}
-						<div>
-							{this.state.message && (
-								<Alert variant='secondary' className='mt-3'>
-									{this.state.message}
-								</Alert>
-							)}
-						</div>
 					</div>
 				</Modal.Body>
 			</Modal>

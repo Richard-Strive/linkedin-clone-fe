@@ -18,15 +18,20 @@ class Home extends React.Component {
 		postSize: 0,
 
 		formData: null,
+		addImageModalShow: false,
+		isImageLoading: false,
 	};
 
 	saveImage = () => {
+		this.setState({ isImageLoading: true });
 		const inputFile = document.querySelector("#post-image-upload-file");
 
 		let formData = new FormData();
 		formData.append("post", inputFile.files[0]);
 
-		this.setState({ formData });
+		this.setState({ formData }, () => {
+			this.setState({ addImageModalShow: false });
+		});
 	};
 
 	uploadImage = async (postId) => {
@@ -102,6 +107,14 @@ class Home extends React.Component {
 						</Col>
 						<Col xs={6}>
 							<MakePost
+								isImageLoading={this.state.isImageLoading}
+								addImageModalShow={this.state.addImageModalShow}
+								onHide={() =>
+									this.setState({ addImageModalShow: false })
+								}
+								showImageModal={() =>
+									this.setState({ addImageModalShow: true })
+								}
 								saveImage={this.saveImage}
 								show={showModal}
 								showFunction={this.showModal}

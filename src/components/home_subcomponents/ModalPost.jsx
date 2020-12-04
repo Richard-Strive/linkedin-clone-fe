@@ -6,7 +6,6 @@ import PostImage from "./PostImage";
 export default class ModalPost extends PureComponent {
 	state = {
 		user: {},
-		modalShow: false,
 	};
 
 	fetchGet = async () => {
@@ -26,7 +25,9 @@ export default class ModalPost extends PureComponent {
 	componentDidMount() {
 		this.fetchGet();
 	}
-
+	handleImageError = (e) => {
+		e.currentTarget.style.display = "none";
+	};
 	render() {
 		let {
 			show,
@@ -40,9 +41,10 @@ export default class ModalPost extends PureComponent {
 			<div>
 				<PostImage
 					//post={this.props.post}
+
 					saveImage={this.props.saveImage}
-					show={this.state.modalShow}
-					onHide={() => this.setState({ modalShow: false })}
+					show={this.props.addImageModalShow}
+					onHide={this.props.onHide}
 				/>
 
 				<Modal.Dialog style={{ marginTop: `${show}` }}>
@@ -53,7 +55,11 @@ export default class ModalPost extends PureComponent {
 					<Modal.Body>
 						<Row className='body-header'>
 							<Col xs={2}>
-								<img src={this.state.user.image} alt='' />
+								<img
+									onError={this.handleImageError}
+									src={this.state.user.image}
+									alt=''
+								/>
 							</Col>
 							<Col xs={10}>
 								<p>{this.state.user.name}</p>
@@ -71,6 +77,19 @@ export default class ModalPost extends PureComponent {
 							rows='10'
 							placeholder='Write your post'
 							onChange={(e) => fillFunction(e)}></textarea>
+
+						<img
+							style={{
+								border: "none",
+								marginLeft: "7%",
+								marginTop: "3%",
+								width: "90%",
+								height: "100%",
+							}}
+							className='modal-image-preview'
+							src=''
+							alt=''
+						/>
 						<div className='hashtag'>
 							<button>Add hashtag</button>
 							<p>Help the right people see your post</p>
@@ -82,9 +101,7 @@ export default class ModalPost extends PureComponent {
 							<div className='add'>
 								<i className='fas fa-plus'></i>
 								<i
-									onClick={() =>
-										this.setState({ modalShow: true })
-									}
+									onClick={this.props.showImageModal}
 									className='fas fa-image'></i>
 								<i className='fab fa-youtube'></i>
 								<i className='far fa-newspaper'></i>
