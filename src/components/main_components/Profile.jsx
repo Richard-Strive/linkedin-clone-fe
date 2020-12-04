@@ -4,6 +4,7 @@ import "../../css/Profile.css";
 import TopHeader from "../profile_subcomponents/TopHeader";
 import AboutBlock from "../profile_subcomponents/AboutBlock";
 import Dashboard from "../profile_subcomponents/Dashboard";
+import Footer from '../Footer'
 
 import Interests from "../profile_subcomponents/Interests";
 import Skills from "../profile_subcomponents/Skills";
@@ -150,6 +151,7 @@ class Profile extends React.Component {
 			userInfo = id;
 		}
 		return (
+			<>
 			<div className='container d-flex flex-row' id='profile-page'>
 				<div>
 					<TopHeader
@@ -178,6 +180,8 @@ class Profile extends React.Component {
 					<InLearning />
 				</div>
 			</div>
+				<Footer/>
+			</>
 		);
 	}
 }

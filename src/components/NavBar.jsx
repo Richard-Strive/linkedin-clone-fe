@@ -39,7 +39,7 @@ class NavBar extends Component {
 						className='align-items-center justify-content-center mt-4 collapse navbar-collapse'
 						id='navbarSupportedContent'>
 						<Col md={1}>
-							<Link to='/'>
+							<Link to='/feed'>
 								<Image
 									src={logo}
 								/>

@@ -9,19 +9,28 @@ import VisibilityOffIcon from "@material-ui/icons/VisibilityOff";
 import FlagIcon from "@material-ui/icons/Flag";
 import VisibilityIcon from "@material-ui/icons/Visibility";
 import ImageIcon from "@material-ui/icons/Image";
+import DeleteIcon from "@material-ui/icons/Delete";
 import "../css/DropdownPost.css";
 
+import DeletePostModal from "./DeletePostModal";
 import PostImage from "./PostImage";
 class DropdownPost extends Component {
-	state = { modalShow: false };
+	state = { modalShow: false, deleteModalShow: false };
+
 	render() {
 		const { toggleModal, post, userId } = this.props;
+		const currentUserId = JSON.parse(window.localStorage.getItem("userId"));
 		return (
 			<div>
 				<PostImage
 					post={this.props.post}
 					show={this.state.modalShow}
 					onHide={() => this.setState({ modalShow: false })}
+				/>
+				<DeletePostModal
+					post={this.props.post}
+					show={this.state.deleteModalShow}
+					onHide={() => this.setState({ deleteModalShow: false })}
 				/>
 				<Dropdown className='dropdown-btn'>
 					<Dropdown.Toggle variant={"trasparent-grey-post"}>
@@ -72,6 +81,21 @@ class DropdownPost extends Component {
 							<strong>Who can see this post?</strong>
 							<p className='text-muted'>
 								Visible to anyone on or off Linkedln
+							</p>{" "}
+						</Dropdown.Item>
+
+						<Dropdown.Item
+							className={
+								currentUserId === post.user._id
+									? "d-block"
+									: "d-none"
+							}
+							onClick={() => {
+								this.setState({ deleteModalShow: true });
+							}}>
+							<DeleteIcon /> <strong>Delete this post</strong>
+							<p className='text-muted'>
+								You can't go back.Be sure to delete
 							</p>{" "}
 						</Dropdown.Item>
 					</Dropdown.Menu>
