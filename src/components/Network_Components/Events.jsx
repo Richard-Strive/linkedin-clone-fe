@@ -81,12 +81,21 @@ export default class Events extends PureComponent {
                             <p>{cat}</p>
                             <Row className="cards-container">
                                 {this.state.cards[cat].map((card, index)=>{
+                                    let random=Math.floor(Math.random()*200)
                                     return(
                                         <Col xs={4} key={index}>
-                                            <header></header>
-                                            <img src='' alt="image"/>
-                                            <p>Name {card.name}</p>
-                                            <p>Description</p>
+                                            <header
+                                            style={{
+                                                backgroundColor: cat==='RecommendedPages'? 'red':'green'
+                                            }}
+                                            ></header>
+                                            <img src={card.imageUrl} alt=""/>
+                                            <div className="event-info">
+                                            <p>{card.name}</p>
+                                            <p>{card.description}</p>
+                                            <p>{random} attendees</p>
+
+                                            </div>
                                             <button>View</button>
                                         </Col>
                                      )
