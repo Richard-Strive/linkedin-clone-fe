@@ -35,7 +35,7 @@ export default class PeopleAlsoViewed extends Component {
                       height: "100%",
                     }}
                   >
-                    <i className="fas fa-paper-plane"></i>
+                    <i className="fas fa-paper-plane link"></i>
                   </Col>
                 </Row>
               );
