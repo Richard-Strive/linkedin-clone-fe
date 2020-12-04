@@ -13,6 +13,8 @@ import ShowSearchResult from "./components/main_components/ShowSearchResult";
 import Home from "./components/main_components/Home";
 import LandingPage from "./components/main_components/LandingPage";
 import MakePost from "./components/home_subcomponents/MakePost";
+import NetworkPage from "./components/Network_Components/NetworkPage";
+import JobsPage from "./components/Jobs_Compnents/JobsPage";
 class App extends React.Component {
 	state = {
 		userList: [],
@@ -91,6 +93,8 @@ class App extends React.Component {
 					/>
 					<Route path='/feed' exact component={Home} />
 					<Route path='/profile/:id' component={Profile} />
+          <Route path='/mynetwork' render={(props)=><NetworkPage userList={this.state.userList}/>}/>
+					<Route path='/jobs' component={JobsPage} />
 					<Footer />
 				</Router>
 			</div>
