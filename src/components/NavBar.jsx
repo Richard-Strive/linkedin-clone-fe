@@ -19,11 +19,11 @@ import logo from "./images/logo.png";
 class NavBar extends Component {
 	render() {
 		return (
-			<div className='linkedin-nav'>
+			<Row className='linkedin-nav'>
+				<Container>
+
 				<Navbar
 					className='mb-4 navnavbar  '
-					style={{ height: 50 }}
-					bg='light'
 					expand='lg'>
 					<button
 						className='navbar-toggler'
@@ -39,12 +39,8 @@ class NavBar extends Component {
 						className='align-items-center justify-content-center mt-4 collapse navbar-collapse'
 						id='navbarSupportedContent'>
 						<Col md={1}>
-							<Link to='/'>
+							<Link to='/feed'>
 								<Image
-									style={{
-										height: 60,
-										width: 60,
-									}}
 									src={logo}
 								/>
 							</Link>
@@ -72,18 +68,13 @@ class NavBar extends Component {
 										value={this.props.searchString}
 										onKeyDown={this.props.handleSearch}
 										onChange={this.props.handleSearch}
-										style={{
-											width: "390px",
-											height: "45px",
-											marginLeft: "-35px",
-										}}
 									/>
 								</InputGroup>
 							</Form>
 						</Col>
 						<Col md={7}>
 							<ul className='navul'>
-								<Link to='/'>
+								<Link to='/feed'>
 									<li className='navli'>
 										<i className='fas nav-icons fa-home '>
 											<br />
@@ -93,7 +84,7 @@ class NavBar extends Component {
 										</i>
 									</li>
 								</Link>
-								<Link to='/'>
+								<Link to='/mynetwork'>
 									<li className='navli'>
 										<i className='fas nav-icons fa-network-wired '>
 											<br />
@@ -103,7 +94,7 @@ class NavBar extends Component {
 										</i>
 									</li>
 								</Link>
-								<Link to='/'>
+								<Link to='/jobs'>
 									<li className='navli'>
 										<i className='fas nav-icons fa-briefcase '>
 											<br />{" "}
@@ -113,7 +104,7 @@ class NavBar extends Component {
 										</i>
 									</li>
 								</Link>
-								<Link to='/'>
+								<Link to='/message'>
 									<li className='navli'>
 										<i className=' nav-icons far fa-comment-dots '>
 											<br />
@@ -157,7 +148,8 @@ class NavBar extends Component {
 						</Col>
 					</Row>
 				</Navbar>
-			</div>
+				</Container>
+			</Row>
 		);
 	}
 }

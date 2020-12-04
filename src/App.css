@@ -3,8 +3,65 @@
   text-align: center;
   background-color: #f3f2ef;
 }
+
+#home-page {
+  margin-top: 60px;
+}
+
+.linkedin-nav {
+  width: 100%;
+  margin: 0;
+  height: 50px;
+  position: fixed;
+  top: 0;
+  background-color: #f8f9fa;
+  z-index: 10;
+}
+
+nav {
+  height: 50px;
+}
+
+.navnavbar {
+  min-height: auto !important;
+  padding: 0.2rem;
+}
+
+#navbarSupportedContent {
+  height: 100%;
+  margin: 0;
+  margin-top: 0 !important;
+  align-items: center;
+}
+
+.col-md-1,
+.col-md-4,
+.col-md-7 {
+  height: 100%;
+}
+
+.col-md-1 a img {
+  height: 100%;
+}
+
+.col-md-4 {
+  padding: 0.25rem;
+}
+
+.form-inline {
+  width: 100%;
+}
+
+.form-inline .input-group {
+  width: 100%;
+}
+
+.form-inline .input-group input {
+  width: 100%;
+}
+
 .nav-icons {
-  font-size: 25px;
+  font-size: 1.25rem;
   color: rgb(80, 80, 80);
 }
 .nav-icons:hover {
@@ -59,7 +116,7 @@
 
 .navul {
   list-style-type: none;
-  margin-top: 20px;
+  margin: 0;
 }
 
 .navli {
@@ -86,4 +143,51 @@
 }
 .discover:hover {
   background-color: rgb(228, 215, 215);
+}
+
+input[type="file"] {
+  border: 0;
+  clip: rect(0, 0, 0, 0);
+  height: 1px;
+  overflow: hidden;
+  padding: 0;
+  /* position: absolute !important; */
+  white-space: nowrap;
+  width: 1px;
+}
+
+.links {
+  color: grey;
+}
+
+.editAdd {
+  border-radius: 13px;
+}
+
+.links:hover {
+  text-decoration: underline;
+}
+
+.link:hover {
+  text-decoration: underline;
+}
+/* input[type="file"] + label {
+} */
+
+.add-photo-icon:hover {
+  cursor: pointer;
+}
+
+.preview-image-modal .modal-content {
+  margin-bottom: 120%;
+  margin-left: -50%;
+}
+
+.preview-image-modal .modal-dialog .modal-content {
+  height: 90%;
+}
+
+.preview-image-modal .modal-content {
+  background-color: transparent !important;
+  border: none !important;
 }

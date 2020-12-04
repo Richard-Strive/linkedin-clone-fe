@@ -10,20 +10,33 @@ export default class PeopleAlsoViewed extends Component {
             <Card.Title className="text-left">People also viewed</Card.Title>
             {this.props.deta.slice(3, 5).map((user) => {
               return (
-                <Row>
-                  <Col xs={6} md={4}>
+                <Row style={{ height: "100px", overflow: "hidden" }}>
+                  <Col xs={4} md={4}>
                     <Image
-                      style={{ heigh: "100px", width: "100px" }}
+                      style={{ height: "56px", width: "56px" }}
                       src={user.image}
                       roundedCircle
                     />
                   </Col>
-                  <Col>
-                    <b>{user.name}</b>
-                    <p>{user.bio}</p>
-                    <hr />
+                  <Col xs={4}>
+                    <div className="link">
+                      <b style={{ fontSize: "15px" }}>{user.name}</b>
+                      <p style={{ fontSize: "10px" }}>{user.bio}</p>
+                      <hr />
+                    </div>
                   </Col>
-                  <Col xs={6} md={4}></Col>
+                  <Col
+                    xs={4}
+                    md={4}
+                    style={{
+                      display: "flex",
+                      flexDirection: "column",
+                      justifyContent: "center",
+                      height: "100%",
+                    }}
+                  >
+                    <i className="fas fa-paper-plane link"></i>
+                  </Col>
                 </Row>
               );
             })}
