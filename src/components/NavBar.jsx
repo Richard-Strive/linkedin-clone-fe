@@ -84,7 +84,7 @@ class NavBar extends Component {
 										</i>
 									</li>
 								</Link>
-								<Link to='/'>
+								<Link to='/mynetwork'>
 									<li className='navli'>
 										<i className='fas nav-icons fa-network-wired '>
 											<br />
@@ -94,7 +94,7 @@ class NavBar extends Component {
 										</i>
 									</li>
 								</Link>
-								<Link to='/'>
+								<Link to='/jobs'>
 									<li className='navli'>
 										<i className='fas nav-icons fa-briefcase '>
 											<br />{" "}
@@ -104,7 +104,7 @@ class NavBar extends Component {
 										</i>
 									</li>
 								</Link>
-								<Link to='/'>
+								<Link to='/message'>
 									<li className='navli'>
 										<i className=' nav-icons far fa-comment-dots '>
 											<br />
