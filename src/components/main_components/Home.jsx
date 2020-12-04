@@ -71,7 +71,7 @@ class Home extends React.Component {
 		setTimeout(() => {
 			this.showModal();
 			this.setState({ postSize: this.state.postSize + 1 });
-		}, 1000);
+		}, 100);
 	};
 
 	showModal = () => {

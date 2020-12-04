@@ -37,7 +37,11 @@ export default class Jobs extends PureComponent {
                             <Col xs={3}>
                                 <header>
                                     <img src={job.imageUrl} alt=""/>
+                                    <div className="icons-jobs">
                                     <i className="fas fa-ban"></i>
+                                    <i className="far fa-bookmark"></i>
+
+                                    </div>
                                 </header>
                                 <div className="job-body">
                                     <p>{job.name}</p>
