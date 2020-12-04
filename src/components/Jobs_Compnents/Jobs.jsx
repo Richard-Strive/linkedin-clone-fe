@@ -34,9 +34,10 @@ export default class Jobs extends PureComponent {
                 <Row className='jobs-container'>
                     {this.state.allJobs.map(job=>{
                         return(
-                            <Col xs={4}>
+                            <Col xs={3}>
                                 <header>
                                     <img src={job.imageUrl} alt=""/>
+                                    <i className="fas fa-ban"></i>
                                 </header>
                                 <div className="job-body">
                                     <p>{job.name}</p>
