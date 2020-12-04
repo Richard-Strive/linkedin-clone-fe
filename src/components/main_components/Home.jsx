@@ -71,7 +71,7 @@ class Home extends React.Component {
 		setTimeout(() => {
 			this.showModal();
 			this.setState({ postSize: this.state.postSize + 1 });
-		}, 1000);
+		}, 100);
 	};
 
 	showModal = () => {
@@ -111,7 +111,10 @@ class Home extends React.Component {
 								clickable={canClick}
 								onClick={this.showModal}
 							/>
-							<Posts postSize={this.state.postSize} />
+							<Posts
+								showDelete={this.state}
+								postSize={this.state.postSize}
+							/>
 						</Col>
 						<Col xs={3}>
 							<RightSide />
