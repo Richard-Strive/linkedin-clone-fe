@@ -2,6 +2,8 @@ import React, { PureComponent } from 'react'
 import './Jobs_Styles/JobsPage.scss'
 import SearchJob from './SearchJob'
 import {Container} from 'react-bootstrap'
+import AdsJobs from './AdsJobs'
+import Jobs from './Jobs'
 
 export default class JobsPage extends PureComponent {
     render() {
@@ -36,6 +38,8 @@ export default class JobsPage extends PureComponent {
                     </button>
                 </nav>
                 <SearchJob/>
+                <AdsJobs/>
+                <Jobs/>
             </Container>
         )
     }
