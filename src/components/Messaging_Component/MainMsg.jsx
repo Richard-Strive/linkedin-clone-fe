@@ -2,6 +2,81 @@ import React, { PureComponent } from 'react'
 import './Messaging_Styles/MainMsg.scss'
 
 export default class MainMsg extends PureComponent {
+
+    state={
+        msg:[],
+        targetMsg:[],
+        sendComment:{
+            comment: "",
+			author: '',
+			rate: 1,
+			elementId: '5fca3098d0446f00154e1016',
+        },
+        me:''
+    }
+
+    getProfileUserName=async()=>{
+        let response= await fetch(process.env.REACT_APP_BASE_URL + `profile/me`,
+        {
+            headers: {
+                Authorization: `Bearer ${process.env.REACT_APP_ACCESS_TOKEN}`,
+            },
+        })
+        let result = await response.json()
+        console.log(result)
+        this.setState({me:result.username, sendComment:{...this.state.sendComment, author:result.username}})
+    }
+
+    getCommentForMsg = async () => {
+			let response = await fetch(
+				"https://striveschool-api.herokuapp.com/api/comments/5fca3098d0446f00154e1016",
+				{
+					headers: new Headers({
+						Authorization: `Bearer ${process.env.REACT_APP_ACCESS_TOKEN}`,
+					}),
+				}
+			);
+            let comments = await response.json();
+            console.log(comments)
+            this.setState({msg:comments})
+            let lastComment=comments[comments.length -1]
+            this.setState({targetMsg: [...this.state.targetMsg, lastComment]})
+
+    };
+    
+    sendCommentMsg = async () => {
+		// e.preventDefault();
+
+			let response = await fetch(
+				"https://striveschool-api.herokuapp.com/api/comments/",
+				{
+					method: "POST",
+					body: JSON.stringify(this.state.sendComment),
+					headers: new Headers({
+						"Content-Type": "application/json",
+						Authorization: `Bearer ${process.env.REACT_APP_ACCESS_TOKEN}`,
+					}),
+				}
+			);
+            let result = await response.json()
+            console.log(result)
+	};
+
+    componentDidMount(){
+        this.getCommentForMsg()
+        this.getProfileUserName()
+    }
+
+    writeText=(e)=>{
+        let comment = e.currentTarget.value
+
+		this.setState({ sendComment:{...this.state.sendComment, comment: comment} });
+    }
+
+    sendText=()=>{
+        this.sendCommentMsg(this.state.sendComment)
+    }
+
     render() {
         return (
             <div id='main-msg'>
@@ -9,10 +84,30 @@ export default class MainMsg extends PureComponent {
                     New Message
                 </header>
                 <input type="text" placeholder='Type a name or multiple names...'/>
-                <div className="msg-dialog"></div>
+                <div className="msg-dialog">
+                    {/* {this.state.msg.filter(msg=>msg.author==='Reniejr').map((msg, index)=>{
+                        return(
+                        <p key={index} className='sender'>{msg.comment}</p>
+                        )
+                    })}
+                    {this.state.msg.filter(msg=>msg.author==='orhanors').map((msg, index)=>{
+                        return(
+                        <p key={index} className='received'>{msg.comment}</p>
+                        )
+                    })} */}
+                    {this.state.targetMsg.map((msg, index)=>{
+                        return(
+                        <p key={index}>{msg.comment}</p>
+                        )
+                    })}
+                </div>
                 <div className="msg-sender">
-                    <input type="text" placeholder='Write here your text...'/>
-                    <button>
+                    <input 
+                    type="text" 
+                    placeholder='Write here your text...'
+                    onChange={(e)=>this.writeText(e)}
+                    />
+                    <button onClick={()=>this.sendText()}>
                         <i className="fas fa-chevron-up"></i>
                     </button>
                 </div>
