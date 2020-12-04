@@ -7,7 +7,7 @@ export default class InLearning extends Component {
       <div>
         <Card className="mt-3 mb-3" style={{ width: "18rem" }}>
           <Card.Body>
-            <Card.Title className="text-left">People you may know</Card.Title>
+            <Card.Title className="text-left">E-Learning</Card.Title>
             <Row>
               <Col xs={6} md={4}>
                 <Image

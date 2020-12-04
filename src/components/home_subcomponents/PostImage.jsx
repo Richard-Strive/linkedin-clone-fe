@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Button, Form, Modal, Alert, Spinner } from "react-bootstrap";
 import AddAPhotoIcon from "@material-ui/icons/AddAPhoto";
-class ProfileImage extends Component {
+class PostImage extends Component {
 	state = { isImage: false };
 
 	styles = {
@@ -13,7 +13,7 @@ class ProfileImage extends Component {
 		imagePreview: {
 			width: "150px",
 			height: "150px",
-			borderRadius: "50%",
+			borderRadius: "10px",
 			marginLeft: "25%",
 			backgroundColor: "gray",
 			border: "3px",
@@ -23,7 +23,7 @@ class ProfileImage extends Component {
 	preview_image = (event) => {
 		let reader = new FileReader();
 		reader.onload = function () {
-			let output = document.getElementById("output_image_user");
+			let output = document.getElementById("output_image");
 			output.src = reader.result;
 		};
 		reader.readAsDataURL(event.target.files[0]);
@@ -40,13 +40,11 @@ class ProfileImage extends Component {
 				centered>
 				<Modal.Body>
 					<div>
-						<Form
-							onSubmit={this.props.uploadImage}
-							className='profile-image-upload'>
+						<Form className='profile-image-upload'>
 							<Form.Group>
 								<Form.File
 									onChange={this.preview_image}
-									id='profile-image-upload-file'
+									id='post-image-upload-file'
 									type='file'
 								/>
 								<Form.Label
@@ -54,7 +52,7 @@ class ProfileImage extends Component {
 										marginLeft: "40%",
 										marginTop: "5%",
 									}}
-									htmlFor='profile-image-upload-file'>
+									htmlFor='post-image-upload-file'>
 									<AddAPhotoIcon
 										className='add-photo-icon'
 										style={this.styles.largeIcon}
@@ -64,19 +62,19 @@ class ProfileImage extends Component {
 
 							<img
 								style={this.styles.imagePreview}
-								id='output_image_user'
+								id='output_image'
 							/>
 							<Button
 								className={
 									this.state.isImage ? "d-block" : "d-none"
 								}
 								style={{ marginLeft: "30%", marginTop: "10%" }}
-								type='submit'
+								onClick={this.props.saveImage}
 								variant='primary'>
 								Save Image
 							</Button>
 						</Form>
-						{this.props.isLoading && (
+						{this.state.isLoading && (
 							<Spinner
 								style={{ marginLeft: "40%" }}
 								className='main-page-spinner'
@@ -85,9 +83,9 @@ class ProfileImage extends Component {
 							/>
 						)}
 						<div>
-							{this.props.message.length > 3 && (
-								<Alert variant='secondary' className='mt-2'>
-									{this.props.message}
+							{this.state.message && (
+								<Alert variant='secondary' className='mt-3'>
+									{this.state.message}
 								</Alert>
 							)}
 						</div>
@@ -98,4 +96,4 @@ class ProfileImage extends Component {
 	}
 }
 
-export default ProfileImage;
+export default PostImage;

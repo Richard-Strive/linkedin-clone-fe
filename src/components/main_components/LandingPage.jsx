@@ -20,15 +20,14 @@ export default class LandingPage extends PureComponent {
     login(){
         let reply=''
         let tokenConfirmed=''
-        this.props.userList.map(user=>{
-            user.username.includes(this.state.login.username)? reply='yes' : reply='no'
-            console.log(reply)
-            return reply
-        })
+        let filter = this.props.userList.filter(user=>user.username===this.state.login.username)
+        filter[0]? (filter[0].username===this.state.login.username? reply='yes':reply='no') : reply='no'
+        
+        console.log(reply)
         this.state.login.token===process.env.REACT_APP_ACCESS_TOKEN? tokenConfirmed='yes': tokenConfirmed='no'
         console.log(tokenConfirmed)
         if(reply==='yes' && tokenConfirmed==='yes'){
-            window.location.href='/profile/me'
+            window.location.href='/feed'
         }
         else{
             console.log('cannot access')

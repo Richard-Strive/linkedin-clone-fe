@@ -27,6 +27,9 @@ class EditProfileModal extends Component {
 					</Modal.Header>
 					<Modal.Body>
 						<ProfileImage
+							message={this.props.message}
+							isLoading={this.props.isLoading}
+							uploadImage={this.props.uploadImage}
 							show={this.state.modalShow}
 							onHide={() => this.setState({ modalShow: false })}
 						/>
@@ -54,7 +57,10 @@ class EditProfileModal extends Component {
 							</Col>
 						</Row>
 						<div>
-							<EditProfileForm user={user} />
+							<EditProfileForm
+								modalShow={this.state.modalShow}
+								user={user}
+							/>
 						</div>
 					</Modal.Body>
 				</Modal>

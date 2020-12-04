@@ -7,9 +7,15 @@ export default class EditAdd extends Component {
       <div>
         <Card className="mb-3" style={{ width: "18rem" }}>
           <Card.Body>
-            <Card.Text>Edit public profile & URL</Card.Text>
+            <Card.Text>
+              Edit public profile & URL{" "}
+              <i class="fas fa-question-circle ml-2"></i>
+            </Card.Text>
             <hr />
-            <Card.Text>Add profile in another language</Card.Text>
+            <Card.Text>
+              Add profile in another language
+              <i class="fas fa-question-circle "></i>
+            </Card.Text>
           </Card.Body>
         </Card>
       </div>

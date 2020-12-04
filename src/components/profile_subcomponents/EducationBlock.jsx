@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import "../css/EducationBlock.scss";
 import ModalForEduBlock from "./ModalForEduBlock";
-import { Row, Col, Form, Alert } from "react-bootstrap";
+import { Row, Col, Form } from "react-bootstrap";
 import ExperienceForm from "../dataExamples/ExperienceForm.json";
 import SchoolForm from "../dataExamples/SchoolForm.json";
 
@@ -86,6 +86,7 @@ export default class EducationBlock extends PureComponent {
         )
         let result = await response.json()
         this.setState({results: [...this.state.results, result]})
+        return result
     }
 
     //FETCH PUT
@@ -115,11 +116,6 @@ export default class EducationBlock extends PureComponent {
         })
         let result = await response.json()
         console.log(result)
-        // return(
-        //     <Alert variant='danger'>
-        //         Your Experience has been deleted
-        //     </Alert>
-        // )
     }
 
     //SHOW MODAL FUNCTION
@@ -192,10 +188,10 @@ export default class EducationBlock extends PureComponent {
     }
 
     //POST EXPERIENCE
-    saveExp =()=>{
+    saveExp =async()=>{
         let id = this.props.user/*._id*/
-        this.fetchPost(id, 'experiences')
-        // this.loadExp()
+        let postResult= await this.fetchPost(id, 'experiences')
+        this.postImgExp(postResult._id)
         this.showModal()
     }
 
@@ -219,6 +215,8 @@ export default class EducationBlock extends PureComponent {
 
     }
 
+    
+
     //LOAD ALL EXPERIENCES
     loadExp (){
         let id = this.props.user/*._id*/
@@ -232,11 +230,14 @@ export default class EducationBlock extends PureComponent {
         let id = this.props.user/*._id*/
         this.fetchPut(id, 'experiences', this.state.idToEdit)
         this.postImgExp(this.state.idToEdit)
+        this.setState({results:[]})
+        console.log(this.state.results)
+        this.loadExp()
         this.showModal()
     }
 
     //DELETE EXPERIENCE
-    deleteExp = async (id)=>{
+    deleteExp =(id)=>{
         let userId = this.props.user/*._id*/
         this.fetchDelete(userId, 'experiences', id)
         let result=[];
@@ -247,13 +248,11 @@ export default class EducationBlock extends PureComponent {
         this.loadExp()
     }
 
-    // componentDidUpdate(prevProps, prevState){
-    //     if(prevState.results !== this.state.results){
-    //         let userId = this.props.user/*._id*/
-    //         console.log(this.state.results)
-    //     }
+    componentDidUpdate(prevProps, prevState){
+        if(prevState.results !== this.state.results){
+        }
         
-    // }
+    }
 
 
     render() {
@@ -319,7 +318,6 @@ export default class EducationBlock extends PureComponent {
                                 />
                             </Form.Group>
                         </Form>
-                            <button onClick={()=>console.log(this.state.imageToUpload)}>Confirm</button>
                     </Form>   
                 </ModalForEduBlock>
 

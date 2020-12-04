@@ -3,14 +3,30 @@ import { Col, Container, Row, Dropdown, DropdownButton } from "react-bootstrap";
 import "../css/TopHeader.css";
 import striveLogo from "../images/strive-logo.jpeg";
 import EditProfileModal from "./EditProfileModal";
+import CreateIcon from "@material-ui/icons/Create";
+import ProfileImage from "./ProfileImage";
+
+import ImagePreviewModal from "../main_components/ImagePreviewModal";
 class TopHeader extends React.Component {
-	state = { showModal: false };
+	state = { showModal: false, modalShow: false, imgPreviewModal: false };
 
 	render() {
 		const { user } = this.props;
 		return (
 			<>
+				<ImagePreviewModal
+					image={user.image}
+					show={this.state.imgPreviewModal}
+					onHide={() => {
+						this.setState({
+							imgPreviewModal: false,
+						});
+					}}
+				/>
 				<EditProfileModal
+					message={this.props.message}
+					isLoading={this.props.isLoading}
+					uploadImage={this.props.uploadImage}
 					user={user}
 					onHide={() => {
 						this.setState({
@@ -22,6 +38,14 @@ class TopHeader extends React.Component {
 					show={this.state.showModal}
 				/>
 
+				<ProfileImage
+					message={this.props.message}
+					isLoading={this.props.isLoading}
+					uploadImage={this.props.uploadImage}
+					show={this.state.modalShow}
+					onHide={() => this.setState({ modalShow: false })}
+				/>
+
 				<div className='top-header-card'>
 					<Row>
 						<Col md={12} className='images-container'>
@@ -31,10 +55,26 @@ class TopHeader extends React.Component {
 								alt='top-image'
 							/>
 							<img
+								onClick={() =>
+									this.setState({ imgPreviewModal: true })
+								}
 								className='profile-img'
 								src={user.image}
 								alt='profile-pic'
 							/>
+							<div
+								style={{
+									visibility: this.props.isShowEditBtn
+										? "visible"
+										: "hidden",
+								}}
+								className='profile-img-edit'
+								onClick={() =>
+									this.setState({ modalShow: true })
+								}>
+								<CreateIcon />
+							</div>
+
 							<div
 								style={{
 									visibility: this.props.isShowEditBtn

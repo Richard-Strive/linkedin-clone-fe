@@ -13,6 +13,9 @@ import ShowSearchResult from "./components/main_components/ShowSearchResult";
 import Home from "./components/main_components/Home";
 import LandingPage from "./components/main_components/LandingPage";
 import MakePost from "./components/home_subcomponents/MakePost";
+import NetworkPage from "./components/Network_Components/NetworkPage";
+import JobsPage from "./components/Jobs_Compnents/JobsPage";
+import MsgPage from "./components/Messaging_Component/MsgPage";
 class App extends React.Component {
 	state = {
 		userList: [],
@@ -43,8 +46,6 @@ class App extends React.Component {
 		if (e.keyCode === 13 || e.key === "Enter") {
 			e.preventDefault();
 
-			this.setState({ showResult: true });
-
 			let filteredUserList = this.state.userList.filter(
 				(user) =>
 					(user.name &&
@@ -58,6 +59,7 @@ class App extends React.Component {
 			);
 
 			this.setState({ filteredUserList });
+			this.setState({ showResult: true });
 		} else {
 			this.setState({
 				searchString: e.currentTarget.value,
@@ -83,9 +85,18 @@ class App extends React.Component {
 						searchString={this.state.searchString}
 						handleSearch={this.handleSearch}
 					/>
-					<Route path='/' exact component={Home} />
+					<Route
+						path='/'
+						exact
+						render={(props) => (
+							<LandingPage userList={this.state.userList} />
+						)}
+					/>
+					<Route path='/feed' exact component={Home} />
 					<Route path='/profile/:id' component={Profile} />
-					<Route path='/landing' exact render={(props)=><LandingPage userList={this.state.userList}/>}/>
+          			<Route path='/mynetwork' render={(props)=><NetworkPage userList={this.state.userList}/>}/>
+					<Route path='/jobs' component={JobsPage} />
+					<Route path='/message' component={MsgPage} />
 					<Footer />
 				</Router>
 			</div>
