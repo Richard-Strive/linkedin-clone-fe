@@ -120,7 +120,7 @@ class PostContent extends Component {
 		return (
 			<>
 				{!this.state.isDeleted && (
-					<div className='post-card mb-3'>
+					<div className='post-card mb-3' id={this.props.id}>
 						<ImagePreviewModal
 							image={post.image && post.image}
 							show={this.state.imgPreviewModal}

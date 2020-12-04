@@ -19,11 +19,9 @@ class Home extends React.Component {
 
 		formData: null,
 		addImageModalShow: false,
-		isImageLoading: false,
 	};
 
 	saveImage = () => {
-		this.setState({ isImageLoading: true });
 		const inputFile = document.querySelector("#post-image-upload-file");
 
 		let formData = new FormData();
@@ -107,7 +105,6 @@ class Home extends React.Component {
 						</Col>
 						<Col xs={6}>
 							<MakePost
-								isImageLoading={this.state.isImageLoading}
 								addImageModalShow={this.state.addImageModalShow}
 								onHide={() =>
 									this.setState({ addImageModalShow: false })

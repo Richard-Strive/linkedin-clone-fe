@@ -23,7 +23,8 @@ class DeletePostModal extends React.Component {
 					isLoading: false,
 					message: "Successfuly deleted",
 				});
-
+				let deletedElement = document.getElementById(id);
+				deletedElement.style.display = "none";
 				return res;
 			} else {
 				this.setState({
