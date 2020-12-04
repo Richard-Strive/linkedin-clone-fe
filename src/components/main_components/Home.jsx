@@ -1,5 +1,5 @@
 import React from "react";
-import '../../App.css'
+import "../../App.css";
 
 import { Container, Row, Col } from "react-bootstrap";
 
@@ -16,6 +16,39 @@ class Home extends React.Component {
 		post: { text: "" },
 		showPost: true,
 		postSize: 0,
+
+		formData: null,
+	};
+
+	saveImage = () => {
+		const inputFile = document.querySelector("#post-image-upload-file");
+
+		let formData = new FormData();
+		formData.append("post", inputFile.files[0]);
+
+		this.setState({ formData });
+	};
+
+	uploadImage = async (postId) => {
+		try {
+			let response = await fetch(
+				`https://striveschool-api.herokuapp.com/api/posts/${postId}`,
+				{
+					method: "POST",
+					body: this.state.formData,
+					headers: new Headers({
+						// "Content-Type": "multipart/form-data",
+						Authorization: `Bearer ${process.env.REACT_APP_ACCESS_TOKEN}`,
+					}),
+				}
+			);
+
+			if (response.ok) {
+				const data = await response.json();
+			}
+		} catch (e) {
+			console.log(e);
+		}
 	};
 
 	fetchPost = async () => {
@@ -28,13 +61,17 @@ class Home extends React.Component {
 			}),
 		});
 		let result = await response.json();
-		console.log(result);
+
+		let imageUpload = await this.uploadImage(result._id);
 	};
 
 	postConfirm = () => {
 		this.fetchPost();
-		this.showModal();
-		this.setState({ postSize: this.state.postSize + 1 });
+
+		setTimeout(() => {
+			this.showModal();
+			this.setState({ postSize: this.state.postSize + 1 });
+		}, 1000);
 	};
 
 	showModal = () => {
@@ -65,6 +102,7 @@ class Home extends React.Component {
 						</Col>
 						<Col xs={6}>
 							<MakePost
+								saveImage={this.saveImage}
 								show={showModal}
 								showFunction={this.showModal}
 								fillFunction={this.fillUp}
