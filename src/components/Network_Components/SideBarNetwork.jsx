@@ -17,14 +17,14 @@ export default class SideBarNetwork extends PureComponent {
                 <ion-icon name="people-outline"></ion-icon>
                 <spam>Connections</spam>
               </div>
-              <spam></spam>
+              <spam>{this.props.counter}</spam>
             </li>
             <li>
               <div className="netMenuItem">
                 <i className="fas fa-address-book"></i>
                 <spam>Contacts</spam>
               </div>
-              <spam>{this.props.counter}</spam>
+              <spam></spam>
             </li>
             <li>
               <div className="netMenuItem">
