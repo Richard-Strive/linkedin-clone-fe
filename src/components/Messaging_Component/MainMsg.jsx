@@ -42,7 +42,7 @@ export default class MainMsg extends PureComponent {
             console.log(comments)
             this.setState({msg:comments})
             let lastComment=comments[comments.length -1]
-            this.setState({targetMsg: [...this.state.targetMsg, lastComment], lastMsg: lastComment})
+            this.setState({targetMsg: [...this.state.targetMsg, lastComment]})
 
     };
     
@@ -73,7 +73,7 @@ export default class MainMsg extends PureComponent {
     }
 
     componentDidUpdate(prevProps, prevState){
-        if(prevState.lastMsg !== this.state.lastMsg){}
+        if(prevState.targetMsg !== this.state.targetMsg){}
     }
 
     writeText=(e)=>{
