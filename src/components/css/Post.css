@@ -71,7 +71,7 @@
 
 .commentArea {
 	border-radius: 20px;
-	width: 180%;
+	width: 28rem;
 	margin-left: 1rem;
 	margin-right: 1rem !important;
 
@@ -82,9 +82,17 @@
 	margin-bottom: 10%;
 }
 .comment-item {
-	width: 150%;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	width: 27rem;
 	margin-left: 1rem !important;
 	margin-right: 1rem !important;
+}
+
+.comment-item:hover{
+	text-overflow: initial;
+	white-space: pre-wrap;
 }
 
 .list-group-item {

@@ -2,7 +2,6 @@ import React from "react";
 import "bootstrap/dist/css/bootstrap.css";
 import "./App.css";
 import NavBar from "./components/NavBar";
-import Footer from "./components/Footer";
 
 import Profile from "./components/main_components/Profile";
 
@@ -12,7 +11,6 @@ import ShowSearchResult from "./components/main_components/ShowSearchResult";
 
 import Home from "./components/main_components/Home";
 import LandingPage from "./components/main_components/LandingPage";
-import MakePost from "./components/home_subcomponents/MakePost";
 import NetworkPage from "./components/Network_Components/NetworkPage";
 import JobsPage from "./components/Jobs_Compnents/JobsPage";
 import MsgPage from "./components/Messaging_Component/MsgPage";
@@ -97,7 +95,7 @@ class App extends React.Component {
           			<Route path='/mynetwork' render={(props)=><NetworkPage userList={this.state.userList}/>}/>
 					<Route path='/jobs' component={JobsPage} />
 					<Route path='/message' component={MsgPage} />
-					<Footer />
+					
 				</Router>
 			</div>
 		);
