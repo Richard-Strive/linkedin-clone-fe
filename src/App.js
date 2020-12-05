@@ -10,7 +10,7 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import ShowSearchResult from "./components/main_components/ShowSearchResult";
 
 import Home from "./components/main_components/Home";
-import LandingPage from "./components/main_components/LandingPage";
+
 import NetworkPage from "./components/Network_Components/NetworkPage";
 import JobsPage from "./components/Jobs_Compnents/JobsPage";
 import MsgPage from "./components/Messaging_Component/MsgPage";
@@ -83,19 +83,17 @@ class App extends React.Component {
 						searchString={this.state.searchString}
 						handleSearch={this.handleSearch}
 					/>
-					<Route
-						path='/'
-						exact
-						render={(props) => (
-							<LandingPage userList={this.state.userList} />
-						)}
-					/>
+
 					<Route path='/feed' exact component={Home} />
 					<Route path='/profile/:id' component={Profile} />
-          			<Route path='/mynetwork' render={(props)=><NetworkPage userList={this.state.userList}/>}/>
+					<Route
+						path='/mynetwork'
+						render={(props) => (
+							<NetworkPage userList={this.state.userList} />
+						)}
+					/>
 					<Route path='/jobs' component={JobsPage} />
 					<Route path='/message' component={MsgPage} />
-					
 				</Router>
 			</div>
 		);
