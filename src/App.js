@@ -84,7 +84,7 @@ class App extends React.Component {
 						handleSearch={this.handleSearch}
 					/>
 
-					<Route path='/feed' exact component={Home} />
+					<Route path='/' exact component={Home} />
 					<Route path='/profile/:id' component={Profile} />
 					<Route
 						path='/mynetwork'

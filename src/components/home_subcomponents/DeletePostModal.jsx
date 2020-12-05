@@ -53,14 +53,16 @@ class DeletePostModal extends React.Component {
 				<Modal.Body>
 					{" "}
 					<WarningIcon style={{ width: "2rem", marginLeft: "40%" }} />
-					<h4 className='mt-3'>
-						Are you sure you want to delete this post?
-					</h4>{" "}
 					{!this.state.message && (
-						<p style={{ color: "gray" }}>
-							This post will be deleted immediately. You can't
-							undo this action
-						</p>
+						<div>
+							<h4 className='mt-3'>
+								Are you sure you want to delete this post?
+							</h4>
+							<p style={{ color: "gray" }}>
+								This post will be deleted immediately. You can't
+								undo this action
+							</p>
+						</div>
 					)}
 					{this.state.isLoading && (
 						<Spinner
